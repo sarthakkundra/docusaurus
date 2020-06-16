@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import {ValidationError} from 'yup';
+
 export interface BlogContent {
   blogPosts: BlogPost[];
   blogListPaginated: BlogPaginated[];
@@ -41,6 +43,11 @@ export interface PluginOptions {
   };
   editUrl?: string;
   admonitions: any;
+}
+
+export interface ValidationResult {
+  options?: any;
+  errors?: ValidationError;
 }
 
 export interface BlogTags {

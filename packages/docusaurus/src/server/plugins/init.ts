@@ -10,6 +10,8 @@ import {join} from 'path';
 import importFresh from 'import-fresh';
 import {LoadContext, Plugin, PluginConfig} from '@docusaurus/types';
 import {CONFIG_FILE_NAME} from '../../constants';
+import {ValidationError} from 'yup';
+const chalk = require('chalk');
 
 export function initPlugins({
   pluginConfigs,
@@ -50,7 +52,29 @@ export function initPlugins({
       const pluginModule: any = importFresh(
         pluginRequire.resolve(pluginModuleImport),
       );
-      return (pluginModule.default || pluginModule)(context, pluginOptions);
+
+      const plugin = pluginModule.default || pluginModule;
+      if (plugin.validateOptions) {
+        const {
+          options,
+          errors,
+        }: {options: any; errors: ValidationError} = plugin.validateOptions(
+          pluginOptions,
+        );
+        if (errors) {
+          console.log(
+            chalk.red(
+              `Error: Validation Error at ${pluginModuleImport}. Following fields doesn't pass validation\n${errors.errors.concat(
+                '\n',
+              )}`,
+            ),
+          );
+          process.exit(1);
+        } else {
+          pluginOptions = options;
+        }
+      }
+      return plugin(context, pluginOptions);
     })
     .filter(Boolean);
 
