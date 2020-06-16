@@ -34,33 +34,7 @@ import {
 import {Configuration, Loader} from 'webpack';
 import {generateBlogFeed, generateBlogPosts} from './blogUtils';
 
-const DEFAULT_OPTIONS: PluginOptions = {
-  path: 'blog', // Path to data on filesystem, relative to site dir.
-  routeBasePath: 'blog', // URL Route.
-  include: ['*.md', '*.mdx'], // Extensions to include.
-  postsPerPage: 10, // How many posts per page.
-  blogListComponent: '@theme/BlogListPage',
-  blogPostComponent: '@theme/BlogPostPage',
-  blogTagsListComponent: '@theme/BlogTagsListPage',
-  blogTagsPostsComponent: '@theme/BlogTagsPostsPage',
-  showReadingTime: true,
-  remarkPlugins: [],
-  rehypePlugins: [],
-  editUrl: undefined,
-  truncateMarker: /<!--\s*(truncate)\s*-->/, // Regex.
-  admonitions: {},
-};
-
-function assertFeedTypes(val: any): asserts val is FeedType {
-  if (typeof val !== 'string' && !['rss', 'atom', 'all'].includes(val)) {
-    throw new Error(
-      `Invalid feedOptions type: ${val}. It must be either 'rss', 'atom', or 'all'`,
-    );
-  }
-}
-
-const getFeedTypes = (type?: FeedType) => {
-  assertFeedTypes(type);
+const getFeedTypes = (type: FeedType) => {
   let feedTypes: ('rss' | 'atom')[] = [];
 
   if (type === 'all') {
@@ -73,13 +47,11 @@ const getFeedTypes = (type?: FeedType) => {
 
 export default function pluginContentBlog(
   context: LoadContext,
-  opts: Partial<PluginOptions>,
+  options: PluginOptions,
 ): Plugin<BlogContent | null> {
-  const options: PluginOptions = {...DEFAULT_OPTIONS, ...opts};
-
   if (options.admonitions) {
     options.remarkPlugins = options.remarkPlugins.concat([
-      [admonitions, opts.admonitions || {}],
+      [admonitions, options.admonitions],
     ]);
   }
 
@@ -514,7 +486,6 @@ pluginContentBlog.validateOptions = (opt: Object): ValidationResult => {
   try {
     const value = PluginOptionSchema.validateSync(opt, {
       abortEarly: false,
-      strict: true,
     });
     return {options: value};
   } catch (err) {
