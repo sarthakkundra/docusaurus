@@ -64,9 +64,9 @@ export function initPlugins({
         if (errors) {
           console.log(
             chalk.red(
-              `Error: Validation Error at ${pluginModuleImport}. Following fields doesn't pass validation\n${errors.errors.concat(
-                '\n',
-              )}`,
+              `Validation Error at ${pluginModuleImport}.\nFollowing fields doesn't pass validation\n${errors.errors
+                .map((error, i) => `${i + 1}. ${error}`)
+                .join('\n')}`,
             ),
           );
           process.exit(1);

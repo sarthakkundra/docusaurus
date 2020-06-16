@@ -10,7 +10,6 @@ import kebabCase from 'lodash.kebabcase';
 import path from 'path';
 import admonitions from 'remark-admonitions';
 import {normalizeUrl, docuHash, aliasedSitePath} from '@docusaurus/utils';
-import * as yup from 'yup';
 
 import {
   PluginOptions,
@@ -22,6 +21,7 @@ import {
   FeedType,
   BlogPost,
   ValidationResult,
+  PluginOptionSchema,
 } from './types';
 import {
   LoadContext,
@@ -510,41 +510,12 @@ export default function pluginContentBlog(
   };
 }
 
-const pluginOptionSchema = yup.object().shape({
-  path: yup.string().default('blog'),
-  routeBasePath: yup.string().default('blog'),
-  include: yup.array().of(yup.string()).default(['*.md', '*.mdx']),
-  postsPerPage: yup.number().integer().moreThan(0).default(10),
-  blogListComponent: yup.string().default('@theme/BlogListPage'),
-  blogPostComponent: yup.string().default('@theme/BlogPostPage'),
-  blogTagsListComponent: yup.string().default('@theme/BlogPostPage'),
-  blogTagsPostsComponent: yup.string().default('@theme/BlogTagsPostsPage'),
-  showReadingTime: yup.bool().default(true),
-  remarkPlugins: yup.array().of(yup.object()).default([]),
-  rehypePlugins: yup.array().of(yup.string()).default([]),
-  editUrl: yup.string().url().default(undefined),
-  truncateMarker: yup
-    .mixed()
-    .transform((val) => new RegExp(val))
-    .default(/<!--\s*(truncate)\s*-->/),
-  admonitions: yup.object().default({}),
-  beforeDefaultRemarkPlugins: yup.array().of(yup.object()).default([]),
-  beforeDefaultRehypePlugins: yup.array().of(yup.object()).default([]),
-  feedOptions: yup
-    .object()
-    .shape({
-      type: yup.string().oneOf(['rss', 'all', 'atom']).default('all'),
-      title: yup.string(),
-      description: yup.string().default(''),
-      copyright: yup.string().default(''),
-      language: yup.string(),
-    })
-    .default({}),
-});
-
 pluginContentBlog.validateOptions = (opt: Object): ValidationResult => {
   try {
-    const value = pluginOptionSchema.validateSync(opt);
+    const value = PluginOptionSchema.validateSync(opt, {
+      abortEarly: false,
+      strict: true,
+    });
     return {options: value};
   } catch (err) {
     return {errors: err};
