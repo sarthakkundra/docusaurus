@@ -9,9 +9,27 @@ import Module from 'module';
 import {join} from 'path';
 import importFresh from 'import-fresh';
 import {LoadContext, Plugin, PluginConfig} from '@docusaurus/types';
-import {CONFIG_FILE_NAME} from '../../constants';
-import {ValidationError} from 'yup';
+import {Schema} from 'yup';
 const chalk = require('chalk');
+import {CONFIG_FILE_NAME} from '../../constants';
+
+function validate<T>(schema: Schema<T>, options: unknown) {
+  try {
+    return schema.validateSync(options, {
+      abortEarly: false,
+    });
+  } catch (error) {
+    console.log(
+      chalk.red(
+        `Validation Errors:${error.errors.reduce(
+          (formatedError, error, i) => `${formatedError}\n${i + 1}. ${error}`,
+          '',
+        )}`,
+      ),
+    );
+    process.exit(1);
+  }
+}
 
 export function initPlugins({
   pluginConfigs,
@@ -55,24 +73,12 @@ export function initPlugins({
 
       const plugin = pluginModule.default || pluginModule;
       if (plugin.validateOptions) {
-        const {
-          options,
-          errors,
-        }: {options: any; errors: ValidationError} = plugin.validateOptions(
-          pluginOptions,
-        );
-        if (errors) {
-          console.log(
-            chalk.red(
-              `Validation Error at ${pluginModuleImport}.\nFollowing fields doesn't pass validation\n${errors.errors
-                .map((error, i) => `${i + 1}. ${error}`)
-                .join('\n')}`,
-            ),
-          );
-          process.exit(1);
-        } else {
-          pluginOptions = options;
-        }
+        const options = plugin.validateOptions({
+          validate,
+          options: pluginOptions,
+        });
+
+        pluginOptions = options;
       }
       return plugin(context, pluginOptions);
     })

@@ -20,8 +20,9 @@ import {
   BlogPaginated,
   FeedType,
   BlogPost,
-  ValidationResult,
   PluginOptionSchema,
+  Validate,
+  PluginOptionResult,
 } from './types';
 import {
   LoadContext,
@@ -432,7 +433,7 @@ export default function pluginContentBlog(
     },
 
     injectHtmlTags() {
-      if (!options.feedOptions) {
+      if (!options.feedOptions?.type) {
         return {};
       }
 
@@ -482,13 +483,12 @@ export default function pluginContentBlog(
   };
 }
 
-pluginContentBlog.validateOptions = (opt: Object): ValidationResult => {
-  try {
-    const value = PluginOptionSchema.validateSync(opt, {
-      abortEarly: false,
-    });
-    return {options: value};
-  } catch (err) {
-    return {errors: err};
-  }
+pluginContentBlog.validateOptions = ({
+  validate,
+  options,
+}: {
+  validate: Validate;
+  options: PluginOptionResult;
+}) => {
+  return validate(PluginOptionSchema, options);
 };

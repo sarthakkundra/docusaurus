@@ -21,7 +21,7 @@ export const PluginOptionSchema = yup
     showReadingTime: yup.bool().default(true),
     remarkPlugins: yup.array().of(yup.object()).default([]),
     rehypePlugins: yup.array().of(yup.string()).default([]),
-    editUrl: yup.string().url().default(undefined),
+    editUrl: yup.string().url(),
     truncateMarker: yup
       .mixed()
       .transform((val) => new RegExp(val))
@@ -29,18 +29,21 @@ export const PluginOptionSchema = yup
     admonitions: yup.object().default({}),
     beforeDefaultRemarkPlugins: yup.array().of(yup.object()).default([]),
     beforeDefaultRehypePlugins: yup.array().of(yup.object()).default([]),
-    feedOptions: yup
-      .object()
-      .shape({
-        type: yup.string().oneOf(['rss', 'all', 'atom']).default(undefined),
-        title: yup.string().default(''),
-        description: yup.string().default(''),
-        copyright: yup.string().default(''),
-        language: yup.string().default('en'),
-      })
-      .default(undefined),
+    feedOptions: yup.object().shape({
+      type: yup.string().oneOf(['rss', 'all', 'atom']),
+      title: yup.string(),
+      description: yup.string().default(''),
+      copyright: yup.string().default(''),
+      language: yup.string().default('en'),
+    }),
   })
   .defined();
+
+export type PluginOptionResult = yup.InferType<typeof PluginOptionSchema>;
+export type Validate = (
+  val: typeof PluginOptionSchema,
+  options: unknown,
+) => PluginOptionResult;
 
 export interface BlogContent {
   blogPosts: BlogPost[];
@@ -69,7 +72,7 @@ export interface PluginOptions {
   rehypePlugins: string[];
   truncateMarker: RegExp;
   showReadingTime: boolean;
-  feedOptions?: {
+  feedOptions: {
     type: FeedType;
     title?: string;
     description?: string;
