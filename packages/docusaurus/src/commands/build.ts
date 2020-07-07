@@ -100,6 +100,10 @@ export default async function build(
             from: staticDir,
             to: outDir,
           },
+          {
+            from: path.join(generatedFilesDir, '@static'),
+            to: outDir,
+          },
         ]),
       ],
     });

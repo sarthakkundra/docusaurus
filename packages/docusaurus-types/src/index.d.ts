@@ -98,6 +98,7 @@ export interface Props extends LoadContext, InjectedHtmlTags {
 export interface PluginContentLoadedActions {
   addRoute(config: RouteConfig): void;
   createData(name: string, data: any): Promise<string>;
+  createStatic(name: string, data: any): Promise<string>;
 }
 
 export interface Plugin<T, U = unknown> {

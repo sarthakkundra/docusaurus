@@ -87,6 +87,12 @@ export async function loadPlugins({
         plugin.name,
       );
 
+      const staticContentDir = path.join(
+        context.generatedFilesDir,
+        '@static',
+        plugin.name,
+      );
+
       const actions: PluginContentLoadedActions = {
         addRoute: (config) => pluginsRouteConfigs.push(config),
         createData: async (name, content) => {
@@ -94,6 +100,12 @@ export async function loadPlugins({
           await fs.ensureDir(path.dirname(modulePath));
           await generate(pluginContentDir, name, content);
           return modulePath;
+        },
+        createStatic: async (name, content) => {
+          const modulePath = path.join(staticContentDir, name);
+          await fs.ensureDir(path.dirname(modulePath));
+          await generate(staticContentDir, name, content);
+          return `/${plugin.name}/${name}`;
         },
       };
 

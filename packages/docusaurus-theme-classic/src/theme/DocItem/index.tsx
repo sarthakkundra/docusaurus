@@ -13,7 +13,6 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import DocPaginator from '@theme/DocPaginator';
 import useTOCHighlight from '@theme/hooks/useTOCHighlight';
 import Link from '@docusaurus/Link';
-
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
@@ -63,6 +62,7 @@ function DocItem(props): JSX.Element {
   const {url: siteUrl, title: siteTitle} = siteConfig;
   const {content: DocContent} = props;
   const {metadata} = DocContent;
+  console.log(props);
   const {
     description,
     title,
@@ -97,7 +97,9 @@ function DocItem(props): JSX.Element {
         {keywords && keywords.length && (
           <meta name="keywords" content={keywords.join(',')} />
         )}
-        {metaImage && <meta property="og:image" content={metaImageUrl} />}
+        {metadata.ogImage && (
+          <meta property="og:image" content={metadata.ogImage} />
+        )}
         {metaImage && <meta property="twitter:image" content={metaImageUrl} />}
         {metaImage && (
           <meta name="twitter:image:alt" content={`Image for ${title}`} />

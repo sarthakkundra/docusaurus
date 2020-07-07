@@ -12,24 +12,28 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/bluebird": "^3.5.32",
+    "@types/hapi__joi": "^17.1.2",
+    "@types/puppeteer": "^3.0.1",
     "commander": "^5.0.0",
-    "picomatch": "^2.1.1",
-    "@types/hapi__joi": "^17.1.2"
+    "picomatch": "^2.1.1"
   },
   "dependencies": {
     "@docusaurus/mdx-loader": "^2.0.0-alpha.58",
     "@docusaurus/types": "^2.0.0-alpha.58",
     "@docusaurus/utils": "^2.0.0-alpha.58",
+    "@hapi/joi": "17.1.1",
+    "bluebird": "^3.7.2",
     "execa": "^3.4.0",
     "fs-extra": "^8.1.0",
     "globby": "^10.0.1",
-    "@hapi/joi": "17.1.1",
     "import-fresh": "^3.2.1",
     "loader-utils": "^1.2.3",
     "lodash.flatmap": "^4.5.0",
     "lodash.groupby": "^4.6.0",
     "lodash.pick": "^4.4.0",
     "lodash.pickby": "^4.6.0",
+    "puppeteer": "^5.0.0",
     "remark-admonitions": "^1.2.1",
     "shelljs": "^0.8.4"
   },

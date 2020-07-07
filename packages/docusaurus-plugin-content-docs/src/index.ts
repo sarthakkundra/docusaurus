@@ -26,6 +26,8 @@ import {
   ValidationResult,
 } from '@docusaurus/types';
 
+import bluebird from 'bluebird';
+
 import createOrder from './order';
 import loadSidebars from './sidebars';
 import processMetadata from './metadata';
@@ -55,10 +57,12 @@ import {docsVersion} from './version';
 import {VERSIONS_JSON_FILE} from './constants';
 import {PluginOptionSchema} from './pluginOptionSchema';
 import {ValidationError} from '@hapi/joi';
+import {createPage, screenshot} from './ogimage';
 
 function getFirstDocLinkOfSidebar(
   sidebarItems: DocsSidebarItem[],
 ): string | null {
+  // eslint-disable-next-line no-restricted-syntax
   for (const sidebarItem of sidebarItems) {
     if (sidebarItem.type === 'category') {
       const url = getFirstDocLinkOfSidebar(sidebarItem.items);
@@ -329,7 +333,7 @@ Available document ids=
       }
 
       const {docLayoutComponent, docItemComponent, routeBasePath} = options;
-      const {addRoute, createData} = actions;
+      const {addRoute, createData, createStatic} = actions;
       const aliasedSource = (source: string) =>
         `~docs/${path.relative(dataDir, source)}`;
 
@@ -354,13 +358,30 @@ Available document ids=
       const genRoutes = async (
         metadataItems: Metadata[],
       ): Promise<RouteConfig[]> => {
-        const routes = await Promise.all(
-          metadataItems.map(async (metadataItem) => {
+        const page = await createPage();
+        const routes = await bluebird.mapSeries(
+          metadataItems,
+          async (metadataItem) => {
+            const image = await screenshot(
+              `<html>${metadataItem.version}-${metadataItem.source}<html/>`,
+              page,
+            );
+            const imagePath = await createStatic(
+              `${docuHash(metadataItem.source)}.png`,
+              image,
+            );
             await createData(
               // Note that this created data path must be in sync with
               // metadataPath provided to mdx-loader.
               `${docuHash(metadataItem.source)}.json`,
-              JSON.stringify(metadataItem, null, 2),
+              JSON.stringify(
+                {
+                  ...metadataItem,
+                  ogImage: imagePath,
+                },
+                null,
+                2,
+              ),
             );
 
             return {
@@ -371,7 +392,7 @@ Available document ids=
                 content: metadataItem.source,
               },
             };
-          }),
+          },
         );
 
         return routes.sort((a, b) => a.path.localeCompare(b.path));
@@ -426,8 +447,9 @@ Available document ids=
             docMetadata.latestVersionMainDocPermalink = rootUrl;
           }
         });
-        await Promise.all(
-          Object.keys(docsMetadataByVersion).map(async (version) => {
+        await bluebird.mapSeries(
+          Object.keys(docsMetadataByVersion),
+          async (version) => {
             const routes: RouteConfig[] = await genRoutes(
               docsMetadataByVersion[version],
             );
@@ -449,7 +471,7 @@ Available document ids=
               // `/docs/:route` instead of `/docs/next/:route`.
               isLatestVersion ? -1 : undefined,
             );
-          }),
+          },
         );
       } else {
         const routes = await genRoutes(Object.values(content.docsMetadata));
