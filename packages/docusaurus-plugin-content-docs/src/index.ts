@@ -354,11 +354,10 @@ Available document ids=
           version,
         };
       };
-
+      const page = await createPage();
       const genRoutes = async (
         metadataItems: Metadata[],
       ): Promise<RouteConfig[]> => {
-        const page = await createPage();
         const routes = await bluebird.mapSeries(
           metadataItems,
           async (metadataItem) => {

@@ -56,7 +56,7 @@ export default async function start(
       console.error(chalk.red(err.stack));
     });
   };
-  const {siteConfig, plugins = []} = props;
+  const {siteConfig, plugins = [], generatedFilesDir} = props;
 
   const normalizeToSiteDir = (filepath) => {
     if (filepath && path.isAbsolute(filepath)) {
@@ -161,6 +161,7 @@ export default async function start(
         app.use(
           baseUrl,
           express.static(path.resolve(siteDir, STATIC_DIR_NAME)),
+          express.static(path.resolve(generatedFilesDir, '@static')),
         );
 
         // This lets us fetch source contents from webpack for the error overlay.
