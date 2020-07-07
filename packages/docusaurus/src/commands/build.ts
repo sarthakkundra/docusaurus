@@ -13,7 +13,7 @@ import ReactLoadableSSRAddon from 'react-loadable-ssr-addon';
 import webpack, {Configuration, Plugin, Stats} from 'webpack';
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 import merge from 'webpack-merge';
-import {STATIC_DIR_NAME} from '../constants';
+import {STATIC_DIR_NAME, PLUGIN_STATIC_DIR_NAME} from '../constants';
 import {load} from '../server';
 import {BuildCLIOptions, Props} from '@docusaurus/types';
 import createClientConfig from '../webpack/client';
@@ -101,7 +101,7 @@ export default async function build(
             to: outDir,
           },
           {
-            from: path.join(generatedFilesDir, '@static'),
+            from: path.join(generatedFilesDir, PLUGIN_STATIC_DIR_NAME),
             to: outDir,
           },
         ]),

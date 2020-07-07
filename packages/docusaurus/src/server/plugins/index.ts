@@ -15,6 +15,7 @@ import {
   PluginContentLoadedActions,
   RouteConfig,
 } from '@docusaurus/types';
+import {PLUGIN_STATIC_DIR_NAME} from '../../constants';
 import initPlugins from './init';
 
 export function sortConfig(routeConfigs: RouteConfig[]): void {
@@ -89,7 +90,7 @@ export async function loadPlugins({
 
       const staticContentDir = path.join(
         context.generatedFilesDir,
-        '@static',
+        PLUGIN_STATIC_DIR_NAME,
         plugin.name,
       );
 

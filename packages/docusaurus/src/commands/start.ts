@@ -21,7 +21,12 @@ import merge from 'webpack-merge';
 import HotModuleReplacementPlugin from 'webpack/lib/HotModuleReplacementPlugin';
 import {load} from '../server';
 import {StartCLIOptions} from '@docusaurus/types';
-import {CONFIG_FILE_NAME, STATIC_DIR_NAME, DEFAULT_PORT} from '../constants';
+import {
+  CONFIG_FILE_NAME,
+  STATIC_DIR_NAME,
+  DEFAULT_PORT,
+  PLUGIN_STATIC_DIR_NAME,
+} from '../constants';
 import createClientConfig from '../webpack/client';
 import {applyConfigureWebpack} from '../webpack/utils';
 import choosePort from '../choosePort';
@@ -161,7 +166,9 @@ export default async function start(
         app.use(
           baseUrl,
           express.static(path.resolve(siteDir, STATIC_DIR_NAME)),
-          express.static(path.resolve(generatedFilesDir, '@static')),
+          express.static(
+            path.resolve(generatedFilesDir, PLUGIN_STATIC_DIR_NAME),
+          ),
         );
 
         // This lets us fetch source contents from webpack for the error overlay.
