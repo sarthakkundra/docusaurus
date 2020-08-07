@@ -17,17 +17,18 @@ These subclasses are essentially singletons - only one instance of each is creat
 
 To send a view:
 
-1. Create the ViewManager subclass.
-2. Implement the `createViewInstance` method
-3. Expose view property setters using `@ReactProp` (or `@ReactPropGroup`) annotation
-4. Register the manager in `createViewManagers` of the applications package.
-5. Implement the JavaScript module
+1.  Create the ViewManager subclass.
+2.  Implement the `createViewInstance` method
+3.  Expose view property setters using `@ReactProp` (or `@ReactPropGroup`) annotation
+4.  Register the manager in `createViewManagers` of the applications package.
+5.  Implement the JavaScript module
 
 ## 1. Create the `ViewManager` subclass
 
 In this example we create view manager class `ReactImageManager` that extends `SimpleViewManager` of type `ReactImageView`. `ReactImageView` is the type of object managed by the manager, this will be the custom native view. Name returned by `getName` is used to reference the native view type from JavaScript.
 
 ```java
+
 ...
 
 public class ReactImageManager extends SimpleViewManager<ReactImageView> {
@@ -43,6 +44,7 @@ public class ReactImageManager extends SimpleViewManager<ReactImageView> {
   public String getName() {
     return REACT_CLASS;
   }
+
 ```
 
 ## 2. Implement method `createViewInstance`
@@ -50,10 +52,12 @@ public class ReactImageManager extends SimpleViewManager<ReactImageView> {
 Views are created in the `createViewInstance` method, the view should initialize itself in its default state, any properties will be set via a follow up call to `updateView.`
 
 ```java
+
   @Override
   public ReactImageView createViewInstance(ThemedReactContext context) {
     return new ReactImageView(context, Fresco.newDraweeControllerBuilder(), null, mCallerContext);
   }
+
 ```
 
 ## 3. Expose view property setters using `@ReactProp` (or `@ReactPropGroup`) annotation
@@ -62,15 +66,16 @@ Properties that are to be reflected in JavaScript needs to be exposed as setter 
 
 Annotation `@ReactProp` has one obligatory argument `name` of type `String`. Name assigned to the `@ReactProp` annotation linked to the setter method is used to reference the property on JS side.
 
-<!-- alex disable primitive -->
+alex disable primitive
 
 Except from `name`, `@ReactProp` annotation may take following optional arguments: `defaultBoolean`, `defaultInt`, `defaultFloat`. Those arguments should be of the corresponding type (accordingly `boolean`, `int`, `float`) and the value provided will be passed to the setter method in case when the property that the setter is referencing has been removed from the component. Note that "default" values are only provided for primitive types, in case when setter is of some complex type, `null` will be provided as a default value in case when corresponding property gets removed.
 
 Setter declaration requirements for methods annotated with `@ReactPropGroup` are different than for `@ReactProp`, please refer to the `@ReactPropGroup` annotation class docs for more information about it. **IMPORTANT!** in ReactJS updating the property value will result in setter method call. Note that one of the ways we can update component is by removing properties that have been set before. In that case setter method will be called as well to notify view manager that property has changed. In that case "default" value will be provided (for primitive types "default" can value can be specified using `defaultBoolean`, `defaultFloat`, etc. arguments of `@ReactProp` annotation, for complex types setter will be called with value set to `null`).
 
-<!-- alex enable primitive -->
+alex enable primitive
 
 ```java
+
   @ReactProp(name = "src")
   public void setSrc(ReactImageView view, @Nullable ReadableArray sources) {
     view.setSource(sources);
@@ -85,6 +90,7 @@ Setter declaration requirements for methods annotated with `@ReactPropGroup` are
   public void setResizeMode(ReactImageView view, @Nullable String resizeMode) {
     view.setScaleType(ImageResizeMode.toScaleType(resizeMode));
   }
+
 ```
 
 ## 4. Register the `ViewManager`
@@ -92,6 +98,7 @@ Setter declaration requirements for methods annotated with `@ReactPropGroup` are
 The final Java step is to register the ViewManager to the application, this happens in a similar way to [Native Modules](native-modules-android.md), via the applications package member function `createViewManagers.`
 
 ```java
+
   @Override
   public List<ViewManager> createViewManagers(
                             ReactApplicationContext reactContext) {
@@ -99,6 +106,7 @@ The final Java step is to register the ViewManager to the application, this happ
       new ReactImageManager(reactContext)
     );
   }
+
 ```
 
 ## 5. Implement the JavaScript module
@@ -127,6 +135,7 @@ The `requireNativeComponent` function takes the name of the native view. Note th
 So now we know how to expose native view components that we can control freely from JS, but how do we deal with events from the user, like pinch-zooms or panning? When a native event occurs the native code should issue an event to the JavaScript representation of the View, and the two views are linked with the value returned from the `getId()` method.
 
 ```java
+
 class MyCustomView extends View {
    ...
    public void onReceiveNativeEvent() {
@@ -139,11 +148,13 @@ class MyCustomView extends View {
           event);
     }
 }
+
 ```
 
 To map the `topChange` event name to the `onChange` callback prop in JavaScript, register it by overriding the `getExportedCustomBubblingEventTypeConstants` method in your `ViewManager`:
 
 ```java
+
 public class ReactImageManager extends SimpleViewManager<MyCustomView> {
     ...
     public Map getExportedCustomBubblingEventTypeConstants() {
@@ -156,11 +167,13 @@ public class ReactImageManager extends SimpleViewManager<MyCustomView> {
                     .build();
     }
 }
+
 ```
 
 This callback is invoked with the raw event, which we typically process in the wrapper component to make a simpler API:
 
 ```jsx
+
 // MyCustomView.js
 
 class MyCustomView extends React.Component {
@@ -187,4 +200,5 @@ MyCustomView.propTypes = {
 };
 
 var RCTMyCustomView = requireNativeComponent(`RCTMyCustomView`);
+
 ```

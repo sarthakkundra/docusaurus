@@ -6,6 +6,7 @@ title: StyleSheet
 A StyleSheet is an abstraction similar to CSS StyleSheets
 
 ```SnackPlayer name=StyleSheet
+
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -36,6 +37,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 Code quality tips:
@@ -52,12 +54,15 @@ Code quality tips:
 ### `compose()`
 
 ```jsx
+
 static compose(style1: object, style2: object): object | array<object>
+
 ```
 
 Combines two styles such that `style2` will override any styles in `style1`. If either style is falsy, the other one is returned without allocating an array, saving allocations and maintaining reference equality for PureComponent checks.
 
 ```SnackPlayer name=Compose
+
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -94,6 +99,7 @@ const container = StyleSheet.compose(page.container, lists.listContainer);
 const text = StyleSheet.compose(page.text, lists.listItem);
 
 export default App;
+
 ```
 
 ---
@@ -101,7 +107,9 @@ export default App;
 ### `create()`
 
 ```jsx
+
 static create(obj: object): object
+
 ```
 
 Creates a StyleSheet style reference from the given object.
@@ -111,14 +119,17 @@ Creates a StyleSheet style reference from the given object.
 ### `flatten()`
 
 ```jsx
+
 static flatten(style: array<object>): object
+
 ```
 
 Flattens an array of style objects, into one aggregated style object. Alternatively, this method can be used to lookup IDs, returned by `StyleSheet.register`.
 
-> **NOTE:** Exercise caution as abusing this can tax you in terms of optimizations. IDs enable optimizations through the bridge and memory in general. Referring to style objects directly will deprive you of these optimizations.
+&gt; **NOTE:** Exercise caution as abusing this can tax you in terms of optimizations. IDs enable optimizations through the bridge and memory in general. Referring to style objects directly will deprive you of these optimizations.
 
 ```SnackPlayer name=Flatten
+
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -166,6 +177,7 @@ const flattenStyle = StyleSheet.flatten([
 ]);
 
 export default App;
+
 ```
 
 This method internally uses `StyleSheetRegistry.getStyleByID(style)` to resolve style objects represented by IDs. Thus, an array of style objects (instances of `StyleSheet.create()`), are individually resolved to, their respective objects, merged as one and then returned. This also explains the alternative use.
@@ -174,10 +186,12 @@ This method internally uses `StyleSheetRegistry.getStyleByID(style)` to resolve 
 
 ### `setStyleAttributePreprocessor()`
 
-> **WARNING: EXPERIMENTAL.** Breaking changes will probably happen a lot and will not be reliably announced. The whole thing might be deleted, who knows? Use at your own risk.
+&gt; **WARNING: EXPERIMENTAL.** Breaking changes will probably happen a lot and will not be reliably announced. The whole thing might be deleted, who knows? Use at your own risk.
 
 ```jsx
+
 static setStyleAttributePreprocessor(property: string, process: (propValue: any) => any)
+
 ```
 
 Sets a function to use to pre-process a style property value. This is used internally to process color and transform values. You should not use this unless you really know what you are doing and have exhausted other options.
@@ -191,6 +205,7 @@ Sets a function to use to pre-process a style property value. This is used inter
 A very common pattern is to create overlays with position absolute and zero positioning (`position: 'absolute', left: 0, right: 0, top: 0, bottom: 0`), so `absoluteFill` can be used for convenience and to reduce duplication of these repeated styles. If you want, absoluteFill can be used to create a customized entry in a StyleSheet, e.g.:
 
 ```SnackPlayer name=absoluteFill
+
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -241,6 +256,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 ---
@@ -250,6 +266,7 @@ export default App;
 Sometimes you may want `absoluteFill` but with a couple tweaks - `absoluteFillObject` can be used to create a customized entry in a `StyleSheet`, e.g.:
 
 ```SnackPlayer name=absoluteFillObject
+
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -302,6 +319,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 ---
@@ -311,6 +329,7 @@ export default App;
 This is defined as the width of a thin line on the platform. It can be used as the thickness of a border or division between two elements. Example:
 
 ```SnackPlayer name=hairlineWidth
+
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -334,6 +353,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 This constant will always be a round number of pixels (so a line defined by it can look crisp) and will try to match the standard width of a thin line on the underlying platform. However, you should not rely on it being a constant size, because on different platforms and screen densities its value may be calculated differently.

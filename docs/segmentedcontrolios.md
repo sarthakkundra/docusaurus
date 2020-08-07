@@ -1,9 +1,9 @@
 ---
 id: segmentedcontrolios
-title: 🚧 SegmentedControlIOS
+title: '🚧 SegmentedControlIOS'
 ---
 
-> **Deprecated.** Use [@react-native-community/segmented-control](https://github.com/react-native-community/segmented-control) instead.
+&gt; **Deprecated.** Use [@react-native-community/segmented-control](https://github.com/react-native-community/segmented-control) instead.
 
 Uses `SegmentedControlIOS` to render a UISegmentedControl iOS.
 
@@ -14,6 +14,7 @@ The selected index can be changed on the fly by assigning the selectedIndex prop
 ## Example
 
 ```SnackPlayer name=SegmentedControlIOS%20Example&supportedPlatforms=ios
+
 import React, { useState } from "react";
 import { SegmentedControlIOS, StyleSheet, Text, View } from "react-native";
 
@@ -45,6 +46,7 @@ const styles = StyleSheet.create({
     marginTop: 24
   }
 });
+
 ```
 
 ---
@@ -107,7 +109,7 @@ The index in `props.values` of the segment to be (pre)selected.
 
 ### `tintColor`
 
-> **Note:** `tintColor` is not supported on the iOS 13+.
+&gt; **Note:** `tintColor` is not supported on the iOS 13+.
 
 Accent color of the control.
 

@@ -1,9 +1,9 @@
 ---
 id: imagepickerios
-title: 🚧 ImagePickerIOS
+title: '🚧 ImagePickerIOS'
 ---
 
-> **Deprecated.** Use [@react-native-community/image-picker-ios](https://github.com/react-native-community/react-native-image-picker-ios) instead.
+&gt; **Deprecated.** Use [@react-native-community/image-picker-ios](https://github.com/react-native-community/react-native-image-picker-ios) instead.
 
 ---
 
@@ -14,7 +14,9 @@ title: 🚧 ImagePickerIOS
 ### `canRecordVideos()`
 
 ```jsx
+
 static canRecordVideos(callback)
+
 ```
 
 ---
@@ -22,7 +24,9 @@ static canRecordVideos(callback)
 ### `canUseCamera()`
 
 ```jsx
+
 static canUseCamera(callback)
+
 ```
 
 ---
@@ -30,7 +34,9 @@ static canUseCamera(callback)
 ### `openCameraDialog()`
 
 ```jsx
+
 static openCameraDialog(config, successCallback, cancelCallback)
+
 ```
 
 **Parameters:**
@@ -56,7 +62,9 @@ static openCameraDialog(config, successCallback, cancelCallback)
 ### `openSelectDialog()`
 
 ```jsx
+
 static openSelectDialog(config, successCallback, cancelCallback)
+
 ```
 
 **Parameters:**

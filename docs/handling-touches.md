@@ -25,6 +25,7 @@ This will render a blue label on iOS, and a blue rounded rectangle with light te
 Go ahead and play around with the `Button` component using the example below. You can select which platform your app is previewed in by clicking on the toggle in the bottom right, then click on "Tap to Play" to preview the app.
 
 ```SnackPlayer name=Button%20Basics
+
 import React, { Component } from 'react';
 import { Button, StyleSheet, View } from 'react-native';
 
@@ -79,6 +80,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   }
 });
+
 ```
 
 ## Touchables
@@ -100,6 +102,7 @@ In some cases, you may want to detect when a user presses and holds a view for a
 Let's see all of these in action:
 
 ```SnackPlayer name=Touchables
+
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TouchableHighlight, TouchableOpacity, TouchableNativeFeedback, TouchableWithoutFeedback, View } from 'react-native';
 
@@ -167,6 +170,7 @@ const styles = StyleSheet.create({
     color: 'white'
   }
 });
+
 ```
 
 ## Scrolling and swiping

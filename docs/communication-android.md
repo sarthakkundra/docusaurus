@@ -20,6 +20,7 @@ Properties are the most straightforward way of cross-component communication. So
 You can pass properties down to the React Native app by providing a custom implementation of `ReactActivityDelegate` in your main activity. This implementation should override `getLaunchOptions` to return a `Bundle` with the desired properties.
 
 ```java
+
 public class MainActivity extends ReactActivity {
   @Override
   protected ReactActivityDelegate createReactActivityDelegate() {
@@ -37,6 +38,7 @@ public class MainActivity extends ReactActivity {
     };
   }
 }
+
 ```
 
 ```jsx
@@ -56,6 +58,7 @@ export default class ImageBrowserApp extends React.Component {
 `ReactRootView` provides a read-write property `appProperties`. After `appProperties` is set, the React Native app is re-rendered with new properties. The update is only performed when the new updated properties differ from the previous ones.
 
 ```java
+
 Bundle updatedProps = mReactRootView.getAppProperties();
 ArrayList<String> imageList = new ArrayList<String>(Arrays.asList(
         "http://foo.com/bar3.png",
@@ -64,13 +67,14 @@ ArrayList<String> imageList = new ArrayList<String>(Arrays.asList(
 updatedProps.putStringArrayList("images", imageList);
 
 mReactRootView.setAppProperties(updatedProps);
+
 ```
 
 It is fine to update properties anytime. However, updates have to be performed on the main thread. You use the getter on any thread.
 
 There is no way to update only a few properties at a time. We suggest that you build it into your own wrapper instead.
 
-> **_Note:_** Currently, JS function `componentWillUpdateProps` of the top level RN component will not be called after a prop update. However, you can access the new props in `componentDidMount` function.
+&gt; **_Note:_** Currently, JS function `componentWillUpdateProps` of the top level RN component will not be called after a prop update. However, you can access the new props in `componentDidMount` function.
 
 ### Passing properties from React Native to native
 
@@ -102,4 +106,4 @@ Events are powerful, because they allow us to change React Native components wit
 
 Native modules are Java classes that are available in JS. Typically one instance of each module is created per JS bridge. They can export arbitrary functions and constants to React Native. They have been covered in detail in [this article](native-modules-android).
 
-> **_Warning_**: All native modules share the same namespace. Watch out for name collisions when creating new ones.
+&gt; **_Warning_**: All native modules share the same namespace. Watch out for name collisions when creating new ones.

@@ -21,18 +21,22 @@ The [React Native CLI](https://github.com/react-native-community/cli) comes with
 
 #### 1. Run the `upgrade` command
 
-> The `upgrade` command works on top of Git by using `git apply` with 3-way merge, therefore it's required to use Git in order for this to work, if you don't use Git but still want to use this solution then you can check out how to do it in the [Troubleshooting](#i-want-to-upgrade-with-react-native-cli-but-i-don-t-use-git) section.
+&gt; The `upgrade` command works on top of Git by using `git apply` with 3-way merge, therefore it's required to use Git in order for this to work, if you don't use Git but still want to use this solution then you can check out how to do it in the [Troubleshooting](#i-want-to-upgrade-with-react-native-cli-but-i-don-t-use-git) section.
 
 Run the following command to start the process of upgrading to the latest version:
 
 ```sh
+
 npx react-native upgrade
+
 ```
 
 You may specify a React Native version by passing an argument, e.g. to upgrade to `0.61.0-rc.0` run:
 
 ```sh
+
 npx react-native upgrade 0.61.0-rc.0
+
 ```
 
 The project is upgraded using `git apply` with 3-way merge, it may happen that you'll need to resolve a few conflicts after it's finished.
@@ -42,11 +46,12 @@ The project is upgraded using `git apply` with 3-way merge, it may happen that y
 Conflicted files include delimiters which make very clear where the changes come from. For example:
 
 ```
+
 13B07F951A680F5B00A75B9A /* Release */ = {
   isa = XCBuildConfiguration;
   buildSettings = {
     ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-<<<<<<< ours
+<!!!!!! ours
     CODE_SIGN_IDENTITY = "iPhone Developer";
     FRAMEWORK_SEARCH_PATHS = (
       "$(inherited)",
@@ -62,6 +67,7 @@ Conflicted files include delimiters which make very clear where the changes come
       "$(SRCROOT)/../node_modules/react-native/React/**",
       "$(SRCROOT)/../node_modules/react-native-code-push/ios/CodePush/**",
     );
+
 ```
 
 You can think of "ours" as "your team" and "theirs" as "the React Native development team".
@@ -81,9 +87,11 @@ You first need to select from and to which version you wish to upgrade, by defau
 The first file that is shown is the `package.json`, it's good to update the dependencies that are showing in there. For example, if `react-native` and `react` appears as changes then you can install it in your project by running `yarn add`:
 
 ```sh
+
 # {{VERSION}} and {{REACT_VERSION}} are the release versions showing in the diff
 yarn add react-native@{{VERSION}}
 yarn add react@{{REACT_VERSION}}
+
 ```
 
 #### 3. Upgrade your project files
@@ -93,7 +101,9 @@ The new release may contain updates to other files that are generated when you r
 In case there are changes then you can either update them manually by copying and pasting from the changes in the page or you can do it with the React Native CLI upgrade command by running:
 
 ```sh
+
 npx react-native upgrade
+
 ```
 
 This will check your files against the latest template and perform the following:
@@ -102,7 +112,7 @@ This will check your files against the latest template and perform the following
 - If a file in the template is identical to your file, it is skipped.
 - If a file is different in your project than the template, you will be prompted; you have options to keep your file or overwrite it with the template version.
 
-> Some upgrades won't be done automatically with the React Native CLI and require manual work, e.g. `0.28` to `0.29`, or `0.56` to `0.57`. Make sure to check the [release notes](https://github.com/facebook/react-native/releases) when upgrading so that you can identify any manual changes your particular project may require.
+&gt; Some upgrades won't be done automatically with the React Native CLI and require manual work, e.g. `0.28` to `0.29`, or `0.56` to `0.57`. Make sure to check the [release notes](https://github.com/facebook/react-native/releases) when upgrading so that you can identify any manual changes your particular project may require.
 
 ### Troubleshooting
 
@@ -111,9 +121,11 @@ This will check your files against the latest template and perform the following
 While your project does not have to be handled by the Git versioning system -- you can use Mercurial, SVN, or nothing -- you will still need to [install Git](https://git-scm.com/downloads) on your system in order to use `npx react-native upgrade`. Git will also need to be available in the `PATH`. If your project doesn't use Git, initialize it and commit:
 
 ```sh
+
 git init # Initialize a Git repository
 git add . # Stage all the current files
 git commit -m "Upgrade react-native" # Save the current files in a commit
+
 ```
 
 After you finish upgrading you may remove the `.git` directory.

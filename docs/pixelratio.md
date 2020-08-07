@@ -30,6 +30,7 @@ In React Native, everything in JavaScript and within the layout engine works wit
 ## Example
 
 ```SnackPlayer name=PixelRatio%20Example
+
 import React from "react";
 import { Image, PixelRatio, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 
@@ -89,6 +90,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 ---
@@ -100,7 +102,9 @@ export default App;
 ### `get()`
 
 ```jsx
+
 static get()
+
 ```
 
 Returns the device pixel density. Some examples:
@@ -130,13 +134,15 @@ Returns the device pixel density. Some examples:
 ### `getFontScale()`
 
 ```jsx
+
 static getFontScale(): number
+
 ```
 
 Returns the scaling factor for font sizes. This is the ratio that is used to calculate the absolute font size, so any elements that heavily depend on that should use this to do calculations.
 
-- on Android value reflects the user preference set in **Settings > Display > Font size**
-- on iOS value reflects the user preference set in **Settings > Display & Brightness > Text Size**, value can also be updated in **Settings > Accessibilty > Display & Test Size > Larger Text**
+- on Android value reflects the user preference set in **Settings &gt; Display &gt; Font size**
+- on iOS value reflects the user preference set in **Settings &gt; Display & Brightness &gt; Text Size**, value can also be updated in **Settings &gt; Accessibilty &gt; Display & Test Size &gt; Larger Text**
 
 If a font scale is not set, this returns the device pixel ratio.
 
@@ -145,7 +151,9 @@ If a font scale is not set, this returns the device pixel ratio.
 ### `getPixelSizeForLayoutSize()`
 
 ```jsx
+
 static getPixelSizeForLayoutSize(layoutSize: number): number
+
 ```
 
 Converts a layout size (dp) to pixel size (px).
@@ -157,7 +165,9 @@ Guaranteed to return an integer number.
 ### `roundToNearestPixel()`
 
 ```jsx
+
 static roundToNearestPixel(layoutSize: number): number
+
 ```
 
 Rounds a layout size (dp) to the nearest layout size that corresponds to an integer number of pixels. For example, on a device with a PixelRatio of 3, `PixelRatio.roundToNearestPixel(8.4) = 8.33`, which corresponds to exactly (8.33 \* 3) = 25 pixels.

@@ -8,6 +8,7 @@ Displays native to iOS [Action Sheet](https://developer.apple.com/design/human-i
 ## Example
 
 ```SnackPlayer name=ActionSheetIOS&supportedPlatforms=ios
+
 import React, { useState } from "react";
 import { ActionSheetIOS, Button, StyleSheet, Text, View } from "react-native";
 
@@ -52,6 +53,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 # Reference
@@ -61,7 +63,9 @@ export default App;
 ### `showActionSheetWithOptions()`
 
 ```jsx
+
 static showActionSheetWithOptions(options, callback)
+
 ```
 
 Display an iOS action sheet. The `options` object must contain one or more of:
@@ -98,7 +102,9 @@ ActionSheetIOS.showActionSheetWithOptions(
 ### `showShareActionSheetWithOptions()`
 
 ```jsx
+
 static showShareActionSheetWithOptions(options, failureCallback, successCallback)
+
 ```
 
 Display the iOS share sheet. The `options` object should contain one or both of `message` and `url` and can additionally have a `subject` or `excludedActivityTypes`:
@@ -108,7 +114,7 @@ Display the iOS share sheet. The `options` object should contain one or both of 
 - `subject` (string) - a subject for the message
 - `excludedActivityTypes` (array) - the activities to exclude from the ActionSheet
 
-> **Note:** If `url` points to a local file, or is a base64-encoded uri, the file it points to will be loaded and shared directly. In this way, you can share images, videos, PDF files, etc. If `url` points to a remote file or address it must conform to URL format as described in [RFC 2396](https://www.ietf.org/rfc/rfc2396.txt). For example, a web URL without a proper protocol (HTTP/HTTPS) will not be shared.
+&gt; **Note:** If `url` points to a local file, or is a base64-encoded uri, the file it points to will be loaded and shared directly. In this way, you can share images, videos, PDF files, etc. If `url` points to a remote file or address it must conform to URL format as described in [RFC 2396](https://www.ietf.org/rfc/rfc2396.txt). For example, a web URL without a proper protocol (HTTP/HTTPS) will not be shared.
 
 The 'failureCallback' function takes one parameter, an error object. The only property defined on this object is an optional `stack` property of type `string`.
 

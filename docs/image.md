@@ -7,215 +7,64 @@ A React component for displaying different types of images, including network im
 
 This example shows fetching and displaying an image from local storage as well as one from network and even from data provided in the `'data:'` uri scheme.
 
-> Note that for network and data images, you will need to manually specify the dimensions of your image!
+&gt; Note that for network and data images, you will need to manually specify the dimensions of your image!
 
 ## Examples
 
-<div class="toggler">
-  <ul role="tablist" class="toggle-syntax">
-    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+<div className="toggler">
+  <ul role="tablist" className="toggle-syntax">
+    <li id="functional" className="button-functional" aria-selected="false" role="tab" tabIndex={0} aria-controls="functionaltab" onClick="displayTabs('syntax', 'functional')">
       Function Component Example
     </li>
-    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+    <li id="classical" className="button-classical" aria-selected="false" role="tab" tabIndex={0} aria-controls="classicaltab" onClick="displayTabs('syntax', 'classical')">
       Class Component Example
     </li>
   </ul>
 </div>
 
-<block class="functional syntax" />
+block
 
 ```SnackPlayer name=Function%20Component%20Example
 
-import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 50,
-  },
-  tinyLogo: {
-    width: 50,
-    height: 50,
-  },
-  logo: {
-    width: 66,
-    height: 58,
-  },
-});
 
-const DisplayAnImage = () => {
-  return (
-    <View style={styles.container}>
-      <Image
-        style={styles.tinyLogo}
-        source={require('@expo/snack-static/react-native-logo.png')}
-      />
-      <Image
-        style={styles.tinyLogo}
-        source={{
-          uri: 'https://reactnative.dev/img/tiny_logo.png',
-        }}
-      />
-      <Image
-        style={styles.logo}
-        source={{
-          uri:
-            'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
-        }}
-      />
-    </View>
-  );
-}
-
-export default DisplayAnImage;
 ```
-
-<block class="classical syntax" />
 
 ```SnackPlayer name=Class%20Component%20Example
 
-import React, { Component } from 'react';
-import { AppRegistry, View, Image, StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 50,
-  },
-  tinyLogo: {
-    width: 50,
-    height: 50,
-  },
-  logo: {
-    width: 66,
-    height: 58,
-  },
-});
 
-class DisplayAnImage extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Image
-          style={styles.tinyLogo}
-          source={require('@expo/snack-static/react-native-logo.png')}
-        />
-        <Image
-          style={styles.tinyLogo}
-          source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
-        />
-        <Image
-          style={styles.logo}
-          source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
-        />
-      </View>
-    );
-  }
-}
-
-export default DisplayAnImage;
 ```
 
-<block class="endBlock syntax" />
+You can also add `` to an image:
 
-You can also add `style` to an image:
-
-<div class="toggler">
-  <ul role="tablist" class="toggle-syntax">
-    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
       Function Component Example
-    </li>
-    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
-      Class Component Example
-    </li>
-  </ul>
-</div>
 
-<block class="functional syntax" />
+
+      Class Component Example
 
 ```SnackPlayer name=Function%20Component%20Example
 
-import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 50,
-  },
-  stretch: {
-    width: 50,
-    height: 200,
-    resizeMode: 'stretch',
-  },
-});
 
-const DisplayAnImageWithStyle = () => {
-  return (
-    <View style={styles.container}>
-      <Image
-        style={styles.stretch}
-        source={require('@expo/snack-static/react-native-logo.png')}
-      />
-    </View>
-  );
-}
-
-export default DisplayAnImageWithStyle;
 ```
-
-<block class="classical syntax" />
 
 ```SnackPlayer name=Class%20Component%20Example
 
-import React, { Component } from 'react';
-import { View, Image, StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
-  stretch: {
-    width: 50,
-    height: 200,
-    resizeMode: 'stretch'
-  }
-});
 
-class DisplayAnImageWithStyle extends Component {
-  render() {
-    return (
-      <View>
-        <Image
-          style={styles.stretch}
-          source={require('@expo/snack-static/react-native-logo.png')}
-        />
-      </View>
-    );
-  }
-}
-
-export default DisplayAnImageWithStyle;
 ```
-
-<block class="endBlock syntax" />
 
 ## GIF and WebP support on Android
 
 When building your own native code, GIF and WebP are not supported by default on Android.
 
-You will need to add some optional modules in `android/app/build.gradle`, depending on the needs of your app.
+You will need to add some optional modules in ``, depending on the needs of your app.
 
 ```gradle
-dependencies {
-  // If your app supports Android versions before Ice Cream Sandwich (API level 14)
-  implementation 'com.facebook.fresco:animated-base-support:1.3.0'
 
-  // For animated GIF support
-  implementation 'com.facebook.fresco:animated-gif:2.0.0'
 
-  // For WebP support, including animated WebP
-  implementation 'com.facebook.fresco:animated-webp:2.1.0'
-  implementation 'com.facebook.fresco:webpsupport:2.0.0'
 
-  // For WebP support, without animations
-  implementation 'com.facebook.fresco:webpsupport:2.0.0'
-}
 ```
 
 ---
@@ -224,9 +73,9 @@ dependencies {
 
 ## Props
 
-### `style`
+### ``
 
-`ImageResizeMode` is an `Enum` for different image resizing modes, set via the `resizeMode` style property on `Image` components. The values are `contain`, `cover`, `stretch`, `center`, `repeat`.
+`is an` for different image resizing modes, set via the `style property on` components. The values are `,`, `,`, ``.
 
 | Type  | Required |
 | ----- | -------- |
@@ -242,7 +91,7 @@ dependencies {
 
 ---
 
-### `accessible`
+### ``
 
 When true, indicates the image is an accessibility element.
 
@@ -252,7 +101,7 @@ When true, indicates the image is an accessibility element.
 
 ---
 
-### `accessibilityLabel`
+### ``
 
 The text that's read by the screen reader when the user interacts with the image.
 
@@ -262,7 +111,7 @@ The text that's read by the screen reader when the user interacts with the image
 
 ---
 
-### `blurRadius`
+### ``
 
 blurRadius: the blur radius of the blur filter added to the image
 
@@ -270,13 +119,13 @@ blurRadius: the blur radius of the blur filter added to the image
 | ------ | -------- |
 | number | No       |
 
-> Tip : IOS you will need to increase `blurRadius` more than `5`
+&gt; Tip : IOS you will need to increase `more than`
 
 ---
 
-### `capInsets`
+### ``
 
-When the image is resized, the corners of the size specified by `capInsets` will stay a fixed size, but the center content and borders of the image will be stretched. This is useful for creating resizable rounded buttons, shadows, and other resizable assets. More info in the [official Apple documentation](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIImage_Class/index.html#//apple_ref/occ/instm/UIImage/resizableImageWithCapInsets).
+When the image is resized, the corners of the size specified by `` will stay a fixed size, but the center content and borders of the image will be stretched. This is useful for creating resizable rounded buttons, shadows, and other resizable assets. More info in the [official Apple documentation](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIImage_Class/index.html#//apple_ref/occ/instm/UIImage/resizableImageWithCapInsets).
 
 | Type         | Required | Platform |
 | ------------ | -------- | -------- |
@@ -284,7 +133,7 @@ When the image is resized, the corners of the size specified by `capInsets` will
 
 ---
 
-### `defaultSource`
+### ``
 
 A static image to display while loading the image source.
 
@@ -293,21 +142,21 @@ A static image to display while loading the image source.
 | object, number | No       | iOS      |
 | number         | No       | Android  |
 
-If passing an object, the general shape is `{uri: string, width: number, height: number, scale: number}`:
+If passing an object, the general shape is ``:
 
-- `uri` - a string representing the resource identifier for the image, which should be either a local file path or the name of a static image resource (which should be wrapped in the `require('./path/to/image.png')` function).
-- `width`, `height` - can be specified if known at build time, in which case these will be used to set the default `<Image/>` component dimensions.
-- `scale` - used to indicate the scale factor of the image. Defaults to 1.0 if unspecified, meaning that one image pixel equates to one display point / DIP.
+- `- a string representing the resource identifier for the image, which should be either a local file path or the name of a static image resource (which should be wrapped in the` function).
+- `,` - can be specified if known at build time, in which case these will be used to set the default `` component dimensions.
+- `` - used to indicate the scale factor of the image. Defaults to 1.0 if unspecified, meaning that one image pixel equates to one display point / DIP.
 
 If passing a number:
 
-- `number` - Opaque type returned by something like `require('./image.jpg')`.
+- `- Opaque type returned by something like`.
 
-> **Note:** On Android, the default source prop is ignored on debug builds.
+&gt; **Note:** On Android, the default source prop is ignored on debug builds.
 
 ---
 
-### `fadeDuration`
+### ``
 
 Android only. By default, it is 300ms.
 
@@ -317,21 +166,21 @@ Android only. By default, it is 300ms.
 
 ---
 
-### `loadingIndicatorSource`
+### ``
 
-Similarly to `source`, this property represents the resource used to render the loading indicator for the image, displayed until image is ready to be displayed, typically after when it got downloaded from network.
+Similarly to ``, this property represents the resource used to render the loading indicator for the image, displayed until image is ready to be displayed, typically after when it got downloaded from network.
 
 | Type                                  | Required |
 | ------------------------------------- | -------- |
 | array of ImageSourcePropTypes, number | No       |
 
-> Can accept a number as returned by `require('./image.jpg')`
+&gt; Can accept a number as returned by ``
 
 ---
 
-### `onError`
+### ``
 
-Invoked on load error with `{nativeEvent: {error}}`.
+Invoked on load error with ``.
 
 | Type     | Required |
 | -------- | -------- |
@@ -339,9 +188,9 @@ Invoked on load error with `{nativeEvent: {error}}`.
 
 ---
 
-### `onLayout`
+### ``
 
-Invoked on mount and layout changes with `{nativeEvent: {layout: {x, y, width, height}}}`.
+Invoked on mount and layout changes with ``.
 
 | Type     | Required |
 | -------- | -------- |
@@ -349,7 +198,7 @@ Invoked on mount and layout changes with `{nativeEvent: {layout: {x, y, width, h
 
 ---
 
-### `onLoad`
+### ``
 
 Invoked when load completes successfully.
 
@@ -359,7 +208,7 @@ Invoked when load completes successfully.
 
 ---
 
-### `onLoadEnd`
+### ``
 
 Invoked when load either succeeds or fails.
 
@@ -369,11 +218,11 @@ Invoked when load either succeeds or fails.
 
 ---
 
-### `onLoadStart`
+### ``
 
 Invoked on load start.
 
-e.g., `onLoadStart={(e) => this.setState({loading: true})}`
+e.g., ``
 
 | Type     | Required |
 | -------- | -------- |
@@ -381,7 +230,7 @@ e.g., `onLoadStart={(e) => this.setState({loading: true})}`
 
 ---
 
-### `onPartialLoad`
+### ``
 
 Invoked when a partial load of the image is complete. The definition of what constitutes a "partial load" is loader specific though this is meant for progressive JPEG loads.
 
@@ -391,9 +240,9 @@ Invoked when a partial load of the image is complete. The definition of what con
 
 ---
 
-### `onProgress`
+### ``
 
-Invoked on download progress with `{nativeEvent: {loaded, total}}`.
+Invoked on download progress with ``.
 
 | Type     | Required | Platform |
 | -------- | -------- | -------- |
@@ -401,9 +250,9 @@ Invoked on download progress with `{nativeEvent: {loaded, total}}`.
 
 ---
 
-### `progressiveRenderingEnabled`
+### ``
 
-Android only. When true, enables progressive jpeg streaming. https://frescolib.org/docs/progressive-jpegs.html
+Android only. When true, enables progressive jpeg streaming.
 
 | Type | Required | Platform |
 | ---- | -------- | -------- |
@@ -411,17 +260,17 @@ Android only. When true, enables progressive jpeg streaming. https://frescolib.o
 
 ---
 
-### `resizeMethod`
+### ``
 
-The mechanism that should be used to resize the image when the image's dimensions differ from the image view's dimensions. Defaults to `auto`.
+The mechanism that should be used to resize the image when the image's dimensions differ from the image view's dimensions. Defaults to ``.
 
-- `auto`: Use heuristics to pick between `resize` and `scale`.
+- `: Use heuristics to pick between` and ``.
 
-- `resize`: A software operation which changes the encoded image in memory before it gets decoded. This should be used instead of `scale` when the image is much larger than the view.
+- `: A software operation which changes the encoded image in memory before it gets decoded. This should be used instead of` when the image is much larger than the view.
 
-- `scale`: The image gets drawn downscaled or upscaled. Compared to `resize`, `scale` is faster (usually hardware accelerated) and produces higher quality images. This should be used if the image is smaller than the view. It should also be used if the image is slightly bigger than the view.
+- `: The image gets drawn downscaled or upscaled. Compared to`, `` is faster (usually hardware accelerated) and produces higher quality images. This should be used if the image is smaller than the view. It should also be used if the image is slightly bigger than the view.
 
-More details about `resize` and `scale` can be found at http://frescolib.org/docs/resizing.html.
+More details about `and` can be found at .
 
 | Type                            | Required | Platform |
 | ------------------------------- | -------- | -------- |
@@ -429,19 +278,19 @@ More details about `resize` and `scale` can be found at http://frescolib.org/doc
 
 ---
 
-### `resizeMode`
+### ``
 
-Determines how to resize the image when the frame doesn't match the raw image dimensions. Defaults to `cover`.
+Determines how to resize the image when the frame doesn't match the raw image dimensions. Defaults to ``.
 
-- `cover`: Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width and height) of the image will be equal to or larger than the corresponding dimension of the view (minus padding).
+- ``: Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width and height) of the image will be equal to or larger than the corresponding dimension of the view (minus padding).
 
-- `contain`: Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width and height) of the image will be equal to or less than the corresponding dimension of the view (minus padding).
+- ``: Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width and height) of the image will be equal to or less than the corresponding dimension of the view (minus padding).
 
-- `stretch`: Scale width and height independently, This may change the aspect ratio of the src.
+- ``: Scale width and height independently, This may change the aspect ratio of the src.
 
-- `repeat`: Repeat the image to cover the frame of the view. The image will keep its size and aspect ratio, unless it is larger than the view, in which case it will be scaled down uniformly so that it is contained in the view.
+- ``: Repeat the image to cover the frame of the view. The image will keep its size and aspect ratio, unless it is larger than the view, in which case it will be scaled down uniformly so that it is contained in the view.
 
-- `center`: Center the image in the view along both dimensions. If the image is larger than the view, scale it down uniformly so that it is contained in the view.
+- ``: Center the image in the view along both dimensions. If the image is larger than the view, scale it down uniformly so that it is contained in the view.
 
 | Type                                                    | Required |
 | ------------------------------------------------------- | -------- |
@@ -449,13 +298,13 @@ Determines how to resize the image when the frame doesn't match the raw image di
 
 ---
 
-### `source`
+### ``
 
 The image source (either a remote URL or a local file resource).
 
-This prop can also contain several remote URLs, specified together with their width and height and potentially with scale/other URI arguments. The native side will then choose the best `uri` to display based on the measured size of the image container. A `cache` property can be added to control how networked request interacts with the local cache. (For more information see [Cache Control for Images](images#cache-control-ios-only)).
+This prop can also contain several remote URLs, specified together with their width and height and potentially with scale/other URI arguments. The native side will then choose the best `to display based on the measured size of the image container. A` property can be added to control how networked request interacts with the local cache. (For more information see [Cache Control for Images](images#cache-control-ios-only)).
 
-The currently supported formats are `png`, `jpg`, `jpeg`, `bmp`, `gif`, `webp` (Android only), `psd` (iOS only). In addition, iOS supports several RAW image formats. Refer to Apple's documentation for the current list of supported camera models (for iOS 12, see https://support.apple.com/en-ca/HT208967).
+The currently supported formats are `,`, `,`, `,` (Android only), `` (iOS only). In addition, iOS supports several RAW image formats. Refer to Apple's documentation for the current list of supported camera models (for iOS 12, see ).
 
 | Type                | Required |
 | ------------------- | -------- |
@@ -463,7 +312,7 @@ The currently supported formats are `png`, `jpg`, `jpeg`, `bmp`, `gif`, `webp` (
 
 ---
 
-### `testID`
+### ``
 
 A unique identifier for this element to be used in UI Automation testing scripts.
 
@@ -473,10 +322,9 @@ A unique identifier for this element to be used in UI Automation testing scripts
 
 ## Methods
 
-### `getSize()`
+### ``
 
 ```jsx
-Image.getSize(uri, success, [failure]);
 ```
 
 Retrieve the width and height (in pixels) of an image prior to displaying it. This method can fail if the image cannot be found, or fails to download.
@@ -493,10 +341,9 @@ In order to retrieve the image dimensions, the image may first need to be loaded
 
 ---
 
-### `getSizeWithHeaders()`
+### ``
 
 ```jsx
-Image.getSizeWithHeaders(uri, headers, success, [failure]);
 ```
 
 Retrieve the width and height (in pixels) of an image prior to displaying it with the ability to provide the headers for the request. This method can fail if the image cannot be found, or fails to download.
@@ -516,10 +363,9 @@ Does not work for static image resources.
 
 ---
 
-### `prefetch()`
+### ``
 
 ```jsx
-Image.prefetch(url);
 ```
 
 Prefetches a remote image for later use by downloading it to the disk cache
@@ -532,10 +378,9 @@ Prefetches a remote image for later use by downloading it to the disk cache
 
 ---
 
-### `abortPrefetch()`
+### ``
 
 ```jsx
-Image.abortPrefetch(requestId);
 ```
 
 Abort prefetch request. Android-only.
@@ -548,10 +393,9 @@ Abort prefetch request. Android-only.
 
 ---
 
-### `queryCache()`
+### ``
 
 ```jsx
-Image.queryCache(urls);
 ```
 
 Perform cache interrogation. Returns a mapping from URL to cache status, such as "disk" or "memory". If a requested URL is not in the mapping, it means it's not in the cache.
@@ -564,18 +408,17 @@ Perform cache interrogation. Returns a mapping from URL to cache status, such as
 
 ---
 
-### `resolveAssetSource()`
+### ``
 
 ```jsx
-Image.resolveAssetSource(source);
 ```
 
-Resolves an asset reference into an object which has the properties `uri`, `width`, and `height`.
+Resolves an asset reference into an object which has the properties `,`, and ``.
 
 **Parameters:**
 
-| Name   | Type           | Required | Description                                                                  |
-| ------ | -------------- | -------- | ---------------------------------------------------------------------------- |
-| source | number, object | Yes      | A number (opaque type returned by require('./foo.png')) or an `ImageSource`. |
+| Name   | Type           | Required | Description                                                       |
+| ------ | -------------- | -------- | ----------------------------------------------------------------- |
+| source | number, object | Yes      | A number (opaque type returned by require('./foo.png')) or an ``. |
 
-> `ImageSource` is an object like `{ uri: '<http location || file path>' }`
+&gt; `is an object like`

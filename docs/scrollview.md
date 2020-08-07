@@ -22,6 +22,7 @@ This is where `FlatList` comes into play. `FlatList` renders items lazily, when 
 ## Example
 
 ```SnackPlayer name=ScrollView
+
 import React from 'react';
 import { StyleSheet, Text, SafeAreaView, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 ---
@@ -144,6 +146,7 @@ When true, the scroll view automatically centers the content when the content is
 These styles will be applied to the scroll view content container which wraps all of the child views. Example:
 
 ```
+
 return (
   <ScrollView contentContainerStyle={styles.contentContainer}>
   </ScrollView>
@@ -154,6 +157,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20
   }
 });
+
 ```
 
 | Type                                 | Required |
@@ -166,9 +170,9 @@ const styles = StyleSheet.create({
 
 The amount by which the scroll view content is inset from the edges of the scroll view. Defaults to `{top: 0, left: 0, bottom: 0, right: 0}`.
 
-| Type                                                               | Required | Platform |
-| ------------------------------------------------------------------ | -------- | -------- |
-| object: {top: number, left: number, bottom: number, right: number} | No       | iOS      |
+| Type                                                                       | Required | Platform |
+| -------------------------------------------------------------------------- | -------- | -------- |
+| object: {"{"}top: number, left: number, bottom: number, right: number{"}"} | No       | iOS      |
 
 ---
 
@@ -336,9 +340,9 @@ Caveat 1: Reordering elements in the scrollview with this enabled will probably 
 
 Caveat 2: This uses `contentOffset` and `frame.origin` in native code to compute visibility. Occlusion, transforms, and other complexity won't be taken into account as to whether content is "visible" or not.
 
-| Type                                                                     | Required | Platform |
-| ------------------------------------------------------------------------ | -------- | -------- |
-| object: { minIndexForVisible: number, autoscrollToTopThreshold: number } | No       | iOS      |
+| Type                                                                             | Required | Platform |
+| -------------------------------------------------------------------------------- | -------- | -------- |
+| object: {"{"} minIndexForVisible: number, autoscrollToTopThreshold: number {"}"} | No       | iOS      |
 
 ---
 
@@ -409,6 +413,7 @@ Called when the momentum scroll ends (scroll which occurs as the ScrollView glid
 Fires at most once per frame during scrolling. The frequency of the events can be controlled using the `scrollEventThrottle` prop. The event has the following shape (all values are numbers):
 
 ```js
+
 {
   nativeEvent: {
     contentInset: {bottom, left, right, top},
@@ -418,6 +423,7 @@ Fires at most once per frame during scrolling. The frequency of the events can b
     zoomScale
   }
 }
+
 ```
 
 | Type     | Required |
@@ -565,9 +571,9 @@ This controls how often the scroll event will be fired while scrolling (as a tim
 
 The amount by which the scroll view indicators are inset from the edges of the scroll view. This should normally be set to the same value as the `contentInset`. Defaults to `{0, 0, 0, 0}`.
 
-| Type                                                               | Required | Platform |
-| ------------------------------------------------------------------ | -------- | -------- |
-| object: {top: number, left: number, bottom: number, right: number} | No       | iOS      |
+| Type                                                                       | Required | Platform |
+| -------------------------------------------------------------------------- | -------- | -------- |
+| object: {"{"}top: number, left: number, bottom: number, right: number{"}"} | No       | iOS      |
 
 ---
 
@@ -718,11 +724,13 @@ Displays the scroll indicators momentarily.
 ### `scrollTo()`
 
 ```jsx
+
 scrollTo(
   options?: {x?: number, y?: number, animated?: boolean} | number,
   deprecatedX?: number,
 	deprecatedAnimated?: boolean,
 );
+
 ```
 
 Scrolls to a given x, y offset, either immediately, with a smooth animation.

@@ -7,218 +7,30 @@ The Modal component is a basic way to present content above an enclosing view.
 
 ## Example
 
-<div class="toggler">
-  <ul role="tablist" class="toggle-syntax">
-    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+<div className="toggler">
+  <ul role="tablist" className="toggle-syntax">
+    <li id="functional" className="button-functional" aria-selected="false" role="tab" tabIndex={0} aria-controls="functionaltab" onClick="displayTabs('syntax', 'functional')">
       Function Component Example
     </li>
-    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+    <li id="classical" className="button-classical" aria-selected="false" role="tab" tabIndex={0} aria-controls="classicaltab" onClick="displayTabs('syntax', 'classical')">
       Class Component Example
     </li>
   </ul>
 </div>
 
-<block class="functional syntax" />
+block
 
 ```SnackPlayer name=Modal&supportedPlatforms=android,ios
-import React, { useState } from "react";
-import {
-  Alert,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View
-} from "react-native";
 
-const App = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  return (
-    <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
 
-            <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </TouchableHighlight>
-          </View>
-        </View>
-      </Modal>
 
-      <TouchableHighlight
-        style={styles.openButton}
-        onPress={() => {
-          setModalVisible(true);
-        }}
-      >
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </TouchableHighlight>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5
-  },
-  openButton: {
-    backgroundColor: "#F194FF",
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center"
-  }
-});
-
-export default App;
 ```
-
-<block class="classical syntax" />
 
 ```SnackPlayer name=Modal&supportedPlatforms=android,ios
-import React, { Component } from "react";
-import {
-  Alert,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View
-} from "react-native";
 
-class App extends Component {
-  state = {
-    modalVisible: false
-  };
 
-  setModalVisible = (visible) => {
-    this.setState({ modalVisible: visible });
-  }
 
-  render() {
-    const { modalVisible } = this.state;
-    return (
-      <View style={styles.centeredView}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
-
-              <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-                onPress={() => {
-                  this.setModalVisible(!modalVisible);
-                }}
-              >
-                <Text style={styles.textStyle}>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-        </Modal>
-
-        <TouchableHighlight
-          style={styles.openButton}
-          onPress={() => {
-            this.setModalVisible(true);
-          }}
-        >
-          <Text style={styles.textStyle}>Show Modal</Text>
-        </TouchableHighlight>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5
-  },
-  openButton: {
-    backgroundColor: "#F194FF",
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center"
-  }
-});
-
-export default App;
 ```
-
-<block class="endBlock syntax" />
 
 ---
 
@@ -226,21 +38,21 @@ export default App;
 
 ## Props
 
-### `animated`
+### ``
 
-> **Deprecated.** Use the [`animationType`](modal.md#animationtype) prop instead.
+&gt; **Deprecated.** Use the [``](modal.md#animationtype) prop instead.
 
 ---
 
-### `animationType`
+### ``
 
-The `animationType` prop controls how the modal animates.
+The `` prop controls how the modal animates.
 
-- `slide` slides in from the bottom
-- `fade` fades into view
-- `none` appears without an animation
+- `` slides in from the bottom
+- `` fades into view
+- `` appears without an animation
 
-Default is set to `none`.
+Default is set to ``.
 
 | Type                          | Required |
 | ----------------------------- | -------- |
@@ -248,9 +60,9 @@ Default is set to `none`.
 
 ---
 
-### `hardwareAccelerated`
+### ``
 
-The `hardwareAccelerated` prop controls whether to force hardware acceleration for the underlying window.
+The `` prop controls whether to force hardware acceleration for the underlying window.
 
 | Type | Required | Platform |
 | ---- | -------- | -------- |
@@ -258,19 +70,9 @@ The `hardwareAccelerated` prop controls whether to force hardware acceleration f
 
 ---
 
-### `onDismiss`
+### ``
 
-The `onDismiss` prop allows passing a function that will be called once the modal has been dismissed.
-
-| Type     | Required | Platform |
-| -------- | -------- | -------- |
-| function | No       | iOS      |
-
----
-
-### `onOrientationChange`
-
-The `onOrientationChange` callback is called when the orientation changes while the modal is being displayed. The orientation provided is only 'portrait' or 'landscape'. This callback is also called on initial render, regardless of the current orientation.
+The `` prop allows passing a function that will be called once the modal has been dismissed.
 
 | Type     | Required | Platform |
 | -------- | -------- | -------- |
@@ -278,9 +80,19 @@ The `onOrientationChange` callback is called when the orientation changes while 
 
 ---
 
-### `onRequestClose`
+### ``
 
-The `onRequestClose` callback is called when the user taps the hardware back button on Android or the menu button on Apple TV. Because of this required prop, be aware that `BackHandler` events will not be emitted as long as the modal is open.
+The `` callback is called when the orientation changes while the modal is being displayed. The orientation provided is only 'portrait' or 'landscape'. This callback is also called on initial render, regardless of the current orientation.
+
+| Type     | Required | Platform |
+| -------- | -------- | -------- |
+| function | No       | iOS      |
+
+---
+
+### ``
+
+The `callback is called when the user taps the hardware back button on Android or the menu button on Apple TV. Because of this required prop, be aware that` events will not be emitted as long as the modal is open.
 
 | Type     | Required | Platform                 |
 | -------- | -------- | ------------------------ |
@@ -289,9 +101,9 @@ The `onRequestClose` callback is called when the user taps the hardware back but
 
 ---
 
-### `onShow`
+### ``
 
-The `onShow` prop allows passing a function that will be called once the modal has been shown.
+The `` prop allows passing a function that will be called once the modal has been shown.
 
 | Type     | Required |
 | -------- | -------- |
@@ -299,16 +111,16 @@ The `onShow` prop allows passing a function that will be called once the modal h
 
 ---
 
-### `presentationStyle`
+### ``
 
-The `presentationStyle` prop controls how the modal appears (generally on larger devices such as iPad or plus-sized iPhones). See https://developer.apple.com/reference/uikit/uimodalpresentationstyle for details.
+The `` prop controls how the modal appears (generally on larger devices such as iPad or plus-sized iPhones). See for details.
 
-- `fullScreen` covers the screen completely
-- `pageSheet` covers portrait-width view centered (only on larger devices)
-- `formSheet` covers narrow-width view centered (only on larger devices)
-- `overFullScreen` covers the screen completely, but allows transparency
+- `` covers the screen completely
+- `` covers portrait-width view centered (only on larger devices)
+- `` covers narrow-width view centered (only on larger devices)
+- `` covers the screen completely, but allows transparency
 
-Default is set to `overFullScreen` or `fullScreen` depending on `transparent` property.
+Default is set to `or` depending on `` property.
 
 | Type                                                           | Required | Platform |
 | -------------------------------------------------------------- | -------- | -------- |
@@ -316,9 +128,9 @@ Default is set to `overFullScreen` or `fullScreen` depending on `transparent` pr
 
 ---
 
-### `statusBarTranslucent`
+### ``
 
-The `statusBarTranslucent` prop determines whether your modal should go under the system statusbar.
+The `` prop determines whether your modal should go under the system statusbar.
 
 | Type | Required | Platform |
 | ---- | -------- | -------- |
@@ -326,9 +138,9 @@ The `statusBarTranslucent` prop determines whether your modal should go under th
 
 ---
 
-### `supportedOrientations`
+### ``
 
-The `supportedOrientations` prop allows the modal to be rotated to any of the specified orientations. On iOS, the modal is still restricted by what's specified in your app's Info.plist's UISupportedInterfaceOrientations field. When using `presentationStyle` of `pageSheet` or `formSheet`, this property will be ignored by iOS.
+The `prop allows the modal to be rotated to any of the specified orientations. On iOS, the modal is still restricted by what's specified in your app's Info.plist's UISupportedInterfaceOrientations field. When using` of `or`, this property will be ignored by iOS.
 
 | Type                                                                                                | Required | Platform |
 | --------------------------------------------------------------------------------------------------- | -------- | -------- |
@@ -336,9 +148,9 @@ The `supportedOrientations` prop allows the modal to be rotated to any of the sp
 
 ---
 
-### `transparent`
+### ``
 
-The `transparent` prop determines whether your modal will fill the entire view. Setting this to `true` will render the modal over a transparent background.
+The `prop determines whether your modal will fill the entire view. Setting this to` will render the modal over a transparent background.
 
 | Type | Required |
 | ---- | -------- |
@@ -346,9 +158,9 @@ The `transparent` prop determines whether your modal will fill the entire view. 
 
 ---
 
-### `visible`
+### ``
 
-The `visible` prop determines whether your modal is visible.
+The `` prop determines whether your modal is visible.
 
 | Type | Required |
 | ---- | -------- |

@@ -3,7 +3,7 @@ id: permissionsandroid
 title: PermissionsAndroid
 ---
 
-<div class="banner-native-code-required">
+<div className="banner-native-code-required">
   <h3>Project with Native Code Required</h3>
   <p>
     The following section only applies to projects with native code exposed. If you are using the managed <code>expo-cli</code> workflow, see the guide on <a href="https://docs.expo.io/versions/latest/sdk/permissions/">Permissions</a> in the Expo documentation for the appropriate alternative.
@@ -18,173 +18,67 @@ If a user has previously turned off a permission that you prompt for, the OS wil
 
 ### Example
 
-<div class="toggler">
-  <ul role="tablist" class="toggle-syntax">
-    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+<div className="toggler">
+  <ul role="tablist" className="toggle-syntax">
+    <li id="functional" className="button-functional" aria-selected="false" role="tab" tabIndex={0} aria-controls="functionaltab" onClick="displayTabs('syntax', 'functional')">
       Function Component Example
     </li>
-    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+    <li id="classical" className="button-classical" aria-selected="false" role="tab" tabIndex={0} aria-controls="classicaltab" onClick="displayTabs('syntax', 'classical')">
       Class Component Example
     </li>
   </ul>
 </div>
 
-<block class="functional syntax" />
+block
 
 ```SnackPlayer name=PermissionsAndroid%20Example&supportedPlatforms=android
-import React from "react";
-import { StyleSheet, Text, View, SafeAreaView, PermissionsAndroid, Button } from "react-native";
-import Constants from "expo-constants";
 
-const requestCameraPermission = async () => {
-  try {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.CAMERA,
-      {
-        title: "Cool Photo App Camera Permission",
-        message:
-          "Cool Photo App needs access to your camera " +
-          "so you can take awesome pictures.",
-        buttonNeutral: "Ask Me Later",
-        buttonNegative: "Cancel",
-        buttonPositive: "OK"
-      }
-    );
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log("You can use the camera");
-    } else {
-      console.log("Camera permission denied");
-    }
-  } catch (err) {
-    console.warn(err);
-  }
-};
 
-const App = () => (
-  <View style={styles.container}>
-    <Text style={styles.item}>Try permissions</Text>
-    <Button title="request permissions" onPress={requestCameraPermission} />
-  </View>
-);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#ecf0f1",
-    padding: 8
-  },
-  item: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: "bold",
-    textAlign: "center"
-  }
-});
-
-export default App;
 ```
-
-<block class="classical syntax" />
 
 ```SnackPlayer name=PermissionsAndroid%20Example&supportedPlatforms=android
-import React, { Component } from "react";
-import { StyleSheet, Text, View, SafeAreaView, PermissionsAndroid, Button } from "react-native";
-import Constants from "expo-constants";
 
-const requestCameraPermission = async () => {
-  try {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.CAMERA,
-      {
-        title: "Cool Photo App Camera Permission",
-        message:
-          "Cool Photo App needs access to your camera " +
-          "so you can take awesome pictures.",
-        buttonNeutral: "Ask Me Later",
-        buttonNegative: "Cancel",
-        buttonPositive: "OK"
-      }
-    );
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log("You can use the camera");
-    } else {
-      console.log("Camera permission denied");
-    }
-  } catch (err) {
-    console.warn(err);
-  }
-};
 
-class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.item}>Try permissions</Text>
-        <Button title="request permissions" onPress={requestCameraPermission} />
-      </View>
-    );
-  }
-};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#ecf0f1",
-    padding: 8
-  },
-  item: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: "bold",
-    textAlign: "center"
-  }
-});
-
-export default App;
 ```
-
-<block class="endBlock syntax" />
 
 ### Permissions that require prompting the user
 
-Available as constants under `PermissionsAndroid.PERMISSIONS`:
+Available as constants under ``:
 
-- `READ_CALENDAR`: 'android.permission.READ_CALENDAR'
-- `WRITE_CALENDAR`: 'android.permission.WRITE_CALENDAR'
-- `CAMERA`: 'android.permission.CAMERA'
-- `READ_CONTACTS`: 'android.permission.READ_CONTACTS'
-- `WRITE_CONTACTS`: 'android.permission.WRITE_CONTACTS'
-- `GET_ACCOUNTS`: 'android.permission.GET_ACCOUNTS'
-- `ACCESS_FINE_LOCATION`: 'android.permission.ACCESS_FINE_LOCATION'
-- `ACCESS_COARSE_LOCATION`: 'android.permission.ACCESS_COARSE_LOCATION'
-- `RECORD_AUDIO`: 'android.permission.RECORD_AUDIO'
-- `READ_PHONE_STATE`: 'android.permission.READ_PHONE_STATE'
-- `CALL_PHONE`: 'android.permission.CALL_PHONE'
-- `READ_CALL_LOG`: 'android.permission.READ_CALL_LOG'
-- `WRITE_CALL_LOG`: 'android.permission.WRITE_CALL_LOG'
-- `ADD_VOICEMAIL`: 'com.android.voicemail.permission.ADD_VOICEMAIL'
-- `USE_SIP`: 'android.permission.USE_SIP'
-- `PROCESS_OUTGOING_CALLS`: 'android.permission.PROCESS_OUTGOING_CALLS'
-- `BODY_SENSORS`: 'android.permission.BODY_SENSORS'
-- `SEND_SMS`: 'android.permission.SEND_SMS'
-- `RECEIVE_SMS`: 'android.permission.RECEIVE_SMS'
-- `READ_SMS`: 'android.permission.READ_SMS'
-- `RECEIVE_WAP_PUSH`: 'android.permission.RECEIVE_WAP_PUSH'
-- `RECEIVE_MMS`: 'android.permission.RECEIVE_MMS'
-- `READ_EXTERNAL_STORAGE`: 'android.permission.READ_EXTERNAL_STORAGE'
-- `WRITE_EXTERNAL_STORAGE`: 'android.permission.WRITE_EXTERNAL_STORAGE'
+- ``: 'android.permission.READ_CALENDAR'
+- ``: 'android.permission.WRITE_CALENDAR'
+- ``: 'android.permission.CAMERA'
+- ``: 'android.permission.READ_CONTACTS'
+- ``: 'android.permission.WRITE_CONTACTS'
+- ``: 'android.permission.GET_ACCOUNTS'
+- ``: 'android.permission.ACCESS_FINE_LOCATION'
+- ``: 'android.permission.ACCESS_COARSE_LOCATION'
+- ``: 'android.permission.RECORD_AUDIO'
+- ``: 'android.permission.READ_PHONE_STATE'
+- ``: 'android.permission.CALL_PHONE'
+- ``: 'android.permission.READ_CALL_LOG'
+- ``: 'android.permission.WRITE_CALL_LOG'
+- ``: 'com.android.voicemail.permission.ADD_VOICEMAIL'
+- ``: 'android.permission.USE_SIP'
+- ``: 'android.permission.PROCESS_OUTGOING_CALLS'
+- ``: 'android.permission.BODY_SENSORS'
+- ``: 'android.permission.SEND_SMS'
+- ``: 'android.permission.RECEIVE_SMS'
+- ``: 'android.permission.READ_SMS'
+- ``: 'android.permission.RECEIVE_WAP_PUSH'
+- ``: 'android.permission.RECEIVE_MMS'
+- ``: 'android.permission.READ_EXTERNAL_STORAGE'
+- ``: 'android.permission.WRITE_EXTERNAL_STORAGE'
 
 ### Result strings for requesting permissions
 
-Available as constants under `PermissionsAndroid.RESULTS`:
+Available as constants under ``:
 
-- `GRANTED`: 'granted'
-- `DENIED`: 'denied'
-- `NEVER_ASK_AGAIN`: 'never_ask_again'
+- ``: 'granted'
+- ``: 'denied'
+- ``: 'never_ask_again'
 
 ---
 
@@ -192,18 +86,16 @@ Available as constants under `PermissionsAndroid.RESULTS`:
 
 ## Methods
 
-### `constructor()`
+### ``
 
 ```jsx
-constructor();
 ```
 
 ---
 
-### `check()`
+### ``
 
 ```jsx
-check(permission);
 ```
 
 Returns a promise resolving to a boolean value as to whether the specified permissions has been granted.
@@ -216,22 +108,21 @@ Returns a promise resolving to a boolean value as to whether the specified permi
 
 ---
 
-### `request()`
+### ``
 
 ```jsx
-request(permission, [rationale]);
 ```
 
 Prompts the user to enable a permission and returns a promise resolving to a string value (see result strings above) indicating whether the user allowed or denied the request or does not want to be asked again.
 
-If `rationale` is provided, this function checks with the OS whether it is necessary to show a dialog explaining why the permission is needed (https://developer.android.com/training/permissions/requesting.html#explain) and then shows the system permission dialog.
+If `` is provided, this function checks with the OS whether it is necessary to show a dialog explaining why the permission is needed () and then shows the system permission dialog.
 
 **Parameters:**
 
 | Name       | Type   | Required | Description                |
 | ---------- | ------ | -------- | -------------------------- |
 | permission | string | Yes      | The permission to request. |
-| rationale  | object | No       | See `rationale` below.     |
+| rationale  | object | No       | See `` below.              |
 
 **Rationale:**
 
@@ -245,10 +136,9 @@ If `rationale` is provided, this function checks with the OS whether it is neces
 
 ---
 
-### `requestMultiple()`
+### ``
 
 ```jsx
-requestMultiple(permissions);
 ```
 
 Prompts the user to enable multiple permissions in the same dialog and returns an object with the permissions as keys and strings as values (see result strings above) indicating whether the user allowed or denied the request or does not want to be asked again.

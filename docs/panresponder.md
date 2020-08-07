@@ -10,7 +10,9 @@ By default, `PanResponder` holds an `InteractionManager` handle to block long-ru
 It provides a predictable wrapper of the responder handlers provided by the [gesture responder system](gesture-responder-system.md). For each handler, it provides a new `gestureState` object alongside the native event object:
 
 ```
+
 onPanResponderMove: (event, gestureState) => {}
+
 ```
 
 A native event is a synthetic touch event with form of [PressEvent](pressevent).
@@ -78,149 +80,30 @@ const ExampleComponent = () => {
 
 `PanResponder` works with `Animated` API to help build complex gestures in the UI. The following example contains an animated `View` component which can be dragged freely across the screen
 
-<div class="toggler">
-  <ul role="tablist" class="toggle-syntax">
-    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+<div className="toggler">
+  <ul role="tablist" className="toggle-syntax">
+    <li id="functional" className="button-functional" aria-selected="false" role="tab" tabIndex={0} aria-controls="functionaltab" onClick="displayTabs('syntax', 'functional')">
       Function Component Example
     </li>
-    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+    <li id="classical" className="button-classical" aria-selected="false" role="tab" tabIndex={0} aria-controls="classicaltab" onClick="displayTabs('syntax', 'classical')">
       Class Component Example
     </li>
   </ul>
 </div>
 
-<block class="functional syntax" />
+block
 
 ```SnackPlayer name=PanResponder
-import React, { useRef } from "react";
-import { Animated, View, StyleSheet, PanResponder, Text } from "react-native";
 
-const App = () => {
-  const pan = useRef(new Animated.ValueXY()).current;
 
-  const panResponder = useRef(
-    PanResponder.create({
-      onMoveShouldSetPanResponder: () => true,
-      onPanResponderGrant: () => {
-        pan.setOffset({
-          x: pan.x._value,
-          y: pan.y._value
-        });
-      },
-      onPanResponderMove: Animated.event(
-        [
-          null,
-          { dx: pan.x, dy: pan.y }
-        ]
-      ),
-      onPanResponderRelease: () => {
-        pan.flattenOffset();
-      }
-    })
-  ).current;
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.titleText}>Drag this box!</Text>
-      <Animated.View
-        style={{
-          transform: [{ translateX: pan.x }, { translateY: pan.y }]
-        }}
-        {...panResponder.panHandlers}
-      >
-        <View style={styles.box} />
-      </Animated.View>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  titleText: {
-    fontSize: 14,
-    lineHeight: 24,
-    fontWeight: "bold"
-  },
-  box: {
-    height: 150,
-    width: 150,
-    backgroundColor: "blue",
-    borderRadius: 5
-  }
-});
-
-export default App;
 ```
-
-<block class="classical syntax" />
 
 ```SnackPlayer name=PanResponder
-import React, { Component } from "react";
-import { Animated, View, StyleSheet, PanResponder, Text } from "react-native";
 
-class App extends Component {
-  pan = new Animated.ValueXY();
-  panResponder = PanResponder.create({
-    onMoveShouldSetPanResponder: () => true,
-    onPanResponderGrant: () => {
-      this.pan.setOffset({
-        x: this.pan.x._value,
-        y: this.pan.y._value
-      });
-    },
-    onPanResponderMove: Animated.event([
-      null,
-      { dx: this.pan.x, dy: this.pan.y }
-    ]),
-    onPanResponderRelease: () => {
-      this.pan.flattenOffset();
-    }
-  });
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.titleText}>Drag this box!</Text>
-        <Animated.View
-          style={{
-            transform: [{ translateX: this.pan.x }, { translateY: this.pan.y }]
-          }}
-          {...this.panResponder.panHandlers}
-        >
-          <View style={styles.box} />
-        </Animated.View>
-      </View>
-    );
-  }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  titleText: {
-    fontSize: 14,
-    lineHeight: 24,
-    fontWeight: "bold"
-  },
-  box: {
-    height: 150,
-    width: 150,
-    backgroundColor: "blue",
-    borderRadius: 5
-  }
-});
-
-export default App;
 ```
-
-<block class="endBlock syntax" />
 
 Try the [PanResponder example in RNTester](https://github.com/facebook/react-native/blob/master/RNTester/js/examples/PanResponder/PanResponderExample.js).
 
@@ -230,10 +113,9 @@ Try the [PanResponder example in RNTester](https://github.com/facebook/react-nat
 
 ## Methods
 
-### `create()`
+### ``
 
 ```jsx
-static create(config)
 ```
 
 **Parameters:**
@@ -242,22 +124,22 @@ static create(config)
 | ------ | ------ | -------- | ----------- |
 | config | object | Yes      | Refer below |
 
-The config object provides enhanced versions of all of the responder callbacks that provide not only the [`PressEvent`](pressevent), but also the `PanResponder` gesture state, by replacing the word `Responder` with `PanResponder` in each of the typical `onResponder*` callbacks. For example, the `config` object would look like:
+The config object provides enhanced versions of all of the responder callbacks that provide not only the [``](pressevent), but also the `gesture state, by replacing the word` with `in each of the typical` callbacks. For example, the `` object would look like:
 
-- `onMoveShouldSetPanResponder: (e, gestureState) => {...}`
-- `onMoveShouldSetPanResponderCapture: (e, gestureState) => {...}`
-- `onStartShouldSetPanResponder: (e, gestureState) => {...}`
-- `onStartShouldSetPanResponderCapture: (e, gestureState) => {...}`
-- `onPanResponderReject: (e, gestureState) => {...}`
-- `onPanResponderGrant: (e, gestureState) => {...}`
-- `onPanResponderStart: (e, gestureState) => {...}`
-- `onPanResponderEnd: (e, gestureState) => {...}`
-- `onPanResponderRelease: (e, gestureState) => {...}`
-- `onPanResponderMove: (e, gestureState) => {...}`
-- `onPanResponderTerminate: (e, gestureState) => {...}`
-- `onPanResponderTerminationRequest: (e, gestureState) => {...}`
-- `onShouldBlockNativeResponder: (e, gestureState) => {...}`
+- ``
+- ``
+- ``
+- ``
+- ``
+- ``
+- ``
+- ``
+- ``
+- ``
+- ``
+- ``
+- ``
 
 In general, for events that have capture equivalents, we update the gestureState once in the capture phase and can use it in the bubble phase as well.
 
-Be careful with `onStartShould*` callbacks. They only reflect updated `gestureState` for start/end events that bubble/capture to the Node. Once the node is the responder, you can rely on every start/end event being processed by the gesture and `gestureState` being updated accordingly. (numberActiveTouches) may not be totally accurate unless you are the responder.
+Be careful with `callbacks. They only reflect updated` for start/end events that bubble/capture to the Node. Once the node is the responder, you can rely on every start/end event being processed by the gesture and `` being updated accordingly. (numberActiveTouches) may not be totally accurate unless you are the responder.

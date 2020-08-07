@@ -3,7 +3,7 @@ id: touchablehighlight
 title: TouchableHighlight
 ---
 
-> If you're looking for a more extensive and future-proof way to handle touch-based input, check out the [Pressable](pressable.md) API.
+&gt; If you're looking for a more extensive and future-proof way to handle touch-based input, check out the [Pressable](pressable.md) API.
 
 A wrapper for making views respond properly to touches. On press down, the opacity of the wrapped view is decreased, which allows the underlay color to show through, darkening or tinting the view.
 
@@ -30,126 +30,30 @@ function MyComponent(props) {
 
 ## Example
 
-<div class="toggler">
-  <ul role="tablist" class="toggle-syntax">
-    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+<div className="toggler">
+  <ul role="tablist" className="toggle-syntax">
+    <li id="functional" className="button-functional" aria-selected="false" role="tab" tabIndex={0} aria-controls="functionaltab" onClick="displayTabs('syntax', 'functional')">
       Function Component Example
     </li>
-    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+    <li id="classical" className="button-classical" aria-selected="false" role="tab" tabIndex={0} aria-controls="classicaltab" onClick="displayTabs('syntax', 'classical')">
       Class Component Example
     </li>
   </ul>
 </div>
 
-<block class="functional syntax" />
+block
 
 ```SnackPlayer name=TouchableHighlight%20Function%20Component%20Example
-import React, { useState } from "react";
-import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 
-const TouchableHighlightExample = () => {
-  const [count, setCount] = useState(0);
-  const onPress = () => setCount(count + 1);
 
-  return (
-    <View style={styles.container}>
-      <TouchableHighlight onPress={onPress}>
-        <View style={styles.button}>
-          <Text>Touch Here</Text>
-        </View>
-      </TouchableHighlight>
-      <View style={styles.countContainer}>
-        <Text style={styles.countText}>
-          {count ? count : null}
-        </Text>
-      </View>
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingHorizontal: 10
-  },
-  button: {
-    alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    padding: 10
-  },
-  countContainer: {
-    alignItems: "center",
-    padding: 10
-  },
-  countText: {
-    color: "#FF00FF"
-  }
-});
-
-export default TouchableHighlightExample;
 ```
-
-<block class="classical syntax" />
 
 ```SnackPlayer name=TouchableHighlight%20Class%20Component%20Example
-import React, { Component } from "react";
-import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { count: 0 };
-  }
 
-  onPress = () => {
-    this.setState({
-      count: this.state.count + 1
-    });
-  };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <TouchableHighlight onPress={this.onPress}>
-          <View style={styles.button}>
-            <Text>Touch Here</Text>
-          </View>
-        </TouchableHighlight>
-        <View style={[styles.countContainer]}>
-          <Text style={[styles.countText]}>
-            {this.state.count ? this.state.count : null}
-          </Text>
-        </View>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingHorizontal: 10
-  },
-  button: {
-    alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    padding: 10
-  },
-  countContainer: {
-    alignItems: "center",
-    padding: 10
-  },
-  countText: {
-    color: "#FF00FF"
-  }
-});
-
-export default App;
 ```
-
-<block class="endBlock syntax" />
 
 ---
 
@@ -159,9 +63,9 @@ export default App;
 
 Inherits [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props).
 
-### `activeOpacity`
+### ``
 
-Determines what the opacity of the wrapped view should be when touch is active. The value should be between 0 and 1. Defaults to 0.85. Requires `underlayColor` to be set.
+Determines what the opacity of the wrapped view should be when touch is active. The value should be between 0 and 1. Defaults to 0.85. Requires `` to be set.
 
 | Type   | Required |
 | ------ | -------- |
@@ -169,7 +73,7 @@ Determines what the opacity of the wrapped view should be when touch is active. 
 
 ---
 
-### `onHideUnderlay`
+### ``
 
 Called immediately after the underlay is hidden.
 
@@ -179,7 +83,7 @@ Called immediately after the underlay is hidden.
 
 ---
 
-### `onShowUnderlay`
+### ``
 
 Called immediately after the underlay is shown.
 
@@ -189,7 +93,7 @@ Called immediately after the underlay is shown.
 
 ---
 
-### `style`
+### ``
 
 | Type       | Required |
 | ---------- | -------- |
@@ -197,7 +101,7 @@ Called immediately after the underlay is shown.
 
 ---
 
-### `underlayColor`
+### ``
 
 The color of the underlay that will show through when the touch is active.
 
@@ -207,7 +111,7 @@ The color of the underlay that will show through when the touch is active.
 
 ---
 
-### `hasTVPreferredFocus`
+### ``
 
 _(Apple TV only)_ TV preferred focus (see documentation for the View component).
 
@@ -217,7 +121,7 @@ _(Apple TV only)_ TV preferred focus (see documentation for the View component).
 
 ---
 
-### `nextFocusDown`
+### ``
 
 TV next focus down (see documentation for the View component).
 
@@ -227,7 +131,7 @@ TV next focus down (see documentation for the View component).
 
 ---
 
-### `nextFocusForward`
+### ``
 
 TV next focus forward (see documentation for the View component).
 
@@ -237,7 +141,7 @@ TV next focus forward (see documentation for the View component).
 
 ---
 
-### `nextFocusLeft`
+### ``
 
 TV next focus left (see documentation for the View component).
 
@@ -247,7 +151,7 @@ TV next focus left (see documentation for the View component).
 
 ---
 
-### `nextFocusRight`
+### ``
 
 TV next focus right (see documentation for the View component).
 
@@ -257,7 +161,7 @@ TV next focus right (see documentation for the View component).
 
 ---
 
-### `nextFocusUp`
+### ``
 
 TV next focus up (see documentation for the View component).
 
@@ -267,7 +171,7 @@ TV next focus up (see documentation for the View component).
 
 ---
 
-### `testOnly_pressed`
+### ``
 
 Handy for snapshot tests.
 

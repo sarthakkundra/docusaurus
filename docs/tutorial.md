@@ -12,6 +12,7 @@ Let's do this thing.
 In accordance with the ancient traditions of our people, we must first build an app that does nothing except say "Hello, world!". Here it is:
 
 ```SnackPlayer name=Hello%20World
+
 import React from 'react';
 import { Text, View } from 'react-native';
 
@@ -28,14 +29,15 @@ const HelloWorldApp = () => {
   )
 }
 export default HelloWorldApp;
+
 ```
 
 If you are feeling curious, you can play around with sample code directly in the web simulators. You can also paste it into your `App.js` file to create a real app on your local machine.
 
 ## What's going on here?
 
-1. First of all, we need to import `React` to be able to use `JSX`, which will then be transformed to the native components of each platform.
-2. On line 2, we import the `Text` and `View` components from `react-native`
+1.  First of all, we need to import `React` to be able to use `JSX`, which will then be transformed to the native components of each platform.
+2.  On line 2, we import the `Text` and `View` components from `react-native`
 
 Then we find the `HelloWorldApp` function, which is a [functional component](https://reactjs.org/docs/components-and-props.html#function-and-class-components) and behaves in the same way as in React for the web. This function returns a `View` component with some styles and a`Text` as its child.
 
@@ -62,6 +64,7 @@ Most components can be customized when they are created, with different paramete
 Your own components can also use `props`. This lets you make a single component that is used in many different places in your app, with slightly different properties in each place. Refer to `props.{NAME}` in your functional components or `this.props.{NAME}` in your class components. Here's an example:
 
 ```SnackPlayer name=Hello%20Props
+
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
@@ -90,6 +93,7 @@ const LotsOfGreetings = () => {
 }
 
 export default LotsOfGreetings;
+
 ```
 
 Using `name` as a prop lets us customize the `Greeting` component, so we can reuse that component for each of our greetings. This example also uses the `Greeting` component in JSX. The power to do this is what makes React so cool.
@@ -108,9 +112,10 @@ In a React component, the props are the variables that we pass from a parent com
 
 #### There are differences between React and React Native to handle the state?
 
-<div class="two-columns">
+<div className="two-columns">
 
 ```jsx
+
 // ReactJS Counter Example using Hooks!
 
 import React, { useState } from 'react';
@@ -138,6 +143,7 @@ const App = () => {
   justify-content: center;
   align-items: center;
 }
+
 
 ```
 
@@ -178,6 +184,7 @@ As shown above, there is no difference in handling the `state` between [React](h
 In the following example we will show the same above counter example using classes.
 
 ```SnackPlayer name=Hello%20Classes
+
 import React, { Component } from 'react'
 import {
   StyleSheet,
@@ -231,4 +238,5 @@ const styles = StyleSheet.create({
 })
 
 export default App;
+
 ```

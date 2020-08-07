@@ -1,15 +1,16 @@
 ---
 id: progressviewios
-title: 🚧 ProgressViewIOS
+title: '🚧 ProgressViewIOS'
 ---
 
-> **Deprecated.** Use [@react-native-community/progress-view](https://github.com/react-native-community/progress-view) instead.
+&gt; **Deprecated.** Use [@react-native-community/progress-view](https://github.com/react-native-community/progress-view) instead.
 
 Uses `ProgressViewIOS` to render a UIProgressView on iOS.
 
 ### Example
 
 ```SnackPlayer name=ProgressViewIOS&supportedPlatforms=ios
+
 import React from 'react';
 import {View, StyleSheet, ProgressViewIOS, Text} from 'react-native';
 
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 ---

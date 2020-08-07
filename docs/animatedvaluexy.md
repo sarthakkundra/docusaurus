@@ -8,6 +8,7 @@ title: Animated.ValueXY
 ## Example
 
 ```SnackPlayer name=Animated.ValueXY
+
 import React, { useRef } from "react";
 import { Animated, PanResponder, StyleSheet, View } from "react-native";
 
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
 });
 
 export default DraggableView;
+
 ```
 
 ---
@@ -201,7 +203,9 @@ getLayout();
 Converts `{x, y}` into `{left, top}` for use in style, e.g.
 
 ```jsx
+
 style={this.state.anim.getLayout()}
+
 ```
 
 ---
@@ -215,7 +219,9 @@ getTranslateTransform();
 Converts `{x, y}` into a useable translation transform, e.g.
 
 ```jsx
+
 style={{
   transform: this.state.anim.getTranslateTransform()
 }}
+
 ```

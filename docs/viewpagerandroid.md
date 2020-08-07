@@ -1,9 +1,9 @@
 ---
 id: viewpagerandroid
-title: 🚧 ViewPagerAndroid
+title: '🚧 ViewPagerAndroid'
 ---
 
-> **Deprecated.** Use [@react-native-community/viewpager](https://github.com/react-native-community/react-native-viewpager) instead.
+&gt; **Deprecated.** Use [@react-native-community/viewpager](https://github.com/react-native-community/react-native-viewpager) instead.
 
 Container that allows to flip left and right between child views. Each child view of the `ViewPagerAndroid` will be treated as a separate page and will be stretched to fill the `ViewPagerAndroid`.
 
@@ -12,6 +12,7 @@ It is important all children are `<View>`s and not composite components. You can
 Example:
 
 ```jsx
+
 render() {
   return (
     <ViewPagerAndroid
@@ -39,6 +40,7 @@ const styles = {
     padding: 20,
   }
 }
+
 ```
 
 ---
@@ -167,9 +169,9 @@ A helper function to scroll to a specific page in the ViewPager. The transition 
 
 ### ViewPagerScrollState
 
-| Type   |
-| ------ |
-| \$Enum |
+| Type     |
+| -------- |
+| \\\$Enum |
 
 **Constants:**
 

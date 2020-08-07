@@ -1,94 +1,38 @@
 ---
 id: datepickerios
-title: 🚧 DatePickerIOS
+title: '🚧 DatePickerIOS'
 ---
 
-> **Deprecated.** Use [@react-native-community/datetimepicker](https://github.com/react-native-community/react-native-datetimepicker) instead.
+&gt; **Deprecated.** Use [@react-native-community/datetimepicker](https://github.com/react-native-community/react-native-datetimepicker) instead.
 
 Use `DatePickerIOS` to render a date/time picker (selector) on iOS. This is a controlled component, so you must hook in to the `onDateChange` callback and update the `date` prop in order for the component to update, otherwise the user's change will be reverted immediately to reflect `props.date` as the source of truth.
 
 ### Example
 
-<div class="toggler">
-  <ul role="tablist" class="toggle-syntax">
-    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+<div className="toggler">
+  <ul role="tablist" className="toggle-syntax">
+    <li id="functional" className="button-functional" aria-selected="false" role="tab" tabIndex={0} aria-controls="functionaltab" onClick="displayTabs('syntax', 'functional')">
       Function Component Example
     </li>
-    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+    <li id="classical" className="button-classical" aria-selected="false" role="tab" tabIndex={0} aria-controls="classicaltab" onClick="displayTabs('syntax', 'classical')">
       Class Component Example
     </li>
   </ul>
 </div>
 
-<block class="functional syntax" />
+block
 
 ```SnackPlayer name=DatePickerIOS&supportedPlatforms=ios
-import React, {useState} from 'react';
-import {DatePickerIOS, View, StyleSheet} from 'react-native';
 
-const App = () => {
 
-  const [chosenDate, setChosenDate] = useState(new Date());
 
-  return (
-    <View style={styles.container}>
-      <DatePickerIOS
-        date={chosenDate}
-        onDateChange={setChosenDate}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-});
-
-export default App;
 ```
-
-<block class="classical syntax" />
 
 ```SnackPlayer name=DatePickerIOS&supportedPlatforms=ios
-import React, {Component} from 'react';
-import {DatePickerIOS, View, StyleSheet} from 'react-native';
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {chosenDate: new Date()};
 
-    this.setDate = this.setDate.bind(this);
-  }
 
-  setDate(newDate) {
-    this.setState({chosenDate: newDate});
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <DatePickerIOS
-          date={this.state.chosenDate}
-          onDateChange={this.setDate}
-        />
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-});
 ```
-
-<block class="endBlock syntax" />
 
 ---
 
@@ -98,7 +42,7 @@ const styles = StyleSheet.create({
 
 Inherits [View Props](view.md#props).
 
-### `date`
+### ``
 
 The currently selected date.
 
@@ -108,7 +52,7 @@ The currently selected date.
 
 ---
 
-### `onChange`
+### ``
 
 Date change handler.
 
@@ -120,7 +64,7 @@ This is called when the user changes the date or time in the UI. The first and o
 
 ---
 
-### `onDateChange`
+### ``
 
 Date change handler.
 
@@ -132,7 +76,7 @@ This is called when the user changes the date or time in the UI. The first and o
 
 ---
 
-### `maximumDate`
+### ``
 
 Maximum date.
 
@@ -142,13 +86,11 @@ Restricts the range of possible date/time values.
 | ---- | -------- |
 | Date | No       |
 
-Example with `maximumDate` set to December 31, 2017:
-
-<center><img src="/docs/assets/DatePickerIOS/maximumDate.gif" width="360"></img></center>
+Example with `` set to December 31, 2017:
 
 ---
 
-### `minimumDate`
+### ``
 
 Minimum date.
 
@@ -158,11 +100,11 @@ Restricts the range of possible date/time values.
 | ---- | -------- |
 | Date | No       |
 
-See [`maximumDate`](datepickerios.md#maximumdate) for an example image.
+See [``](datepickerios.md#maximumdate) for an example image.
 
 ---
 
-### `minuteInterval`
+### ``
 
 The interval at which minutes can be selected.
 
@@ -170,13 +112,11 @@ The interval at which minutes can be selected.
 | ------------------------------------------ | -------- |
 | enum(1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30) | No       |
 
-Example with `minuteInterval` set to `10`:
-
-<center><img src="/docs/assets/DatePickerIOS/minuteInterval.png" width="360"></img></center>
+Example with `set to`:
 
 ---
 
-### `mode`
+### ``
 
 The date picker mode.
 
@@ -184,11 +124,11 @@ The date picker mode.
 | --------------------------------------------- | -------- |
 | enum('date', 'time', 'datetime', 'countdown') | No       |
 
-Example with `mode` set to `date`, `time`, and `datetime`: ![](/docs/assets/DatePickerIOS/mode.png)
+Example with `set to`, `, and`: ![](/docs/assets/DatePickerIOS/mode.png)
 
 ---
 
-### `locale`
+### ``
 
 The locale for the date picker. Value needs to be a [Locale ID](https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html).
 
@@ -198,7 +138,7 @@ The locale for the date picker. Value needs to be a [Locale ID](https://develope
 
 ---
 
-### `timeZoneOffsetInMinutes`
+### ``
 
 Timezone offset in minutes.
 
@@ -210,7 +150,7 @@ By default, the date picker will use the device's timezone. With this parameter,
 
 ---
 
-### `initialDate`
+### ``
 
 Provides an initial value that will change when the user starts selecting a date. It is useful for use-cases where you do not want to deal with listening to events and updating the date prop to keep the controlled state in sync. The controlled state has known bugs which causes it to go out of sync with native. The initialDate prop is intended to allow you to have native be source of truth.
 

@@ -22,6 +22,7 @@ In order to embed a React Native view in a native component, we use `RCTRootView
 `RCTRootView` has an initializer that allows you to pass arbitrary properties down to the React Native app. The `initialProperties` parameter has to be an instance of `NSDictionary`. The dictionary is internally converted into a JSON object that the top-level JS component can reference.
 
 ```objectivec
+
 NSArray *imageList = @[@"http://foo.com/bar1.png",
                        @"http://foo.com/bar2.png"];
 
@@ -30,6 +31,7 @@ NSDictionary *props = @{@"images" : imageList};
 RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                  moduleName:@"ImageBrowserApp"
                                           initialProperties:props];
+
 ```
 
 ```jsx
@@ -49,23 +51,25 @@ export default class ImageBrowserApp extends React.Component {
 `RCTRootView` also provides a read-write property `appProperties`. After `appProperties` is set, the React Native app is re-rendered with new properties. The update is only performed when the new updated properties differ from the previous ones.
 
 ```objectivec
+
 NSArray *imageList = @[@"http://foo.com/bar3.png",
                        @"http://foo.com/bar4.png"];
 
 rootView.appProperties = @{@"images" : imageList};
+
 ```
 
 It is fine to update properties anytime. However, updates have to be performed on the main thread. You use the getter on any thread.
 
-> **_Note:_** Currently, there is a known issue where setting appProperties during the bridge startup, the change can be lost. See https://github.com/facebook/react-native/issues/20115 for more information.
+&gt; **_Note:_** Currently, there is a known issue where setting appProperties during the bridge startup, the change can be lost. See https: for more information.
 
 There is no way to update only a few properties at a time. We suggest that you build it into your own wrapper instead.
 
-> **_Note:_** Currently, JS function `componentWillUpdateProps` of the top level RN component will not be called after a prop update. However, you can access the new props in `componentDidMount` function.
+&gt; **_Note:_** Currently, JS function `of the top level RN component will not be called after a prop update. However, you can access the new props in` function.
 
 ### Passing properties from React Native to native
 
-The problem exposing properties of native components is covered in detail in [this article](native-components-ios#properties). In short, export properties with `RCT_CUSTOM_VIEW_PROPERTY` macro in your custom native component, then use them in React Native as if the component was an ordinary React Native component.
+The problem exposing properties of native components is covered in detail in [this article](native-components-ios#properties). In short, export properties with `` macro in your custom native component, then use them in React Native as if the component was an ordinary React Native component.
 
 ### Limits of properties
 
@@ -87,7 +91,7 @@ Events are powerful, because they allow us to change React Native components wit
 
 - As events can be sent from anywhere, they can introduce spaghetti-style dependencies into your project.
 - Events share namespace, which means that you may encounter some name collisions. Collisions will not be detected statically, which makes them hard to debug.
-- If you use several instances of the same React Native component and you want to distinguish them from the perspective of your event, you'll likely need to introduce identifiers and pass them along with events (you can use the native view's `reactTag` as an identifier).
+- If you use several instances of the same React Native component and you want to distinguish them from the perspective of your event, you'll likely need to introduce identifiers and pass them along with events (you can use the native view's `` as an identifier).
 
 The common pattern we use when embedding native in React Native is to make the native component's RCTViewManager a delegate for the views, sending events back to JavaScript via the bridge. This keeps related event calls in one place.
 
@@ -97,11 +101,11 @@ Native modules are Objective-C classes that are available in JS. Typically one i
 
 The fact that native modules are singletons limits the mechanism in the context of embedding. Let's say we have a React Native component embedded in a native view and we want to update the native, parent view. Using the native module mechanism, we would export a function that not only takes expected arguments, but also an identifier of the parent native view. The identifier would be used to retrieve a reference to the parent view to update. That said, we would need to keep a mapping from identifiers to native views in the module.
 
-Although this solution is complex, it is used in `RCTUIManager`, which is an internal React Native class that manages all React Native views.
+Although this solution is complex, it is used in ``, which is an internal React Native class that manages all React Native views.
 
 Native modules can also be used to expose existing native libraries to JS. The [Geolocation library](https://github.com/react-native-community/react-native-geolocation) is a living example of the idea.
 
-> **_Warning_**: All native modules share the same namespace. Watch out for name collisions when creating new ones.
+&gt; **_Warning_**: All native modules share the same namespace. Watch out for name collisions when creating new ones.
 
 ## Layout computation flow
 
@@ -109,7 +113,7 @@ When integrating native and React Native, we also need a way to consolidate two 
 
 ### Layout of a native component embedded in React Native
 
-This case is covered in [this article](native-components-ios#styles). To summarize, since all our native react views are subclasses of `UIView`, most style and size attributes will work like you would expect out of the box.
+This case is covered in [this article](native-components-ios#styles). To summarize, since all our native react views are subclasses of ``, most style and size attributes will work like you would expect out of the box.
 
 ### Layout of a React Native component embedded in native
 
@@ -120,17 +124,9 @@ The general scenario is when we have a React Native app with a fixed size, which
 For instance, to make an RN app 200 (logical) pixels high, and the hosting view's width wide, we could do:
 
 ```objectivec
-// SomeViewController.m
 
-- (void)viewDidLoad
-{
-  [...]
-  RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
-                                                   moduleName:appName
-                                            initialProperties:props];
-  rootView.frame = CGRectMake(0, 0, self.view.width, 200);
-  [self.view addSubview:rootView];
-}
+
+
 ```
 
 When we have a fixed size root view, we need to respect its bounds on the JS side. In other words, we need to ensure that the React Native content can be contained within the fixed-size root view. The easiest way to ensure this is to use Flexbox layout. If you use absolute positioning, and React components are visible outside the root view's bounds, you'll get overlap with native views, causing some features to behave unexpectedly. For instance, 'TouchableHighlight' will not highlight your touches outside the root view's bounds.
@@ -141,60 +137,35 @@ It's totally fine to update root view's size dynamically by re-setting its frame
 
 In some cases we'd like to render content of initially unknown size. Let's say the size will be defined dynamically in JS. We have two solutions to this problem.
 
-1. You can wrap your React Native view in a `ScrollView` component. This guarantees that your content will always be available and it won't overlap with native views.
-2. React Native allows you to determine, in JS, the size of the RN app and provide it to the owner of the hosting `RCTRootView`. The owner is then responsible for re-laying out the subviews and keeping the UI consistent. We achieve this with `RCTRootView`'s flexibility modes.
+1.  You can wrap your React Native view in a `` component. This guarantees that your content will always be available and it won't overlap with native views.
+2.  React Native allows you to determine, in JS, the size of the RN app and provide it to the owner of the hosting `. The owner is then responsible for re-laying out the subviews and keeping the UI consistent. We achieve this with`'s flexibility modes.
 
-`RCTRootView` supports 4 different size flexibility modes:
+`` supports 4 different size flexibility modes:
 
 ```objectivec
-// RCTRootView.h
 
-typedef NS_ENUM(NSInteger, RCTRootViewSizeFlexibility) {
-  RCTRootViewSizeFlexibilityNone = 0,
-  RCTRootViewSizeFlexibilityWidth,
-  RCTRootViewSizeFlexibilityHeight,
-  RCTRootViewSizeFlexibilityWidthAndHeight,
-};
+
+
 ```
 
-`RCTRootViewSizeFlexibilityNone` is the default value, which makes a root view's size fixed (but it still can be updated with `setFrame:`). The other three modes allow us to track React Native content's size updates. For instance, setting mode to `RCTRootViewSizeFlexibilityHeight` will cause React Native to measure the content's height and pass that information back to `RCTRootView`'s delegate. An arbitrary action can be performed within the delegate, including setting the root view's frame, so the content fits. The delegate is called only when the size of the content has changed.
+`is the default value, which makes a root view's size fixed (but it still can be updated with`). The other three modes allow us to track React Native content's size updates. For instance, setting mode to `will cause React Native to measure the content's height and pass that information back to`'s delegate. An arbitrary action can be performed within the delegate, including setting the root view's frame, so the content fits. The delegate is called only when the size of the content has changed.
 
-> **_Warning:_** Making a dimension flexible in both JS and native leads to undefined behavior. For example - don't make a top-level React component's width flexible (with `flexbox`) while you're using `RCTRootViewSizeFlexibilityWidth` on the hosting `RCTRootView`.
+&gt; **_Warning:_** Making a dimension flexible in both JS and native leads to undefined behavior. For example - don't make a top-level React component's width flexible (with `) while you're using` on the hosting ``.
 
 Let's look at an example.
 
 ```objectivec
-// FlexibleSizeExampleView.m
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-  [...]
 
-  _rootView = [[RCTRootView alloc] initWithBridge:bridge
-  moduleName:@"FlexibilityExampleApp"
-  initialProperties:@{}];
 
-  _rootView.delegate = self;
-  _rootView.sizeFlexibility = RCTRootViewSizeFlexibilityHeight;
-  _rootView.frame = CGRectMake(0, 0, self.frame.size.width, 0);
-}
-
-#pragma mark - RCTRootViewDelegate
-- (void)rootViewDidChangeIntrinsicSize:(RCTRootView *)rootView
-{
-  CGRect newFrame = rootView.frame;
-  newFrame.size = rootView.intrinsicContentSize;
-
-  rootView.frame = newFrame;
-}
 ```
 
-In the example we have a `FlexibleSizeExampleView` view that holds a root view. We create the root view, initialize it and set the delegate. The delegate will handle size updates. Then, we set the root view's size flexibility to `RCTRootViewSizeFlexibilityHeight`, which means that `rootViewDidChangeIntrinsicSize:` method will be called every time the React Native content changes its height. Finally, we set the root view's width and position. Note that we set there height as well, but it has no effect as we made the height RN-dependent.
+In the example we have a `view that holds a root view. We create the root view, initialize it and set the delegate. The delegate will handle size updates. Then, we set the root view's size flexibility to`, which means that `` method will be called every time the React Native content changes its height. Finally, we set the root view's width and position. Note that we set there height as well, but it has no effect as we made the height RN-dependent.
 
 You can checkout full source code of the example [here](https://github.com/facebook/react-native/blob/master/RNTester/RNTester/NativeExampleViews/FlexibleSizeExampleView.m).
 
-It's fine to change root view's size flexibility mode dynamically. Changing flexibility mode of a root view will schedule a layout recalculation and the delegate `rootViewDidChangeIntrinsicSize:` method will be called once the content size is known.
+It's fine to change root view's size flexibility mode dynamically. Changing flexibility mode of a root view will schedule a layout recalculation and the delegate `` method will be called once the content size is known.
 
-> **_Note:_** React Native layout calculation is performed on a separate thread, while native UI view updates are done on the main thread. This may cause temporary UI inconsistencies between native and React Native. This is a known problem and our team is working on synchronizing UI updates coming from different sources.
+&gt; **_Note:_** React Native layout calculation is performed on a separate thread, while native UI view updates are done on the main thread. This may cause temporary UI inconsistencies between native and React Native. This is a known problem and our team is working on synchronizing UI updates coming from different sources.
 
-> **_Note:_** React Native does not perform any layout calculations until the root view becomes a subview of some other views. If you want to hide React Native view until its dimensions are known, add the root view as a subview and make it initially hidden (use `UIView`'s `hidden` property). Then change its visibility in the delegate method.
+&gt; **_Note:_** React Native does not perform any layout calculations until the root view becomes a subview of some other views. If you want to hide React Native view until its dimensions are known, add the root view as a subview and make it initially hidden (use `'s` property). Then change its visibility in the delegate method.

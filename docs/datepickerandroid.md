@@ -1,9 +1,9 @@
 ---
 id: datepickerandroid
-title: 🚧 DatePickerAndroid
+title: '🚧 DatePickerAndroid'
 ---
 
-> **Deprecated.** Use [@react-native-community/datetimepicker](https://github.com/react-native-community/react-native-datetimepicker) instead.
+&gt; **Deprecated.** Use [@react-native-community/datetimepicker](https://github.com/react-native-community/react-native-datetimepicker) instead.
 
 Opens the standard Android date picker dialog.
 
@@ -38,7 +38,9 @@ try {
 ### `open()`
 
 ```jsx
+
 static open(options)
+
 ```
 
 Opens the standard Android date picker dialog.
@@ -62,7 +64,9 @@ Note the native date picker dialog has some UI glitches on Android 4 and lower w
 ### `dateSetAction()`
 
 ```jsx
+
 static dateSetAction()
+
 ```
 
 A date has been selected.
@@ -72,7 +76,9 @@ A date has been selected.
 ### `dismissedAction()`
 
 ```jsx
+
 static dismissedAction()
+
 ```
 
 The dialog has been dismissed.

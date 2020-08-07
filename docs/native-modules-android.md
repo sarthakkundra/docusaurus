@@ -24,6 +24,7 @@ We start by creating a native module. A native module is a Java class that usual
 Create a new Java Class named `ToastModule.java` inside `android/app/src/main/java/com/your-app-name/` folder with the content below:
 
 ```java
+
 // ToastModule.java
 
 package com.your-app-name;
@@ -50,20 +51,24 @@ public class ToastModule extends ReactContextBaseJavaModule {
     reactContext = context;
   }
 }
+
 ```
 
 `ReactContextBaseJavaModule` requires that a method called `getName` is implemented. The purpose of this method is to return the string name of the `NativeModule` which represents this class in JavaScript. So here we will call this `ToastExample` so that we can access it through `React.NativeModules.ToastExample` in JavaScript.
 
 ```java
+
   @Override
   public String getName() {
     return "ToastExample";
   }
+
 ```
 
 An optional method called `getConstants` returns the constant values exposed to JavaScript. Its implementation is not required but is very useful to key pre-defined values that need to be communicated from JavaScript to Java in sync.
 
 ```java
+
   @Override
   public Map<String, Object> getConstants() {
     final Map<String, Object> constants = new HashMap<>();
@@ -71,15 +76,18 @@ An optional method called `getConstants` returns the constant values exposed to 
     constants.put(DURATION_LONG_KEY, Toast.LENGTH_LONG);
     return constants;
   }
+
 ```
 
 To expose a method to JavaScript a Java method must be annotated using `@ReactMethod`. The return type of bridge methods is always `void`. React Native bridge is asynchronous, so the only way to pass a result to JavaScript is by using callbacks or emitting events (see below).
 
 ```java
+
   @ReactMethod
   public void show(String message, int duration) {
     Toast.makeText(getReactApplicationContext(), message, duration).show();
   }
+
 ```
 
 ### Argument Types
@@ -87,6 +95,7 @@ To expose a method to JavaScript a Java method must be annotated using `@ReactMe
 The following argument types are supported for methods annotated with `@ReactMethod` and they directly map to their JavaScript equivalents
 
 ```text
+
 Boolean -> Bool
 Integer -> Number
 Double -> Number
@@ -95,6 +104,7 @@ String -> String
 Callback -> function
 ReadableMap -> Object
 ReadableArray -> Array
+
 ```
 
 Read more about [ReadableMap](https://github.com/facebook/react-native/blob/master/ReactAndroid/src/main/java/com/facebook/react/bridge/ReadableMap.java) and [ReadableArray](https://github.com/facebook/react-native/blob/master/ReactAndroid/src/main/java/com/facebook/react/bridge/ReadableArray.java)
@@ -106,6 +116,7 @@ The last step within Java is to register the Module; this happens in the `create
 create a new Java Class named `CustomToastPackage.java` inside `android/app/src/main/java/com/your-app-name/` folder with the content below:
 
 ```java
+
 // CustomToastPackage.java
 
 package com.your-app-name;
@@ -137,11 +148,13 @@ public class CustomToastPackage implements ReactPackage {
   }
 
 }
+
 ```
 
 The package needs to be provided in the `getPackages` method of the `MainApplication.java` file. This file exists under the android folder in your react-native application directory. The path to this file is: `android/app/src/main/java/com/your-app-name/MainApplication.java`.
 
 ```java
+
 // MainApplication.java
 
 ...
@@ -156,6 +169,7 @@ protected List<ReactPackage> getPackages() {
   packages.add(new CustomToastPackage()); // <-- Add this line with your package name.
   return packages;
 }
+
 ```
 
 To access your new functionality from JavaScript, it is common to wrap the native module in a JavaScript module. This is not necessary but saves the consumers of your library the need to pull it off of `NativeModules` each time. This JavaScript file also becomes a good location for you to add any JavaScript side functionality.
@@ -192,6 +206,7 @@ Please make sure this JavaScript is in the same hierarchy as `ToastExample.js`.
 Native modules also support a unique kind of argument - a callback. In most cases it is used to provide the function call result to JavaScript.
 
 ```java
+
 import com.facebook.react.bridge.Callback;
 
 public class UIManagerModule extends ReactContextBaseJavaModule {
@@ -217,6 +232,7 @@ public class UIManagerModule extends ReactContextBaseJavaModule {
   }
 
 ...
+
 ```
 
 This method would be accessed in JavaScript using:
@@ -245,6 +261,7 @@ Native modules can also fulfill a promise, which can simplify your JavaScript, e
 Refactoring the above code to use a promise instead of callbacks looks like this:
 
 ```java
+
 import com.facebook.react.bridge.Promise;
 
 public class UIManagerModule extends ReactContextBaseJavaModule {
@@ -273,6 +290,7 @@ public class UIManagerModule extends ReactContextBaseJavaModule {
   }
 
 ...
+
 ```
 
 The JavaScript counterpart of this method returns a Promise. This means you can use the `await` keyword within an async function to call it and wait for its result:
@@ -307,6 +325,7 @@ Native modules should not have any assumptions about what thread they are being 
 Native modules can signal events to JavaScript without being invoked directly. The easiest way to do this is to use the `RCTDeviceEventEmitter` which can be obtained from the `ReactContext` as in the code snippet below.
 
 ```java
+
 ...
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.bridge.WritableMap;
@@ -324,11 +343,13 @@ WritableMap params = Arguments.createMap();
 params.putString("eventProperty", "someValue");
 ...
 sendEvent(reactContext, "EventReminder", params);
+
 ```
 
 JavaScript modules can then register to receive events by `addListener` on the NativeEventEmitter class.
 
 ```jsx
+
 import { NativeEventEmitter, NativeModules } from 'react-native';
 ...
 
@@ -344,6 +365,7 @@ import { NativeEventEmitter, NativeModules } from 'react-native';
   componentWillUnmount() {
     this.eventListener.remove(); //Removes the listener
   }
+
 ```
 
 ### Getting activity result from `startActivityForResult`
@@ -351,12 +373,15 @@ import { NativeEventEmitter, NativeModules } from 'react-native';
 You'll need to listen to `onActivityResult` if you want to get results from an activity you started with `startActivityForResult`. To do this, you must extend `BaseActivityEventListener` or implement `ActivityEventListener`. The former is preferred as it is more resilient to API changes. Then, you need to register the listener in the module's constructor,
 
 ```java
+
 reactContext.addActivityEventListener(mActivityResultListener);
+
 ```
 
 Now you can listen to `onActivityResult` by implementing the following method:
 
 ```java
+
 @Override
 public void onActivityResult(
   final Activity activity,
@@ -365,11 +390,13 @@ public void onActivityResult(
   final Intent intent) {
   // Your logic here
 }
+
 ```
 
 We will implement a basic image picker to demonstrate this. The image picker will expose the method `pickImage` to JavaScript, which will return the path of the image when called.
 
 ```java
+
 public class ImagePickerModule extends ReactContextBaseJavaModule {
 
   private static final int IMAGE_PICKER_REQUEST = 1;
@@ -442,6 +469,7 @@ public class ImagePickerModule extends ReactContextBaseJavaModule {
     }
   }
 }
+
 ```
 
 ### Listening to LifeCycle events
@@ -449,12 +477,15 @@ public class ImagePickerModule extends ReactContextBaseJavaModule {
 Listening to the activity's LifeCycle events such as `onResume`, `onPause` etc. is very similar to how we implemented `ActivityEventListener`. The module must implement `LifecycleEventListener`. Then, you need to register a listener in the module's constructor,
 
 ```java
+
 reactContext.addLifecycleEventListener(this);
+
 ```
 
 Now you can listen to the activity's LifeCycle events by implementing the following methods:
 
 ```java
+
 @Override
 public void onHostResume() {
     // Activity `onResume`
@@ -469,4 +500,5 @@ public void onHostPause() {
 public void onHostDestroy() {
     // Activity `onDestroy`
 }
+
 ```

@@ -6,7 +6,7 @@ description: Create mobile apps accessible to assistive technology with React Na
 
 Both Android and iOS provide APIs for integrating apps with assistive technologies like the bundled screen readers VoiceOver (iOS) and TalkBack (Android). React Native has complementary APIs that let your app accommodate all users.
 
-> Android and iOS differ slightly in their approaches, and thus the React Native implementations may vary by platform.
+&gt; Android and iOS differ slightly in their approaches, and thus the React Native implementations may vary by platform.
 
 ## Accessibility properties
 
@@ -66,11 +66,11 @@ iOS In the above example, VoiceOver will read the hint after the label, if the u
 
 Android In the above example, TalkBack will read the hint after the label. At this time, hints cannot be turned off on Android.
 
-### `accessibilityIgnoresInvertColors` <div class="label ios">iOS</div>
+### `accessibilityIgnoresInvertColors` <div className="label ios">iOS</div>
 
 Inverting screen colors is an Accessibility feature that makes the iPhone and iPad easier on the eyes for some people with a sensitivity to brightness, easier to distinguish for some people with color blindness, and easier to make out for some people with low vision. However, sometimes you have views such as photos that you don't want to be inverted. In this case, you can set this property to be false so that these specific views won't have their colors inverted.
 
-### `accessibilityLiveRegion` <div class="label android">Android</div>
+### `accessibilityLiveRegion` <div className="label android">Android</div>
 
 When components dynamically change, we want TalkBack to alert the end user. This is made possible by the `accessibilityLiveRegion` property. It can be set to `none`, `polite` and `assertive`:
 
@@ -79,6 +79,7 @@ When components dynamically change, we want TalkBack to alert the end user. This
 - **assertive** Accessibility services should interrupt ongoing speech to immediately announce changes to this view.
 
 ```jsx
+
 <TouchableWithoutFeedback onPress={addOne}>
   <View style={styles.embedded}>
     <Text>Click me</Text>
@@ -87,6 +88,7 @@ When components dynamically change, we want TalkBack to alert the end user. This
 <Text accessibilityLiveRegion="polite">
   Clicked {count} times
 </Text>
+
 ```
 
 In the above example method `addOne` changes the state variable `count`. As soon as an end user clicks the TouchableWithoutFeedback, TalkBack reads text in the Text view because of its `accessibilityLiveRegion="polite"` property.
@@ -154,19 +156,19 @@ Represents the current value of a component. It can be a textual description of 
 | now  | The current value of this component's range.                                                   | integer | No                        |
 | text | A textual description of this component's value. Will override `min`, `now`, and `max` if set. | string  | No                        |
 
-### `accessibilityViewIsModal` <div class="label ios">iOS</div>
+### `accessibilityViewIsModal` <div className="label ios">iOS</div>
 
 A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
 
 For example, in a window that contains sibling views `A` and `B`, setting `accessibilityViewIsModal` to `true` on view `B` causes VoiceOver to ignore the elements in the view `A`. On the other hand, if view `B` contains a child view `C` and you set `accessibilityViewIsModal` to `true` on view `C`, VoiceOver does not ignore the elements in view `A`.
 
-### `accessibilityElementsHidden` <div class="label ios">iOS</div>
+### `accessibilityElementsHidden` <div className="label ios">iOS</div>
 
 A Boolean value indicating whether the accessibility elements contained within this accessibility element are hidden.
 
 For example, in a window that contains sibling views `A` and `B`, setting `accessibilityElementsHidden` to `true` on view `B` causes VoiceOver to ignore the elements in the view `B`. This is similar to the Android property `importantForAccessibility="no-hide-descendants"`.
 
-### `importantForAccessibility` <div class="label android">Android</div>
+### `importantForAccessibility` <div className="label android">Android</div>
 
 In the case of two overlapping UI components with the same parent, default accessibility focus can have unpredictable behavior. The `importantForAccessibility` property will resolve this by controlling if a view fires accessibility events and if it is reported to accessibility services. It can be set to `auto`, `yes`, `no` and `no-hide-descendants` (the last value will force accessibility services to ignore the component and all of its children).
 
@@ -187,7 +189,7 @@ In the case of two overlapping UI components with the same parent, default acces
 
 In the above example, the `yellow` layout and its descendants are completely invisible to TalkBack and all other accessibility services. So we can use overlapping views with the same parent without confusing TalkBack.
 
-### `onAccessibilityEscape` <div class="label ios">iOS</div>
+### `onAccessibilityEscape` <div className="label ios">iOS</div>
 
 Assign this property to a custom function which will be called when someone performs the "escape" gesture, which is a two finger Z shaped gesture. An escape function should move back hierarchically in the user interface. This can mean moving up or back in a navigation hierarchy or dismissing a modal user interface. If the selected element does not have an `onAccessibilityEscape` function, the system will attempt to traverse up the view hierarchy until it finds a view that does or bonk to indicate it was unable to find one.
 
@@ -195,7 +197,7 @@ Assign this property to a custom function which will be called when someone perf
 
 Use this property to assign a custom function to be called when someone activates an accessible element by double tapping on it while it's selected.
 
-### `onMagicTap` <div class="label ios">iOS</div>
+### `onMagicTap` <div className="label ios">iOS</div>
 
 Assign this property to a custom function which will be called when someone performs the "magic tap" gesture, which is a double-tap with two fingers. A magic tap function should perform the most relevant action a user could take on a component. In the Phone app on iPhone, a magic tap answers a phone call, or ends the current one. If the selected element does not have an `onMagicTap` function, the system will traverse up the view hierarchy until it finds a view that does.
 
@@ -256,7 +258,7 @@ To handle action requests, a component must implement an `onAccessibilityAction`
 
 The `AccessibilityInfo` API allows you to determine whether or not a screen reader is currently active. See the [AccessibilityInfo documentation](accessibilityinfo) for details.
 
-## Sending Accessibility Events <div class="label android">Android</div>
+## Sending Accessibility Events <div className="label android">Android</div>
 
 Sometimes it is useful to trigger an accessibility event on a UI component (i.e. when a custom view appears on a screen or set accessibility focus to a view). Native UIManager module exposes a method ‘sendAccessibilityEvent’ for this purpose. It takes two arguments: view tag and a type of an event. The supported event types are `typeWindowStateChanged`, `typeViewFocused` and `typeViewClicked`.
 
@@ -275,14 +277,14 @@ if (Platform.OS === 'android') {
 }
 ```
 
-## Testing TalkBack Support <div class="label android">Android</div>
+## Testing TalkBack Support <div className="label android">Android</div>
 
 To enable TalkBack, go to the Settings app on your Android device or emulator. Tap Accessibility, then TalkBack. Toggle the "Use service" switch to enable or disable it.
 
 P.S. Android emulator doesn’t have TalkBack by default. To install it:
 
-1. Download TalkBack file here: https://google-talkback.en.uptodown.com/android
-2. Drag the downloaded `.apk` file into the emulator
+1.  Download TalkBack file here: https:
+2.  Drag the downloaded `` file into the emulator
 
 You can use the volume key shortcut to toggle TalkBack. To turn on the volume key shortcut, go to the Settings app, then Accessibility. At the top, turn on Volume key shortcut.
 
@@ -291,14 +293,12 @@ To use the volume key shortcut, press both volume keys for 3 seconds to start an
 Additionally, if you prefer, you can toggle TalkBack via command line with:
 
 ```sh
-# disable
-adb shell settings put secure enabled_accessibility_services com.android.talkback/com.google.android.marvin.talkback.TalkBackService
 
-# enable
-adb shell settings put secure enabled_accessibility_services com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService
+
+
 ```
 
-## Testing VoiceOver Support <div class="label ios">iOS</div>
+## Testing VoiceOver Support iOS
 
 To enable VoiceOver, go to the Settings app on your iOS device (it's not available for simulator). Tap General, then Accessibility. There you will find many tools that people use to make their devices more usable, such as bolder text, increased contrast, and VoiceOver.
 

@@ -1,9 +1,9 @@
 ---
 id: clipboard
-title: 🚧 Clipboard
+title: '🚧 Clipboard'
 ---
 
-> **Deprecated.** Use [@react-native-community/clipboard](https://github.com/react-native-community/clipboard) instead.
+&gt; **Deprecated.** Use [@react-native-community/clipboard](https://github.com/react-native-community/clipboard) instead.
 
 `Clipboard` gives you an interface for setting and getting content from Clipboard on both Android and iOS
 
@@ -12,6 +12,7 @@ title: 🚧 Clipboard
 ## Example
 
 ```SnackPlayer name=Clipboard%20API%20Example&supportedPlatforms=ios,android
+
 
 import React, { useState } from 'react'
 import { SafeAreaView, View, Text, TouchableOpacity, Clipboard, StyleSheet } from 'react-native'
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
 })
 
 export default App
+
 ```
 
 # Reference
@@ -67,15 +69,19 @@ export default App
 ### `getString()`
 
 ```jsx
+
 static getString()
+
 ```
 
 Get content of string type, this method returns a `Promise`, so you can use following code to get clipboard content
 
 ```jsx
+
 async _getContent() {
   var content = await Clipboard.getString();
 }
+
 ```
 
 ---
@@ -83,15 +89,19 @@ async _getContent() {
 ### `setString()`
 
 ```jsx
+
 static setString(content)
+
 ```
 
 Set content of string type. You can use following code to set clipboard content
 
 ```jsx
+
 _setContent() {
   Clipboard.setString('hello world');
 }
+
 ```
 
 **Parameters:**

@@ -104,8 +104,10 @@ When your platform-specific code is more complex, you should consider splitting 
 For example, say you have the following files in your project:
 
 ```sh
+
 BigButton.ios.js
 BigButton.android.js
+
 ```
 
 You can then require the component as follows:
@@ -123,8 +125,10 @@ You can also use the `.native.js` extension when a module needs to be shared bet
 For example, say you have the following files in your project:
 
 ```sh
+
 Container.js # picked up by Webpack, Rollup or any other Web bundler
 Container.native.js # picked up by the React Native bundler for both Android and iOS (Metro)
+
 ```
 
 You can still require it without the `.native` extension, as follows:

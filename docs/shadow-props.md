@@ -4,6 +4,7 @@ title: Shadow Props
 ---
 
 ```SnackPlayer name=Shadow%20Props&supportedPlatforms=ios
+
 import React, { useState } from "react";
 import { Text, View, StyleSheet, Slider } from "react-native";
 
@@ -95,6 +96,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 # Reference
@@ -117,9 +119,9 @@ Sets the drop shadow color
 
 Sets the drop shadow offset
 
-| Type                                   | Required | Platform |
-| -------------------------------------- | -------- | -------- |
-| object: {width: number,height: number} | No       | iOS      |
+| Type                                           | Required | Platform |
+| ---------------------------------------------- | -------- | -------- |
+| object: {"{"}width: number,height: number{"}"} | No       | iOS      |
 
 ---
 

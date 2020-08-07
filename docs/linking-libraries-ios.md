@@ -20,22 +20,26 @@ _All the libraries we ship with React Native live on the `Libraries` folder in t
 Install a library with native dependencies:
 
 ```bash
+
 $ npm install <library-with-native-dependencies> --save
+
 ```
 
-> **_Note:_** `--save` or `--save-dev` flag is very important for this step. React Native will link your libs based on `dependencies` and `devDependencies` in your `package.json` file.
+&gt; **_Note:_** `--save` or `--save-dev` flag is very important for this step. React Native will link your libs based on `dependencies` and `devDependencies` in your `package.json` file.
 
 #### Step 2
 
 Link your native dependencies:
 
 ```bash
+
 $ npx react-native link
+
 ```
 
 Done! All libraries with native dependencies should be successfully linked to your iOS/Android project.
 
-> **_Note:_** If your iOS project is using CocoaPods (contains `Podfile`) and linked library has `podspec` file, then `npx react-native link` will link library using Podfile. To support non-trivial Podfiles add `# Add new pods below this line` comment to places where you expect pods to be added.
+&gt; **_Note:_** If your iOS project is using CocoaPods (contains `Podfile`) and linked library has `podspec` file, then `npx react-native link` will link library using Podfile. To support non-trivial Podfiles add `# Add new pods below this line` comment to places where you expect pods to be added.
 
 ### Manual linking
 

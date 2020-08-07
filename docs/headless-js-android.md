@@ -31,6 +31,7 @@ You can do anything in your task such as network requests, timers and so on, as 
 Yes, this does still require some native code, but it's pretty thin. You need to extend `HeadlessJsTaskService` and override `getTaskConfig`, e.g.:
 
 ```java
+
 package com.your_application_name;
 import android.content.Intent;
 import android.os.Bundle;
@@ -55,12 +56,15 @@ public class MyTaskService extends HeadlessJsTaskService {
     return null;
   }
 }
+
 ```
 
 Then add the service to your `AndroidManifest.xml` file:
 
 ```
+
 <service android:name="com.example.MyTaskService" />
+
 ```
 
 Now, whenever you [start your service][0], e.g. as a periodic task or in response to some system event / broadcast, JS will spin up, run your task, then spin down.
@@ -68,6 +72,7 @@ Now, whenever you [start your service][0], e.g. as a periodic task or in respons
 Example:
 
 ```java
+
 Intent service = new Intent(getApplicationContext(), MyTaskService.class);
 Bundle bundle = new Bundle();
 
@@ -75,6 +80,7 @@ bundle.putString("foo", "bar");
 service.putExtras(bundle);
 
 getApplicationContext().startService(service);
+
 ```
 
 ## Retries
@@ -84,6 +90,7 @@ By default, the headless JS task will not perform any retries. In order to do so
 `LinearCountingRetryPolicy` is an implementation of `HeadlessJsRetryPolicy` that allows you to specify a maximum number of retries with a fixed delay between each attempt. If that does not suit your needs then you can implement your own `HeadlessJsRetryPolicy`. These policies can be passed as an extra argument to the `HeadlessJsTaskConfig` constructor, e.g.
 
 ```java
+
 HeadlessJsRetryPolicy retryPolicy = new LinearCountingRetryPolicy(
   3, // Max number of retry attempts
   1000 // Delay between each retry attempt
@@ -96,6 +103,7 @@ return new HeadlessJsTaskConfig(
   false,
   retryPolicy
 );
+
 ```
 
 A retry attempt will only be made when a specific `Error` is thrown. Inside a headless JS task, you can import the error and throw it when a retry attempt is required.
@@ -103,6 +111,7 @@ A retry attempt will only be made when a specific `Error` is thrown. Inside a he
 Example:
 
 ```jsx
+
 import {HeadlessJsTaskError} from 'HeadlessJsTask';
 
 module.exports = async (taskData) => {
@@ -111,6 +120,7 @@ module.exports = async (taskData) => {
     throw new HeadlessJsTaskError();
   }
 };
+
 ```
 
 If you wish all errors to cause a retry attempt, you will need to catch them and throw the above error.
@@ -128,16 +138,19 @@ Service can be started from Java API. First you need to decide when the service 
 Following lines shows part of Android manifest file for registering broadcast receiver.
 
 ```xml
+
 <receiver android:name=".NetworkChangeReceiver" >
   <intent-filter>
     <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
   </intent-filter>
 </receiver>
+
 ```
 
 Broadcast receiver then handles intent that was broadcasted in onReceive function. This is a great place to check whether your app is on foreground or not. If app is not on foreground we can prepare our intent to be started, with no information or additional information bundled using `putExtra` (keep in mind bundle can handle only parcelable values). In the end service is started and wakelock is acquired.
 
 ```java
+
 public class NetworkChangeReceiver extends BroadcastReceiver {
 
     @Override
@@ -190,6 +203,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
 
 
 }
+
 ```
 
 [0]: https://developer.android.com/reference/android/content/Context.html#startService(android.content.Intent)

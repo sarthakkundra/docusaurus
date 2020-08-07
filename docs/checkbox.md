@@ -1,9 +1,9 @@
 ---
 id: checkbox
-title: 🚧 CheckBox
+title: '🚧 CheckBox'
 ---
 
-> **Deprecated.** Use [@react-native-community/checkbox](https://github.com/react-native-community/react-native-checkbox) instead.
+&gt; **Deprecated.** Use [@react-native-community/checkbox](https://github.com/react-native-community/react-native-checkbox) instead.
 
 Renders a boolean input (Android only).
 
@@ -12,6 +12,7 @@ This is a controlled component that requires an `onValueChange` callback that up
 ## Example
 
 ```SnackPlayer name=CheckBox%20Component%20Example&supportedPlatforms=android,web
+
 import React, { useState } from "react";
 import { CheckBox, Text, StyleSheet, View } from "react-native";
 
@@ -52,6 +53,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 ---

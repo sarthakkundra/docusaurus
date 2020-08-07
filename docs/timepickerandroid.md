@@ -1,9 +1,9 @@
 ---
 id: timepickerandroid
-title: 🚧 TimePickerAndroid
+title: '🚧 TimePickerAndroid'
 ---
 
-> **Deprecated.** Use [@react-native-community/datetimepicker](https://github.com/react-native-community/react-native-datetimepicker) instead.
+&gt; **Deprecated.** Use [@react-native-community/datetimepicker](https://github.com/react-native-community/react-native-datetimepicker) instead.
 
 Opens the standard Android time picker dialog.
 
@@ -33,7 +33,9 @@ try {
 ### `open()`
 
 ```jsx
+
 static open(options)
+
 ```
 
 Opens the standard Android time picker dialog.
@@ -55,7 +57,9 @@ Returns a Promise which will be invoked an object containing `action`, `hour` (0
 ### `timeSetAction()`
 
 ```jsx
+
 static timeSetAction()
+
 ```
 
 A time has been selected.
@@ -65,7 +69,9 @@ A time has been selected.
 ### `dismissedAction()`
 
 ```jsx
+
 static dismissedAction()
+
 ```
 
 The dialog has been dismissed.

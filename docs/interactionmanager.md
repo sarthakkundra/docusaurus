@@ -42,6 +42,7 @@ By default, queued tasks are executed together in a loop in one `setImmediate` b
 ### Basic
 
 ```SnackPlayer name=InteractionManager%20Function%20Component%20Basic%20Example&supportedPlatforms=ios,android
+
 import React, { useState, useEffect } from "react";
 import {
   Alert,
@@ -110,11 +111,13 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 ### Advanced
 
 ```SnackPlayer name=InteractionManager%20Function%20Component%20Advanced%20Example&supportedPlatforms=ios,android
+
 import React, { useEffect } from "react";
 import {
   Alert,
@@ -181,9 +184,10 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
-> **Note**: `InteractionManager.runAfterInteractions()` is not working properly on web. It triggers immediately without waiting until the interaction is finished.
+&gt; **Note**: `InteractionManager.runAfterInteractions()` is not working properly on web. It triggers immediately without waiting until the interaction is finished.
 
 # Reference
 
@@ -192,7 +196,9 @@ export default App;
 ### `runAfterInteractions()`
 
 ```jsx
+
 static runAfterInteractions(task)
+
 ```
 
 Schedule a function to run after all interactions have completed. Returns a cancellable "promise".
@@ -202,7 +208,9 @@ Schedule a function to run after all interactions have completed. Returns a canc
 ### `createInteractionHandle()`
 
 ```jsx
+
 static createInteractionHandle()
+
 ```
 
 Notify manager that an interaction has started.
@@ -212,7 +220,9 @@ Notify manager that an interaction has started.
 ### `clearInteractionHandle()`
 
 ```jsx
+
 static clearInteractionHandle(handle)
+
 ```
 
 Notify manager that an interaction has completed.
@@ -222,7 +232,9 @@ Notify manager that an interaction has completed.
 ### `setDeadline()`
 
 ```jsx
+
 static setDeadline(deadline)
+
 ```
 
 A positive number will use setTimeout to schedule any tasks after the eventLoopRunningTime hits the deadline value, otherwise all tasks will be executed in one setImmediate batch (default).

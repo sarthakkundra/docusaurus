@@ -16,12 +16,14 @@ The image name is resolved the same way JS modules are resolved. In the example 
 You can also use the `@2x` and `@3x` suffixes to provide images for different screen densities. If you have the following file structure:
 
 ```
+
 .
 ├── button.js
 └── img
     ├── check.png
     ├── check@2x.png
     └── check@3x.png
+
 ```
 
 ...and `button.js` code contains:
@@ -36,13 +38,13 @@ On Windows, you might need to restart the bundler if you add new images to your 
 
 Here are some benefits that you get:
 
-1. Same system on Android and iOS.
-2. Images live in the same folder as your JavaScript code. Components are self-contained.
-3. No global namespace, i.e. you don't have to worry about name collisions.
-4. Only the images that are actually used will be packaged into your app.
-5. Adding and changing images doesn't require app recompilation, you can refresh the simulator as you normally do.
-6. The bundler knows the image dimensions, no need to duplicate it in the code.
-7. Images can be distributed via [npm](https://www.npmjs.com/) packages.
+1.  Same system on Android and iOS.
+2.  Images live in the same folder as your JavaScript code. Components are self-contained.
+3.  No global namespace, i.e. you don't have to worry about name collisions.
+4.  Only the images that are actually used will be packaged into your app.
+5.  Adding and changing images doesn't require app recompilation, you can refresh the simulator as you normally do.
+6.  The bundler knows the image dimensions, no need to duplicate it in the code.
+7.  Images can be distributed via [npm](https://www.npmjs.com/) packages.
 
 In order for this to work, the image name in `require` has to be known statically.
 
@@ -102,12 +104,14 @@ These approaches provide no safety checks. It's up to you to guarantee that thos
 Many of the images you will display in your app will not be available at compile time, or you will want to load some dynamically to keep the binary size down. Unlike with static resources, _you will need to manually specify the dimensions of your image_. It's highly recommended that you use https as well in order to satisfy [App Transport Security](running-on-device.md#app-transport-security) requirements on iOS.
 
 ```jsx
+
 // GOOD
 <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
        style={{width: 400, height: 400}} />
 
 // BAD
 <Image source={{uri: 'https://reactjs.org/logo-og.png'}} />
+
 ```
 
 ### Network Requests for Images
@@ -132,7 +136,7 @@ If you would like to set such things as the HTTP-Verb, Headers or a Body along w
 
 Sometimes, you might be getting encoded image data from a REST API call. You can use the `'data:'` uri scheme to use these images. Same as for network resources, _you will need to manually specify the dimensions of your image_.
 
-> This is recommended for very small and dynamic images only, like icons in a list from a DB.
+&gt; This is recommended for very small and dynamic images only, like icons in a list from a DB.
 
 ```jsx
 // include at least width and height!
@@ -185,7 +189,9 @@ _In React Native_ this behavior is intentionally not implemented. It is more wor
 For example, the result of `require('./my-icon.png')` might be:
 
 ```jsx
+
 {"__packager_asset":true,"uri":"my-icon.png","width":591,"height":573}
+
 ```
 
 ## Source as an object
@@ -207,11 +213,13 @@ A common feature request from developers familiar with the web is `background-im
 You might not want to use `<ImageBackground>` in some cases, since the implementation is basic. Refer to `<ImageBackground>`'s [documentation](imagebackground.md) for more insight, and create your own custom component when needed.
 
 ```jsx
+
 return (
   <ImageBackground source={...} style={{width: '100%', height: '100%'}}>
     <Text>Inside</Text>
   </ImageBackground>
 );
+
 ```
 
 Note that you must specify some width and height style attributes.

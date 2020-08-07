@@ -8,6 +8,7 @@ React component that wraps the platform `DrawerLayout` (Android only). The Drawe
 ## Example
 
 ```SnackPlayer name=DrawerLayoutAndroid%20Component%20Example&supportedPlatforms=android
+
 import React, { useState } from "react";
 import { Button, DrawerLayoutAndroid, Text, StyleSheet, View } from "react-native";
 
@@ -67,6 +68,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 ---

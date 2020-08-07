@@ -20,16 +20,19 @@ This guide will use the [iOS Calendar API](https://developer.apple.com/library/m
 A native module is an Objective-C class that implements the `RCTBridgeModule` protocol. If you are wondering, RCT is an abbreviation of ReaCT.
 
 ```objectivec
+
 // CalendarManager.h
 #import <React/RCTBridgeModule.h>
 
 @interface CalendarManager : NSObject <RCTBridgeModule>
 @end
+
 ```
 
 In addition to implementing the `RCTBridgeModule` protocol, your class must also include the `RCT_EXPORT_MODULE()` macro. This takes an optional argument that specifies the name that the module will be accessible as in your JavaScript code (more on this later). If you do not specify a name, the JavaScript module name will match the Objective-C class name. If the Objective-C class name begins with RCT, the JavaScript module name will exclude the RCT prefix.
 
 ```objectivec
+
 // CalendarManager.m
 #import "CalendarManager.h"
 
@@ -42,11 +45,13 @@ RCT_EXPORT_MODULE();
 // RCT_EXPORT_MODULE(AwesomeCalendarManager);
 
 @end
+
 ```
 
 React Native will not expose any methods of `CalendarManager` to JavaScript unless explicitly told to. This is done using the `RCT_EXPORT_METHOD()` macro:
 
 ```objectivec
+
 #import "CalendarManager.h"
 #import <React/RCTLog.h>
 
@@ -60,6 +65,7 @@ RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
 }
 
 @end
+
 ```
 
 Now, from your JavaScript file you can call the method like this (after making sure to rebuild):
@@ -73,9 +79,7 @@ CalendarManager.addEvent(
 );
 ```
 
-> **NOTE**: JavaScript method names
->
-> The name of the method exported to JavaScript is the native method's name up to the first colon. React Native also defines a macro called `RCT_REMAP_METHOD()` to specify the JavaScript method's name. This is useful when multiple native methods are the same up to the first colon and would have conflicting JavaScript names.
+&gt; **NOTE**: JavaScript method names &gt; &gt; The name of the method exported to JavaScript is the native method's name up to the first colon. React Native also defines a macro called `RCT_REMAP_METHOD()` to specify the JavaScript method's name. This is useful when multiple native methods are the same up to the first colon and would have conflicting JavaScript names.
 
 The CalendarManager module is instantiated on the Objective-C side using a [CalendarManager new] call. The return type of bridge methods is always `void`. React Native bridge is asynchronous, so the only way to pass a result to JavaScript is by using callbacks or emitting events (see below).
 
@@ -95,28 +99,34 @@ But it also works with any type that is supported by the `RCTConvert` class (see
 In our `CalendarManager` example, we need to pass the event date to the native method. We can't send JavaScript Date objects over the bridge, so we need to convert the date to a string or number. We could write our native function like this:
 
 ```objectivec
+
 RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(nonnull NSNumber *)secondsSinceUnixEpoch)
 {
   NSDate *date = [RCTConvert NSDate:secondsSinceUnixEpoch];
 }
+
 ```
 
 or like this:
 
 ```objectivec
+
 RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(NSString *)ISO8601DateString)
 {
   NSDate *date = [RCTConvert NSDate:ISO8601DateString];
 }
+
 ```
 
 But by using the automatic type conversion feature, we can skip the manual conversion step completely, and write:
 
 ```objectivec
+
 RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(NSDate *)date)
 {
   // Date is ready to use!
 }
+
 ```
 
 You would then call this from JavaScript by using either:
@@ -144,6 +154,7 @@ And both values would get converted correctly to the native `NSDate`. A bad valu
 As `CalendarManager.addEvent` method gets more and more complex, the number of arguments will grow. Some of them might be optional. In this case it's worth considering changing the API a little bit to accept a dictionary of event attributes, like this:
 
 ```objectivec
+
 #import <React/RCTConvert.h>
 
 RCT_EXPORT_METHOD(addEvent:(NSString *)name details:(NSDictionary *)details)
@@ -152,6 +163,7 @@ RCT_EXPORT_METHOD(addEvent:(NSString *)name details:(NSDictionary *)details)
   NSDate *time = [RCTConvert NSDate:details[@"time"]];
   ...
 }
+
 ```
 
 and call it from JavaScript:
@@ -164,24 +176,22 @@ CalendarManager.addEvent('Birthday Party', {
 });
 ```
 
-> **NOTE**: About array and map
->
-> Objective-C doesn't provide any guarantees about the types of values in these structures. Your native module might expect an array of strings, but if JavaScript calls your method with an array containing numbers and strings, you'll get an `NSArray` containing a mix of `NSNumber` and `NSString`. For arrays, `RCTConvert` provides some typed collections you can use in your method declaration, such as `NSStringArray`, or `UIColorArray`. For maps, it is the developer's responsibility to check the value types individually by manually calling `RCTConvert` helper methods.
+&gt; **NOTE**: About array and map &gt; &gt; Objective-C doesn't provide any guarantees about the types of values in these structures. Your native module might expect an array of strings, but if JavaScript calls your method with an array containing numbers and strings, you'll get an `NSArray` containing a mix of `NSNumber` and `NSString`. For arrays, `RCTConvert` provides some typed collections you can use in your method declaration, such as `NSStringArray`, or `UIColorArray`. For maps, it is the developer's responsibility to check the value types individually by manually calling `RCTConvert` helper methods.
 
 ## Callbacks
 
-> **WARNING**
->
-> This section is more experimental than others because we don't have a solid set of best practices around callbacks yet.
+&gt; **WARNING** &gt; &gt; This section is more experimental than others because we don't have a solid set of best practices around callbacks yet.
 
 Native modules also supports a unique type of argument- a callback. In most cases it is used to provide the function call result to JavaScript.
 
 ```objectivec
+
 RCT_EXPORT_METHOD(findEvents:(RCTResponseSenderBlock)callback)
 {
   NSArray *events = ...
   callback(@[[NSNull null], events]);
 }
+
 ```
 
 `RCTResponseSenderBlock` accepts only one argument - an array of parameters to pass to the JavaScript callback. In this case we use Node's convention to make the first parameter an error object (usually `null` when there is no error) and the rest are the results of the function.
@@ -207,6 +217,7 @@ Native modules can also fulfill a promise, which can simplify your code, especia
 Refactoring the above code to use a promise instead of callbacks looks like this:
 
 ```objectivec
+
 RCT_REMAP_METHOD(findEvents,
                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
@@ -219,6 +230,7 @@ RCT_REMAP_METHOD(findEvents,
     reject(@"no_events", @"There were no events", error);
   }
 }
+
 ```
 
 The JavaScript counterpart of this method returns a Promise. This means you can use the `await` keyword within an async function to call it and wait for its result:
@@ -242,24 +254,29 @@ updateEvents();
 The native module should not have any assumptions about what thread it is being called on. React Native invokes native modules methods on a separate serial GCD queue, but this is an implementation detail and might change. The `- (dispatch_queue_t)methodQueue` method allows the native module to specify which queue its methods should be run on. For example, if it needs to use a main-thread-only iOS API, it should specify this via:
 
 ```objectivec
+
 - (dispatch_queue_t)methodQueue
 {
   return dispatch_get_main_queue();
 }
+
 ```
 
 Similarly, if an operation may take a long time to complete, the native module should not block and can specify it's own queue to run operations on. For example, the `RCTAsyncLocalStorage` module creates its own queue so the React queue isn't blocked waiting on potentially slow disk access:
 
 ```objectivec
+
 - (dispatch_queue_t)methodQueue
 {
   return dispatch_queue_create("com.facebook.React.AsyncLocalStorageQueue", DISPATCH_QUEUE_SERIAL);
 }
+
 ```
 
 The specified `methodQueue` will be shared by all of the methods in your module. If _only one_ of your methods is long-running (or needs to be run on a different queue than the others for some reason), you can use `dispatch_async` inside the method to perform that particular method's code on another queue, without affecting the others:
 
 ```objectivec
+
 RCT_EXPORT_METHOD(doSomethingExpensive:(NSString *)param callback:(RCTResponseSenderBlock)callback)
 {
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -269,11 +286,10 @@ RCT_EXPORT_METHOD(doSomethingExpensive:(NSString *)param callback:(RCTResponseSe
     callback(@[...]);
   });
 }
+
 ```
 
-> **NOTE**: Sharing dispatch queues between modules
->
-> The `methodQueue` method will be called once when the module is initialized, and then retained by the bridge, so there is no need to retain the queue yourself, unless you wish to make use of it within your module. However, if you wish to share the same queue between multiple modules then you will need to ensure that you retain and return the same queue instance for each of them; merely returning a queue of the same name for each won't work.
+&gt; **NOTE**: Sharing dispatch queues between modules &gt; &gt; The `methodQueue` method will be called once when the module is initialized, and then retained by the bridge, so there is no need to retain the queue yourself, unless you wish to make use of it within your module. However, if you wish to share the same queue between multiple modules then you will need to ensure that you retain and return the same queue instance for each of them; merely returning a queue of the same name for each won't work.
 
 ## Dependency Injection
 
@@ -282,6 +298,7 @@ The bridge initializes any registered RCTBridgeModules automatically, however yo
 You can do this by creating a class that implements the RCTBridgeDelegate Protocol, initializing an RCTBridge with the delegate as an argument and initialising a RCTRootView with the initialized bridge.
 
 ```objectivec
+
 id<RCTBridgeDelegate> moduleInitialiser = [[classThatImplementsRCTBridgeDelegate alloc] init];
 
 RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:moduleInitialiser launchOptions:nil];
@@ -290,6 +307,7 @@ RCTRootView *rootView = [[RCTRootView alloc]
                         initWithBridge:bridge
                             moduleName:kModuleName
                      initialProperties:nil];
+
 ```
 
 ## Exporting Constants
@@ -297,10 +315,12 @@ RCTRootView *rootView = [[RCTRootView alloc]
 A native module can export constants that are immediately available to JavaScript at runtime. This is useful for communicating static data that would otherwise require a round-trip through the bridge.
 
 ```objectivec
+
 - (NSDictionary *)constantsToExport
 {
   return @{ @"firstDayOfTheWeek": @"Monday" };
 }
+
 ```
 
 JavaScript can use this value right away, synchronously:
@@ -316,13 +336,16 @@ Note that the constants are exported only at initialization time, so if you chan
 If you override `- constantsToExport` then you should also implement `+ requiresMainQueueSetup` to let React Native know if your module needs to be initialized on the main thread. Otherwise you will see a warning that in the future your module may be initialized on a background thread unless you explicitly opt out with `+ requiresMainQueueSetup`:
 
 ```objectivec
+
 + (BOOL)requiresMainQueueSetup
 {
   return YES;  // only do this if your module initialization relies on calling UIKit!
 }
+
 ```
 
 ```Swift
+
 //Swift
 
 // CalendarManager.swift
@@ -337,6 +360,7 @@ static func moduleName() -> String! {
 static func requiresMainQueueSetup() -> Bool {
     return true
 }
+
 ```
 
 If your module does not require access to UIKit, then you should respond to `+ requiresMainQueueSetup` with `NO`.
@@ -348,27 +372,32 @@ Enums that are defined via `NS_ENUM` cannot be used as method arguments without 
 In order to export the following `NS_ENUM` definition:
 
 ```objectivec
+
 typedef NS_ENUM(NSInteger, UIStatusBarAnimation) {
     UIStatusBarAnimationNone,
     UIStatusBarAnimationFade,
     UIStatusBarAnimationSlide,
 };
+
 ```
 
 You must create a class extension of RCTConvert like so:
 
 ```objectivec
+
 @implementation RCTConvert (StatusBarAnimation)
   RCT_ENUM_CONVERTER(UIStatusBarAnimation, (@{ @"statusBarAnimationNone" : @(UIStatusBarAnimationNone),
                                                @"statusBarAnimationFade" : @(UIStatusBarAnimationFade),
                                                @"statusBarAnimationSlide" : @(UIStatusBarAnimationSlide)}),
                       UIStatusBarAnimationNone, integerValue)
 @end
+
 ```
 
 You can then define methods and export your enum constants like this:
 
 ```objectivec
+
 - (NSDictionary *)constantsToExport
 {
   return @{ @"statusBarAnimationNone" : @(UIStatusBarAnimationNone),
@@ -378,6 +407,7 @@ You can then define methods and export your enum constants like this:
 
 RCT_EXPORT_METHOD(updateStatusBarAnimation:(UIStatusBarAnimation)animation
                                 completion:(RCTResponseSenderBlock)callback)
+
 ```
 
 Your enum will then be automatically unwrapped using the selector provided (`integerValue` in the above example) before being passed to your exported method.
@@ -387,6 +417,7 @@ Your enum will then be automatically unwrapped using the selector provided (`int
 The native module can signal events to JavaScript without being invoked directly. The preferred way to do this is to subclass `RCTEventEmitter`, implement `supportedEvents` and call `self sendEventWithName`:
 
 ```objectivec
+
 // CalendarManager.h
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
@@ -394,9 +425,11 @@ The native module can signal events to JavaScript without being invoked directly
 @interface CalendarManager : RCTEventEmitter <RCTBridgeModule>
 
 @end
+
 ```
 
 ```objectivec
+
 // CalendarManager.m
 #import "CalendarManager.h"
 
@@ -416,11 +449,13 @@ RCT_EXPORT_MODULE();
 }
 
 @end
+
 ```
 
 JavaScript code can subscribe to these events by creating a new `NativeEventEmitter` instance around your module.
 
 ```jsx
+
 import { NativeEventEmitter, NativeModules } from 'react-native';
 const { CalendarManager } = NativeModules;
 
@@ -433,6 +468,7 @@ const subscription = calendarManagerEmitter.addListener(
 ...
 // Don't forget to unsubscribe, typically in componentWillUnmount
 subscription.remove();
+
 ```
 
 ### Optimizing for zero listeners
@@ -440,6 +476,7 @@ subscription.remove();
 You will receive a warning if you expend resources unnecessarily by emitting an event while there are no listeners. To avoid this, and to optimize your module's workload (e.g. by unsubscribing from upstream notifications or pausing background tasks), you can override `startObserving` and `stopObserving` in your `RCTEventEmitter` subclass.
 
 ```objectivec
+
 @implementation CalendarManager
 {
   bool hasListeners;
@@ -464,6 +501,7 @@ You will receive a warning if you expend resources unnecessarily by emitting an 
     [self sendEventWithName:@"EventReminder" body:@{@"name": eventName}];
   }
 }
+
 ```
 
 ## Exporting Swift
@@ -473,6 +511,7 @@ Swift doesn't have support for macros so exposing it to React Native requires a 
 Let's say we have the same `CalendarManager` but as a Swift class:
 
 ```swift
+
 // CalendarManager.swift
 
 @objc(CalendarManager)
@@ -489,13 +528,15 @@ class CalendarManager: NSObject {
   }
 
 }
+
 ```
 
-> **NOTE**: It is important to use the @objc modifiers to ensure the class and functions are exported properly to the Objective-C runtime.
+&gt; **NOTE**: It is important to use the @objc modifiers to ensure the class and functions are exported properly to the Objective-C runtime.
 
 Then create a private implementation file that will register the required information with the React Native bridge:
 
 ```objectivec
+
 // CalendarManagerBridge.m
 #import <React/RCTBridgeModule.h>
 
@@ -504,18 +545,21 @@ Then create a private implementation file that will register the required inform
 RCT_EXTERN_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(nonnull NSNumber *)date)
 
 @end
+
 ```
 
 For those of you new to Swift and Objective-C, whenever you [mix the two languages in an iOS project](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html), you will also need an additional bridging file, known as a bridging header, to expose the Objective-C files to Swift. Xcode will offer to create this header file for you if you add your Swift file to your app through the Xcode `File>New File` menu option. You will need to import `RCTBridgeModule.h` in this header file.
 
 ```objectivec
+
 // CalendarManager-Bridging-Header.h
 #import <React/RCTBridgeModule.h>
+
 ```
 
 You can also use `RCT_EXTERN_REMAP_MODULE` and `_RCT_EXTERN_REMAP_METHOD` to alter the JavaScript name of the module or methods you are exporting. For more information see [`RCTBridgeModule`](https://github.com/facebook/react-native/blob/master/React/Base/RCTBridgeModule.h).
 
-> **Important when making third party modules**: Static libraries with Swift are only supported in Xcode 9 and later. In order for the Xcode project to build when you use Swift in the iOS static library you include in the module, your main app project must contain Swift code and a bridging header itself. If your app project does not contain any Swift code, a workaround can be a single empty .swift file and an empty bridging header.
+&gt; **Important when making third party modules**: Static libraries with Swift are only supported in Xcode 9 and later. In order for the Xcode project to build when you use Swift in the iOS static library you include in the module, your main app project must contain Swift code and a bridging header itself. If your app project does not contain any Swift code, a workaround can be a single empty .swift file and an empty bridging header.
 
 ## Reserved Method Names
 

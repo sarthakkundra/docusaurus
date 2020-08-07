@@ -6,6 +6,7 @@ title: View Style Props
 ### Example
 
 ```SnackPlayer name=ViewStyleProps
+
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
@@ -49,6 +50,7 @@ const styles = StyleSheet.create({
 });
 
 export default ViewStyleProps;
+
 ```
 
 # Reference

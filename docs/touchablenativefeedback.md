@@ -3,7 +3,7 @@ id: touchablenativefeedback
 title: TouchableNativeFeedback
 ---
 
-> If you're looking for a more extensive and future-proof way to handle touch-based input, check out the [Pressable](pressable.md) API.
+&gt; If you're looking for a more extensive and future-proof way to handle touch-based input, check out the [Pressable](pressable.md) API.
 
 A wrapper for making views respond properly to touches (Android only). On Android this component uses native state drawable to display touch feedback.
 
@@ -14,6 +14,7 @@ Background drawable of native feedback touchable can be customized with `backgro
 ## Example
 
 ```SnackPlayer name=TouchableNativeFeedback%20Android%20Component%20Example&supportedPlatforms=android
+
 import React, { useState } from "react";
 import { Text, View, StyleSheet, TouchableNativeFeedback } from "react-native";
 import Constants from "expo-constants";
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 ---
@@ -151,7 +153,9 @@ TV next focus up (see documentation for the View component).
 ### `SelectableBackground()`
 
 ```jsx
+
 static SelectableBackground(rippleRadius: ?number)
+
 ```
 
 Creates an object that represents android theme's default background for selectable elements (?android:attr/selectableItemBackground). `rippleRadius` parameter controls the radius of the ripple effect.
@@ -161,7 +165,9 @@ Creates an object that represents android theme's default background for selecta
 ### `SelectableBackgroundBorderless()`
 
 ```jsx
+
 static SelectableBackgroundBorderless(rippleRadius: ?number)
+
 ```
 
 Creates an object that represent android theme's default background for borderless selectable elements (?android:attr/selectableItemBackgroundBorderless). Available on android API level 21+. `rippleRadius` parameter controls the radius of the ripple effect.
@@ -171,7 +177,9 @@ Creates an object that represent android theme's default background for borderle
 ### `Ripple()`
 
 ```jsx
+
 static Ripple(color: string, borderless: boolean, rippleRadius: ?number)
+
 ```
 
 Creates an object that represents ripple drawable with specified color (as a string). If property `borderless` evaluates to true the ripple will render outside of the view bounds (see native actionbar buttons as an example of that behavior). This background type is available on Android API level 21+.
@@ -189,5 +197,7 @@ Creates an object that represents ripple drawable with specified color (as a str
 ### `canUseNativeForeground()`
 
 ```jsx
+
 static canUseNativeForeground()
+
 ```

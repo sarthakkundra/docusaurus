@@ -8,6 +8,7 @@ It is a component to solve the common problem of views that need to move out of 
 ## Example
 
 ```SnackPlayer name=KeyboardAvoidingView&supportedPlatforms=android,ios
+
 import React from 'react';
 import { View, KeyboardAvoidingView, TextInput, StyleSheet, Text, Platform, TouchableWithoutFeedback, Button, Keyboard  } from 'react-native';
 
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
 });
 
 export default KeyboardAvoidingComponent;
+
 ```
 
 ---
@@ -70,7 +72,7 @@ Inherits [View Props](view.md#props).
 
 Specify how to react to the presence of the keyboard.
 
-> Android and iOS both interact with this prop differently. On both iOS and Android, setting `behavior` is recommended.
+&gt; Android and iOS both interact with this prop differently. On both iOS and Android, setting `behavior` is recommended.
 
 | Type                                  | Required |
 | ------------------------------------- | -------- |

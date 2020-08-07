@@ -10,6 +10,7 @@ This is a controlled component that requires an `onValueChange` callback that up
 ## Example
 
 ```SnackPlayer name=Switch&supportedPlatforms=android,ios
+
 import React, { useState } from "react";
 import { View, Switch, StyleSheet } from "react-native";
 
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 ---
@@ -105,9 +107,9 @@ Custom colors for the switch track.
 
 _iOS_: When the switch value is false, the track shrinks into the border. If you want to change the color of the background exposed by the shrunken track, use [`ios_backgroundColor`](switch.md#ios_backgroundColor).
 
-| Type                                                          | Required |
-| ------------------------------------------------------------- | -------- |
-| object: {false: [color](colors.md), true: [color](colors.md)} | No       |
+| Type                                                                  | Required |
+| --------------------------------------------------------------------- | -------- |
+| object: {"{"}false: [color](colors.md), true: [color](colors.md){"}"} | No       |
 
 ---
 

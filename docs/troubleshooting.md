@@ -14,13 +14,17 @@ The [Metro bundler][metro] runs on port 8081. If another process is already usin
 Run the following command to find the id for the process that is listening on port 8081:
 
 ```sh
+
 $ sudo lsof -i :8081
+
 ```
 
 Then run the following to terminate the process:
 
 ```sh
+
 $ kill -9 <PID>
+
 ```
 
 On Windows you can find the process using port 8081 using [Resource Monitor](https://stackoverflow.com/questions/48198/how-can-you-find-out-which-process-is-listening-on-a-port-on-windows) and stop it using Task Manager.
@@ -30,7 +34,9 @@ On Windows you can find the process using port 8081 using [Resource Monitor](htt
 You can configure the bundler to use a port other than 8081 by using the `port` parameter:
 
 ```sh
+
 $ npx react-native start --port=8088
+
 ```
 
 You will also need to update your applications to load the JavaScript bundle from the new port. If running on device from Xcode, you can do this by updating occurrences of `8081` to your chosen port in the `node_modules/react-native/React/React.xcodeproj/project.pbxproj` file.
@@ -40,8 +46,10 @@ You will also need to update your applications to load the JavaScript bundle fro
 If you encounter an error such as `npm WARN locking Error: EACCES` while using the React Native CLI, try running the following:
 
 ```
+
 sudo chown -R $USER ~/.npm
 sudo chown -R $USER /usr/local/lib/node_modules
+
 ```
 
 ### Missing libraries for React
@@ -51,12 +59,14 @@ If you added React Native manually to your project, make sure you have included 
 If you are using CocoaPods, verify that you have added React along with the subspecs to the `Podfile`. For example, if you were using the `<Text />`, `<Image />` and `fetch()` APIs, you would need to add these in your `Podfile`:
 
 ```
+
 pod 'React', :path => '../node_modules/react-native', :subspecs => [
   'RCTText',
   'RCTImage',
   'RCTNetwork',
   'RCTWebSocket',
 ]
+
 ```
 
 Next, make sure you have run `pod install` and that a `Pods/` directory has been created in your project with React installed. CocoaPods will instruct you to use the generated `.xcworkspace` file henceforth to be able to use these installed dependencies.
@@ -76,8 +86,10 @@ To revert the `User Search Header Paths` and `Header Search Paths` build setting
 React Native implements a polyfill for WebSockets. These [polyfills](https://github.com/facebook/react-native/blob/master/Libraries/Core/InitializeCore.js) are initialized as part of the react-native module that you include in your application through `import React from 'react'`. If you load another module that requires WebSockets, such as [Firebase](https://github.com/facebook/react-native/issues/3645), be sure to load/require it after react-native:
 
 ```
+
 import React from 'react';
 import Firebase from 'firebase';
+
 ```
 
 ## Shell Command Unresponsive Exception
@@ -85,8 +97,10 @@ import Firebase from 'firebase';
 If you encounter a ShellCommandUnresponsiveException exception such as:
 
 ```
+
 Execution failed for task ':app:installDebug'.
   com.android.builder.testing.api.DeviceException: com.android.ddmlib.ShellCommandUnresponsiveException
+
 ```
 
 Try [downgrading your Gradle version to 1.2.3](https://github.com/facebook/react-native/issues/2720) in `android/build.gradle`.
@@ -96,7 +110,9 @@ Try [downgrading your Gradle version to 1.2.3](https://github.com/facebook/react
 If you run into issues where running `npx react-native init` hangs in your system, try running it again in verbose mode and referring to [#2797](https://github.com/facebook/react-native/issues/2797) for common causes:
 
 ```
+
 npx react-native init --verbose
+
 ```
 
 ## Unable to start react-native package manager (on Linux)
@@ -106,7 +122,9 @@ npx react-native init --verbose
 Issue caused by the number of directories [inotify](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers) (used by watchman on Linux) can monitor. To solve it, run this command in your terminal window
 
 ```
+
 echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
 ```
 
 [metro]: https://facebook.github.io/metro/

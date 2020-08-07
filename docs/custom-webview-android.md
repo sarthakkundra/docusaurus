@@ -16,6 +16,7 @@ To get started, you'll need to create a subclass of `ReactWebViewManager`, `Reac
 - `addEventEmitters`
 
 ```java
+
 @ReactModule(name = CustomWebViewManager.REACT_CLASS)
 public class CustomWebViewManager extends ReactWebViewManager {
   /* This name must match what we're referring to in JS */
@@ -44,6 +45,7 @@ public class CustomWebViewManager extends ReactWebViewManager {
     view.setWebViewClient(new CustomWebViewClient());
   }
 }
+
 ```
 
 You'll need to follow the usual steps to [register the module](native-modules-android.md#register-the-module).
@@ -53,6 +55,7 @@ You'll need to follow the usual steps to [register the module](native-modules-an
 To add a new property, you'll need to add it to `CustomWebView`, and then expose it in `CustomWebViewManager`.
 
 ```java
+
 public class CustomWebViewManager extends ReactWebViewManager {
   ...
 
@@ -79,6 +82,7 @@ public class CustomWebViewManager extends ReactWebViewManager {
     ((CustomWebView) view).setFinalUrl(url);
   }
 }
+
 ```
 
 ### Adding New Events
@@ -86,6 +90,7 @@ public class CustomWebViewManager extends ReactWebViewManager {
 For events, you'll first need to make create event subclass.
 
 ```java
+
 // NavigationCompletedEvent.java
 public class NavigationCompletedEvent extends Event<NavigationCompletedEvent> {
   private WritableMap mParams;
@@ -106,6 +111,7 @@ public class NavigationCompletedEvent extends Event<NavigationCompletedEvent> {
     rctEventEmitter.receiveEvent(getViewTag(), getEventName(), mParams);
   }
 }
+
 ```
 
 You can trigger the event in your web view client. You can hook existing handlers if your events are based on them.
@@ -113,6 +119,7 @@ You can trigger the event in your web view client. You can hook existing handler
 You should refer to [ReactWebViewManager.java](https://github.com/facebook/react-native/blob/master/ReactAndroid/src/main/java/com/facebook/react/views/webview/ReactWebViewManager.java) in the React Native codebase to see what handlers are available and how they are implemented. You can extend any methods here to provide extra functionality.
 
 ```java
+
 public class NavigationCompletedEvent extends Event<NavigationCompletedEvent> {
   private WritableMap mParams;
 
@@ -148,11 +155,13 @@ protected static class CustomWebViewClient extends ReactWebViewClient {
     return shouldOverride;
   }
 }
+
 ```
 
 Finally, you'll need to expose the events in `CustomWebViewManager` through `getExportedCustomDirectEventTypeConstants`. Note that currently, the default implementation returns `null`, but this may change in the future.
 
 ```java
+
 public class CustomWebViewManager extends ReactWebViewManager {
   ...
 
@@ -167,6 +176,7 @@ public class CustomWebViewManager extends ReactWebViewManager {
     return export;
   }
 }
+
 ```
 
 ## JavaScript Interface

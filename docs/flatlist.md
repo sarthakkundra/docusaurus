@@ -21,6 +21,7 @@ If you need section support, use [`<SectionList>`](sectionlist.md).
 ## Example
 
 ```SnackPlayer name=flatlist-simple
+
 import React from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 
@@ -78,16 +79,18 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 To render multiple columns, use the [`numColumns`](flatlist.md#numcolumns) prop. Using this approach instead of a `flexWrap` layout can prevent conflicts with the item height logic.
 
-More complex, multi-select example demonstrating `` usage for perf optimization and avoiding bugs.
+More complex, multi-select example demonstrating \`\` usage for perf optimization and avoiding bugs.
 
 - By passing `extraData={selected}` to `FlatList` we make sure `FlatList` itself will re-render when the state changes. Without setting this prop, `FlatList` would not know it needs to re-render any items because it is a `PureComponent` and the prop comparison will not show any changes.
 - `keyExtractor` tells the list to use the `id`s for the react keys instead of the default `key` property.
 
 ```SnackPlayer name=flatlist-selectable
+
 import React, { useState } from "react";
 import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity } from "react-native";
 
@@ -155,6 +158,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 This is a convenience wrapper around [`<VirtualizedList>`](virtualizedlist.md), and thus inherits its props (as well as those of [`<ScrollView>`](scrollview.md)) that aren't explicitly listed here, along with the following caveats:
@@ -199,17 +203,25 @@ Example usage:
 
 ```jsx
 <FlatList
-  ItemSeparatorComponent={Platform.OS !== 'android' && (({highlighted}) => (
-    <View style={[style.separator, highlighted && {marginLeft: 0}]} />
-  ))}
-  data={[{title: 'Title Text', key: 'item1'}]}
-  renderItem={({item, index, separators}) => (
+  ItemSeparatorComponent={
+    Platform.OS !== 'android' &&
+    (({ highlighted }) => (
+      <View
+        style={[
+          style.separator,
+          highlighted && { marginLeft: 0 }
+        ]}
+      />
+    ))
+  }
+  data={[{ title: 'Title Text', key: 'item1' }]}
+  renderItem={({ item, index, separators }) => (
     <TouchableHighlight
       key={item.key}
       onPress={() => this._onPress(item)}
       onShowUnderlay={separators.highlight}
       onHideUnderlay={separators.unhighlight}>
-      <View style={{backgroundColor: 'white'}}>
+      <View style={{ backgroundColor: 'white' }}>
         <Text>{item.title}</Text>
       </View>
     </TouchableHighlight>
@@ -312,15 +324,19 @@ A marker property for telling the list to re-render (since it implements `PureCo
 ### `getItemLayout`
 
 ```jsx
+
 (data, index) => {length: number, offset: number, index: number}
+
 ```
 
 `getItemLayout` is an optional optimization that allows skipping the measurement of dynamic content if you know the size (height or width) of items ahead of time. `getItemLayout` is efficient if you have fixed size items, for example:
 
 ```jsx
+
   getItemLayout={(data, index) => (
     {length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index}
   )}
+
 ```
 
 Adding `getItemLayout` can be a great performance boost for lists of several hundred items. Remember to include separator length (height or width) in your offset calculation if you specify `ItemSeparatorComponent`.
@@ -398,7 +414,9 @@ Multiple columns can only be rendered with `horizontal={false}` and will zig-zag
 ### `onEndReached`
 
 ```jsx
+
 (info: {distanceFromEnd: number}) => void
+
 ```
 
 Called once when the scroll position gets within `onEndReachedThreshold` of the rendered content.
@@ -422,7 +440,9 @@ How far from the end (in units of visible length of the list) the bottom edge of
 ### `onRefresh`
 
 ```jsx
+
 () => void
+
 ```
 
 If provided, a standard RefreshControl will be added for "Pull to Refresh" functionality. Make sure to also set the `refreshing` prop correctly.
@@ -436,10 +456,12 @@ If provided, a standard RefreshControl will be added for "Pull to Refresh" funct
 ### `onViewableItemsChanged`
 
 ```jsx
+
 (info: {
     viewableItems: array,
     changed: array,
   }) => void
+
 ```
 
 Called when the viewability of rows changes, as defined by the `viewabilityConfig` prop.
@@ -484,7 +506,7 @@ Set this true while waiting for new data from a refresh.
 
 This may improve scroll performance for large lists. On Android the default value is true
 
-> Note: May have bugs (missing content) in some circumstances - use at your own risk.
+&gt; Note: May have bugs (missing content) in some circumstances - use at your own risk.
 
 | Type    | Required |
 | ------- | -------- |
@@ -512,10 +534,13 @@ See `ViewabilityHelper.js` for flow type and further documentation.
 At least one of the `viewAreaCoveragePercentThreshold` or `itemVisiblePercentThreshold` is required. This needs to be done in the `constructor` to avoid following error ([ref](https://github.com/facebook/react-native/issues/17408)):
 
 ```
+
   Error: Changing viewabilityConfig on the fly is not supported`
+
 ```
 
 ```jsx
+
 constructor (props) {
   super(props)
 
@@ -524,12 +549,15 @@ constructor (props) {
       viewAreaCoveragePercentThreshold: 95
   }
 }
+
 ```
 
 ```jsx
+
 <FlatList
     viewabilityConfig={this.viewabilityConfig}
   ...
+
 ```
 
 #### minimumViewTime
@@ -588,7 +616,7 @@ scrollToIndex(params);
 
 Scrolls to the item at the specified index such that it is positioned in the viewable area such that `viewPosition` 0 places it at the top, 1 at the bottom, and 0.5 centered in the middle.
 
-> Note: Cannot scroll to locations outside the render window without specifying the `getItemLayout` prop.
+&gt; Note: Cannot scroll to locations outside the render window without specifying the `getItemLayout` prop.
 
 **Parameters:**
 
@@ -613,7 +641,7 @@ scrollToItem(params);
 
 Requires linear scan through data - use `scrollToIndex` instead if possible.
 
-> Note: Cannot scroll to locations outside the render window without specifying the `getItemLayout` prop.
+&gt; Note: Cannot scroll to locations outside the render window without specifying the `getItemLayout` prop.
 
 **Parameters:**
 

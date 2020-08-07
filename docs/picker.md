@@ -1,15 +1,16 @@
 ---
 id: picker
-title: 🚧 Picker
+title: '🚧 Picker'
 ---
 
-> **Deprecated.** Use [@react-native-community/picker](https://github.com/react-native-community/react-native-picker) instead.
+&gt; **Deprecated.** Use [@react-native-community/picker](https://github.com/react-native-community/react-native-picker) instead.
 
 Renders the native picker component on Android and iOS.
 
 ## Example
 
 ```SnackPlayer name=picker
+
 import React, { useState } from "react";
 import { View, Picker, StyleSheet } from "react-native";
 
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 ---

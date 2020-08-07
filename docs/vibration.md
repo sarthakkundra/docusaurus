@@ -7,201 +7,34 @@ Vibrates the device.
 
 ## Example
 
-<div class="toggler">
-  <ul role="tablist" class="toggle-syntax">
-    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+<div className="toggler">
+  <ul role="tablist" className="toggle-syntax">
+    <li id="functional" className="button-functional" aria-selected="false" role="tab" tabIndex={0} aria-controls="functionaltab" onClick="displayTabs('syntax', 'functional')">
       Function Component Example
     </li>
-    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+    <li id="classical" className="button-classical" aria-selected="false" role="tab" tabIndex={0} aria-controls="classicaltab" onClick="displayTabs('syntax', 'classical')">
       Class Component Example
     </li>
   </ul>
 </div>
 
-<block class="functional syntax" />
+block
 
 ```SnackPlayer name=Vibration&supportedPlatforms=ios,android
-import React from "react";
-import { Button, Platform, Text, Vibration, View, SafeAreaView, StyleSheet } from "react-native";
 
-const Separator = () => {
-  return <View style={Platform.OS === "android" ? styles.separator : null} />;
-}
 
-const App = () => {
 
-  const ONE_SECOND_IN_MS = 1000;
-
-  const PATTERN = [
-    1 * ONE_SECOND_IN_MS,
-    2 * ONE_SECOND_IN_MS,
-    3 * ONE_SECOND_IN_MS
-  ];
-
-  const PATTERN_DESC =
-    Platform.OS === "android"
-      ? "wait 1s, vibrate 2s, wait 3s"
-      : "wait 1s, vibrate, wait 2s, vibrate, wait 3s";
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text style={[styles.header, styles.paragraph]}>Vibration API</Text>
-      <View>
-        <Button title="Vibrate once" onPress={() => Vibration.vibrate()} />
-      </View>
-      <Separator />
-      {Platform.OS == "android"
-        ? [
-            <View>
-              <Button
-                title="Vibrate for 10 seconds"
-                onPress={() => Vibration.vibrate(10 * ONE_SECOND_IN_MS)}
-              />
-            </View>,
-            <Separator />
-          ]
-        : null}
-      <Text style={styles.paragraph}>Pattern: {PATTERN_DESC}</Text>
-      <Button
-        title="Vibrate with pattern"
-        onPress={() => Vibration.vibrate(PATTERN)}
-      />
-      <Separator />
-      <Button
-        title="Vibrate with pattern until cancelled"
-        onPress={() => Vibration.vibrate(PATTERN, true)}
-      />
-      <Separator />
-      <Button
-        title="Stop vibration pattern"
-        onPress={() => Vibration.cancel()}
-        color="#FF0000"
-      />
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingTop: 44,
-    padding: 8
-  },
-  header: {
-    fontSize: 18,
-    fontWeight: "bold",
-    textAlign: "center"
-  },
-  paragraph: {
-    margin: 24,
-    textAlign: "center"
-  },
-  separator: {
-    marginVertical: 8,
-    borderBottomColor: "#737373",
-    borderBottomWidth: StyleSheet.hairlineWidth
-  }
-});
-
-export default App;
 ```
-
-<block class="classical syntax" />
 
 ```SnackPlayer name=Vibration&supportedPlatforms=ios,android
-import React, { Component } from "react";
-import { Button, Platform, Text, Vibration, View, SafeAreaView, StyleSheet } from "react-native";
 
-const Separator = () => {
-  return <View style={Platform.OS === "android" ? styles.separator : null} />;
-}
 
-class App extends Component {
-  render() {
-    const ONE_SECOND_IN_MS = 1000;
 
-    const PATTERN = [
-      1 * ONE_SECOND_IN_MS,
-      2 * ONE_SECOND_IN_MS,
-      3 * ONE_SECOND_IN_MS
-    ];
-
-    const PATTERN_DESC =
-      Platform.OS === "android"
-        ? "wait 1s, vibrate 2s, wait 3s"
-        : "wait 1s, vibrate, wait 2s, vibrate, wait 3s";
-
-    return (
-      <SafeAreaView style={styles.container}>
-        <Text style={[styles.header, styles.paragraph]}>Vibration API</Text>
-        <View>
-          <Button title="Vibrate once" onPress={() => Vibration.vibrate()} />
-        </View>
-        <Separator />
-        {Platform.OS == "android"
-          ? [
-              <View>
-                <Button
-                  title="Vibrate for 10 seconds"
-                  onPress={() => Vibration.vibrate(10 * ONE_SECOND_IN_MS)}
-                />
-              </View>,
-              <Separator />
-            ]
-          : null}
-        <Text style={styles.paragraph}>Pattern: {PATTERN_DESC}</Text>
-        <Button
-          title="Vibrate with pattern"
-          onPress={() => Vibration.vibrate(PATTERN)}
-        />
-        <Separator />
-        <Button
-          title="Vibrate with pattern until cancelled"
-          onPress={() => Vibration.vibrate(PATTERN, true)}
-        />
-        <Separator />
-        <Button
-          title="Stop vibration pattern"
-          onPress={() => Vibration.cancel()}
-          color="#FF0000"
-        />
-      </SafeAreaView>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingTop: 44,
-    padding: 8
-  },
-  header: {
-    fontSize: 18,
-    fontWeight: "bold",
-    textAlign: "center"
-  },
-  paragraph: {
-    margin: 24,
-    textAlign: "center"
-  },
-  separator: {
-    marginVertical: 8,
-    borderBottomColor: "#737373",
-    borderBottomWidth: StyleSheet.hairlineWidth
-  }
-});
-
-export default App;
 ```
 
-<block class="endBlock syntax" />
+&gt; Android apps should request the `permission by adding` to ``.
 
-> Android apps should request the `android.permission.VIBRATE` permission by adding `<uses-permission android:name="android.permission.VIBRATE"/>` to `AndroidManifest.xml`.
-
-> The Vibration API is implemented as a `AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)` call on iOS.
+&gt; The Vibration API is implemented as a `` call on iOS.
 
 ---
 
@@ -209,19 +42,18 @@ export default App;
 
 ## Methods
 
-### `vibrate()`
+### ``
 
 ```jsx
-Vibration.vibrate(?pattern: number | Array<number>, ?repeat: boolean)
 ```
 
 Triggers a vibration with a fixed duration.
 
-**On Android,** the vibration duration defaults to 400 milliseconds, and an arbitrary vibration duration can be specified by passing a number as the value for the `pattern` argument. **On iOS,** the vibration duration is fixed at roughly 400 milliseconds.
+**On Android,** the vibration duration defaults to 400 milliseconds, and an arbitrary vibration duration can be specified by passing a number as the value for the `` argument. **On iOS,** the vibration duration is fixed at roughly 400 milliseconds.
 
-The `vibrate()` method can take a `pattern` argument with an array of numbers that represent time in milliseconds. You may set `repeat` to true to run through the vibration pattern in a loop until `cancel()` is called.
+The `method can take a` argument with an array of numbers that represent time in milliseconds. You may set `to true to run through the vibration pattern in a loop until` is called.
 
-**On Android,** the odd indices of the `pattern` array represent the vibration duration, while the even ones represent the separation time. **On iOS,** the numbers in the `pattern` array represent the separation time, as the vibration duration is fixed.
+**On Android,** the odd indices of the `array represent the vibration duration, while the even ones represent the separation time. **On iOS,** the numbers in the` array represent the separation time, as the vibration duration is fixed.
 
 **Parameters:**
 
@@ -233,10 +65,9 @@ The `vibrate()` method can take a `pattern` argument with an array of numbers th
 
 ---
 
-### `cancel()`
+### ``
 
 ```jsx
-Vibration.cancel();
 ```
 
-Call this to stop vibrating after having invoked `vibrate()` with repetition enabled.
+Call this to stop vibrating after having invoked `` with repetition enabled.

@@ -3,7 +3,7 @@ id: appregistry
 title: AppRegistry
 ---
 
-<div class="banner-native-code-required">
+<div className="banner-native-code-required">
   <h3>Project with Native Code Required</h3>
   <p>
     If you are using the managed <code>expo-cli</code> workflow there is only ever one entry component registered with <code>AppRegistry</code> and it is handled automatically, you do not need to use this API.
@@ -37,7 +37,9 @@ To "stop" an application when a view should be destroyed, call `AppRegistry.unmo
 ### `setWrapperComponentProvider()`
 
 ```jsx
+
 static setWrapperComponentProvider(provider)
+
 ```
 
 **Parameters:**
@@ -51,7 +53,9 @@ static setWrapperComponentProvider(provider)
 ### `enableArchitectureIndicator()`
 
 ```jsx
+
 static enableArchitectureIndicator(enabled)
+
 ```
 
 **Parameters:**
@@ -65,7 +69,9 @@ static enableArchitectureIndicator(enabled)
 ### `registerConfig()`
 
 ```jsx
+
 static registerConfig([config])
+
 ```
 
 **Parameters:**
@@ -86,7 +92,9 @@ Valid `AppConfig` keys are:
 ### `registerComponent()`
 
 ```jsx
+
 static registerComponent(appKey, componentProvider, section?)
+
 ```
 
 **Parameters:**
@@ -102,7 +110,9 @@ static registerComponent(appKey, componentProvider, section?)
 ### `registerRunnable()`
 
 ```jsx
+
 static registerRunnable(appKey, run)
+
 ```
 
 **Parameters:**
@@ -117,7 +127,9 @@ static registerRunnable(appKey, run)
 ### `registerSection()`
 
 ```jsx
+
 static registerSection(appKey, component)
+
 ```
 
 **Parameters:**
@@ -132,7 +144,9 @@ static registerSection(appKey, component)
 ### `getAppKeys()`
 
 ```jsx
+
 static getAppKeys()
+
 ```
 
 Returns an Array of AppKeys
@@ -140,7 +154,9 @@ Returns an Array of AppKeys
 ### `getSectionKeys()`
 
 ```jsx
+
 static getSectionKeys()
+
 ```
 
 Returns an Array of SectionKeys
@@ -150,7 +166,9 @@ Returns an Array of SectionKeys
 ### `getSections()`
 
 ```jsx
+
 static getSections()
+
 ```
 
 Returns all Runnables which is an object with key of `AppKeys` and value of type of `Runnable` which consist of:
@@ -163,7 +181,9 @@ Returns all Runnables which is an object with key of `AppKeys` and value of type
 ### `getRunnable()`
 
 ```jsx
+
 static getRunnable(appKey)
+
 ```
 
 Returns a `Runnable` object which consist of:
@@ -176,7 +196,9 @@ Returns a `Runnable` object which consist of:
 ### `getRegistry()`
 
 ```jsx
+
 static getRegistry()
+
 ```
 
 Returns a type `Registry` which consist of:
@@ -189,7 +211,9 @@ Returns a type `Registry` which consist of:
 ### `setComponentProviderInstrumentationHook()`
 
 ```jsx
+
 static setComponentProviderInstrumentationHook(hook)
+
 ```
 
 **Parameters:**
@@ -210,7 +234,9 @@ The `hook` function returns a React Component
 ### `runApplication()`
 
 ```jsx
+
 static runApplication(appKey, appParameters)
+
 ```
 
 Loads the JavaScript bundle and runs the app.
@@ -227,7 +253,9 @@ Loads the JavaScript bundle and runs the app.
 ### `unmountApplicationComponentAtRootTag()`
 
 ```jsx
+
 static unmountApplicationComponentAtRootTag(rootTag)
+
 ```
 
 Stops an application when a view should be destroyed.
@@ -243,7 +271,9 @@ Stops an application when a view should be destroyed.
 ### `registerHeadlessTask()`
 
 ```jsx
+
 static registerHeadlessTask(taskKey, taskProvider)
+
 ```
 
 Register a headless task. A headless task is a bit of code that runs without a UI. @param taskKey the key associated with this task @param taskProvider a promise returning function that takes some data passed from the native side as the only argument; when the promise is resolved or rejected the native side is notified of this event and it may decide to destroy the JS context.
@@ -265,7 +295,9 @@ This is a way to run tasks in JavaScript while your app is in the background. It
 ### `registerCancellableHeadlessTask()`
 
 ```jsx
+
 static registerCancellableHeadlessTask(taskKey, taskProvider, taskCancelProvider)
+
 ```
 
 Register a headless task which can be cancelled. A headless task is a bit of code that runs without a UI. @param taskKey the key associated with this task @param taskProvider a promise returning function that takes some data passed from the native side as the only argument; when the promise is resolved or rejected the native side is notified of this event and it may decide to destroy the JS context. @param taskCancelProvider a void returning function that takes no arguments; when a cancellation is requested, the function being executed by taskProvider should wrap up and return ASAP.
@@ -288,7 +320,9 @@ Register a headless task which can be cancelled. A headless task is a bit of cod
 ### `startHeadlessTask()`
 
 ```jsx
+
 static startHeadlessTask(taskId, taskKey, data)
+
 ```
 
 Only called from native code. Starts a headless task.
@@ -308,7 +342,9 @@ Only called from native code. Starts a headless task.
 ### `cancelHeadlessTask()`
 
 ```jsx
+
 static cancelHeadlessTask(taskId, taskKey)
+
 ```
 
 Only called from native code. Cancels a headless task.

@@ -7,7 +7,7 @@ A component can specify the layout of its children using the Flexbox algorithm. 
 
 You will normally use a combination of `flexDirection`, `alignItems`, and `justifyContent` to achieve the right layout.
 
-> Flexbox works the same way in React Native as it does in CSS on the web, with a few exceptions. The defaults are different, with `flexDirection` defaulting to `column` instead of `row`, and the `flex` parameter only supporting a single number.
+&gt; Flexbox works the same way in React Native as it does in CSS on the web, with a few exceptions. The defaults are different, with `flexDirection` defaulting to `column` instead of `row`, and the `flex` parameter only supporting a single number.
 
 ## Flex
 
@@ -32,6 +32,7 @@ In the following example, the red, yellow, and green views are all children in t
 You can learn more [here](https://yogalayout.com/docs/flex-direction).
 
 ```SnackPlayer name=Flex%20Direction
+
 import React from 'react';
 import { View } from 'react-native';
 
@@ -47,6 +48,7 @@ const FlexDirectionBasics = () => {
 };
 
 export default FlexDirectionBasics;
+
 ```
 
 ![Flex Direction](https://cdn-images-1.medium.com/max/800/1*rA7IbuUsJWsx6evKAsabVw.png)
@@ -78,6 +80,7 @@ Layout direction specifies the direction in which children and text in a hierarc
 You can learn more [here](https://yogalayout.com/docs/justify-content).
 
 ```SnackPlayer name=Justify%20Content
+
 import React from 'react';
 import { View } from 'react-native';
 
@@ -98,6 +101,7 @@ const JustifyContentBasics = () => {
 };
 
 export default JustifyContentBasics;
+
 ```
 
 ![Justify Content](https://cdn-images-1.medium.com/max/800/1*i5TVlme-TisAVvD5ax2yPA.png)
@@ -116,11 +120,12 @@ export default JustifyContentBasics;
 
 - `baseline` Align children of a container along a common baseline. Individual children can be set to be the reference baseline for their parents.
 
-> For `stretch` to have an effect, children must not have a fixed dimension along the secondary axis. In the following example, setting `alignItems: stretch` does nothing until the `width: 50` is removed from the children.
+&gt; For `stretch` to have an effect, children must not have a fixed dimension along the secondary axis. In the following example, setting `alignItems: stretch` does nothing until the `width: 50` is removed from the children.
 
 You can learn more [here](https://yogalayout.com/docs/align-items).
 
 ```SnackPlayer name=Align%20Items
+
 import React from 'react';
 import { View } from 'react-native';
 
@@ -143,6 +148,7 @@ const AlignItemsBasics = () => {
 };
 
 export default AlignItemsBasics;
+
 ```
 
 ![Align Items](https://cdn-images-1.medium.com/max/800/1*evkM7zfxt-9p-HJ1M0Bh2g.png)
@@ -185,11 +191,11 @@ When wrapping lines, `alignContent` can be used to specify how the lines are pla
 
 - [`flexGrow`](layout-props#flexgrow) describes how any space within a container should be distributed among its children along the main axis. After laying out its children, a container will distribute any remaining space according to the flex grow values specified by its children.
 
-  `flexGrow` accepts any floating point value >= 0, with 0 being the default value. A container will distribute any remaining space among its children weighted by the children’s `flexGrow` values.
+  `flexGrow` accepts any floating point value &gt;= 0, with 0 being the default value. A container will distribute any remaining space among its children weighted by the children’s `flexGrow` values.
 
 - [`flexShrink`](layout-props#flexshrink) describes how to shrink children along the main axis in the case in which the total size of the children overflows the size of the container on the main axis. `flexShrink` is very similar to `flexGrow` and can be thought of in the same way if any overflowing size is considered to be negative remaining space. These two properties also work well together by allowing children to grow and shrink as needed.
 
-  `flexShrink` accepts any floating point value >= 0, with 1 being the default value. A container will shrink its children weighted by the children’s `flexShrink` values.
+  `flexShrink` accepts any floating point value &gt;= 0, with 1 being the default value. A container will shrink its children weighted by the children’s `flexShrink` values.
 
 - [`flexBasis`](layout-props#flexbasis) is an axis-independent way of providing the default size of an item along the main axis. Setting the `flexBasis` of a child is similar to setting the `width` of that child if its parent is a container with `flexDirection: row` or setting the `height` of a child if its parent is a container with `flexDirection: column`. The `flexBasis` of an item is the default size of that item, the size of the item before any `flexGrow` and `flexShrink` calculations are performed.
 

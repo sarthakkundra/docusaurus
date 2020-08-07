@@ -3,7 +3,7 @@ id: touchablewithoutfeedback
 title: TouchableWithoutFeedback
 ---
 
-> If you're looking for a more extensive and future-proof way to handle touch-based input, check out the [Pressable](pressable.md) API.
+&gt; If you're looking for a more extensive and future-proof way to handle touch-based input, check out the [Pressable](pressable.md) API.
 
 Do not use unless you have a very good reason. All elements that respond to press should have a visual feedback when touched.
 
@@ -28,6 +28,7 @@ function MyComponent(props) {
 ## Example
 
 ```SnackPlayer name=TouchableWithoutFeedback
+
 import React, { useState } from "react";
 import { StyleSheet, TouchableWithoutFeedback, Text, View } from "react-native";
 
@@ -73,6 +74,7 @@ const styles = StyleSheet.create({
 });
 
 export default TouchableWithoutFeedbackExample;
+
 ```
 
 ---
@@ -165,9 +167,9 @@ Describes the current state of a component to the user of an assistive technolog
 
 See the [Accessibility guide](accessibility.md#accessibilitystate-ios-android) for more information.
 
-| Type                                                                                           | Required |
-| ---------------------------------------------------------------------------------------------- | -------- |
-| object: {disabled: bool, selected: bool, checked: bool or 'mixed', busy: bool, expanded: bool} | No       |
+| Type                                                                                                   | Required |
+| ------------------------------------------------------------------------------------------------------ | -------- |
+| object: {"{"}disabled: bool, selected: bool, checked: bool or 'mixed', busy: bool, expanded: bool{"}"} | No       |
 
 ---
 
@@ -201,9 +203,9 @@ Represents the current value of a component. It can be a textual description of 
 
 See the [Accessibility guide](accessibility.md#accessibilityvalue-ios-android) for more information.
 
-| Type                                                          | Required |
-| ------------------------------------------------------------- | -------- |
-| object: {min: number, max: number, now: number, text: string} | No       |
+| Type                                                                  | Required |
+| --------------------------------------------------------------------- | -------- |
+| object: {"{"}min: number, max: number, now: number, text: string{"}"} | No       |
 
 ---
 
@@ -251,7 +253,7 @@ If true, disable all interactions for this component.
 
 This defines how far your touch can start away from the button. This is added to `pressRetentionOffset` when moving off of the button.
 
-> The touch area never extends past the parent view bounds and the Z-index of sibling views always takes precedence if a touch hits two overlapping views.
+&gt; The touch area never extends past the parent view bounds and the Z-index of sibling views always takes precedence if a touch hits two overlapping views.
 
 | Type                   | Required |
 | ---------------------- | -------- |

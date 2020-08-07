@@ -1,9 +1,9 @@
 ---
 id: imageeditor
-title: 🚧 ImageEditor
+title: '🚧 ImageEditor'
 ---
 
-> **Deprecated.** Use [@react-native-community/image-editor](https://github.com/react-native-community/react-native-image-editor) instead.
+&gt; **Deprecated.** Use [@react-native-community/image-editor](https://github.com/react-native-community/react-native-image-editor) instead.
 
 ---
 
@@ -14,7 +14,9 @@ title: 🚧 ImageEditor
 ### `cropImage()`
 
 ```jsx
+
 static cropImage(uri, cropData, success, failure)
+
 ```
 
 Crop the image specified by the URI param. If URI points to a remote image, it will be downloaded automatically. If the image cannot be loaded/downloaded, the `failure` callback will be called.

@@ -10,6 +10,7 @@ Component to control the app status bar.
 It is possible to have multiple `StatusBar` components mounted at the same time. The props will be merged in the order the `StatusBar` components were mounted.
 
 ```SnackPlayer name=StatusBar%20Component%20Example&supportedPlatforms=android,ios
+
 import React, { useState } from 'react';
 import { Button, Platform, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
 
@@ -96,6 +97,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 ### Imperative API
@@ -108,7 +110,7 @@ For cases where using a component is not ideal, there is also an imperative API 
 
 ## Constants
 
-### `currentHeight` <div class="label android">Android</div>
+### `currentHeight` <div className="label android">Android</div>
 
 The height of the status bar, which includes the notch height, if present.
 
@@ -126,7 +128,7 @@ If the transition between status bar property changes should be animated. Suppor
 
 ---
 
-### `backgroundColor` <div class="label android">Android</div>
+### `backgroundColor` <div className="label android">Android</div>
 
 The background color of the status bar.
 
@@ -158,7 +160,7 @@ If the status bar is hidden.
 
 ---
 
-### `networkActivityIndicatorVisible` <div class="label ios">iOS</div>
+### `networkActivityIndicatorVisible` <div className="label ios">iOS</div>
 
 If the network activity indicator should be visible.
 
@@ -168,7 +170,7 @@ If the network activity indicator should be visible.
 
 ---
 
-### `showHideTransition` <div class="label ios">iOS</div>
+### `showHideTransition` <div className="label ios">iOS</div>
 
 The transition effect when showing and hiding the status bar using the `hidden` prop.
 
@@ -178,7 +180,7 @@ The transition effect when showing and hiding the status bar using the `hidden` 
 
 ---
 
-### `translucent` <div class="label android">Android</div>
+### `translucent` <div className="label android">Android</div>
 
 If the status bar is translucent. When translucent is set to `true`, the app will draw under the status bar. This is useful when using a semi transparent status bar color.
 
@@ -191,7 +193,9 @@ If the status bar is translucent. When translucent is set to `true`, the app wil
 ### `popStackEntry()`
 
 ```jsx
+
 static popStackEntry(entry: any)
+
 ```
 
 Get and remove the last StatusBar entry from the stack.
@@ -207,7 +211,9 @@ Get and remove the last StatusBar entry from the stack.
 ### `pushStackEntry()`
 
 ```jsx
+
 static pushStackEntry(props: any)
+
 ```
 
 Push a StatusBar entry onto the stack. The return value should be passed to `popStackEntry` when complete.
@@ -223,7 +229,9 @@ Push a StatusBar entry onto the stack. The return value should be passed to `pop
 ### `replaceStackEntry()`
 
 ```jsx
+
 static replaceStackEntry(entry: any, props: any)
+
 ```
 
 Replace an existing StatusBar stack entry with new props.
@@ -237,10 +245,12 @@ Replace an existing StatusBar stack entry with new props.
 
 ---
 
-### `setBackgroundColor()` <div class="label android">Android</div>
+### `setBackgroundColor()` <div className="label android">Android</div>
 
 ```jsx
+
 static setBackgroundColor(color: string, [animated]: boolean)
+
 ```
 
 Set the background color for the status bar.
@@ -257,7 +267,9 @@ Set the background color for the status bar.
 ### `setBarStyle()`
 
 ```jsx
+
 static setBarStyle(style: StatusBarStyle, [animated]: boolean)
+
 ```
 
 Set the status bar style.
@@ -274,24 +286,28 @@ Set the status bar style.
 ### `setHidden()`
 
 ```jsx
+
 static setHidden(hidden: boolean, [animation]: StatusBarAnimation)
+
 ```
 
 Show or hide the status bar.
 
 **Parameters:**
 
-| Name                                       | Type                                               | Required | Description                                             |
-| ------------------------------------------ | -------------------------------------------------- | -------- | ------------------------------------------------------- |
-| hidden                                     | boolean                                            | Yes      | Hide the status bar.                                    |
-| animation <div class="label ios">iOS</div> | [StatusBarAnimation](statusbar#statusbaranimation) | No       | Animation when changing the status bar hidden property. |
+| Name                                           | Type                                               | Required | Description                                             |
+| ---------------------------------------------- | -------------------------------------------------- | -------- | ------------------------------------------------------- |
+| hidden                                         | boolean                                            | Yes      | Hide the status bar.                                    |
+| animation <div className="label ios">iOS</div> | [StatusBarAnimation](statusbar#statusbaranimation) | No       | Animation when changing the status bar hidden property. |
 
 ---
 
-### `setNetworkActivityIndicatorVisible()` <div class="label ios">iOS</div>
+### `setNetworkActivityIndicatorVisible()` <div className="label ios">iOS</div>
 
 ```jsx
+
 static setNetworkActivityIndicatorVisible(visible: boolean)
+
 ```
 
 Control the visibility of the network activity indicator.
@@ -304,10 +320,12 @@ Control the visibility of the network activity indicator.
 
 ---
 
-### `setTranslucent()` <div class="label android">Android</div>
+### `setTranslucent()` <div className="label android">Android</div>
 
 ```jsx
+
 static setTranslucent(translucent: boolean)
+
 ```
 
 Control the translucency of the status bar.
@@ -348,8 +366,8 @@ Status bar style type.
 
 **Constants:**
 
-| Value             | Type   | Description                                                          |
-| ----------------- | ------ | -------------------------------------------------------------------- |
-| `'default'`       | string | Default status bar style (dark for iOS, light for Android)           |
-| `'light-content'` | string | Dark background, white texts and icons                               |
-| `'dark-content'`  | string | Light background, dark texts and icons (requires API>=23 on Android) |
+| Value             | Type   | Description                                                             |
+| ----------------- | ------ | ----------------------------------------------------------------------- |
+| `'default'`       | string | Default status bar style (dark for iOS, light for Android)              |
+| `'light-content'` | string | Dark background, white texts and icons                                  |
+| `'dark-content'`  | string | Light background, dark texts and icons (requires API&gt;=23 on Android) |

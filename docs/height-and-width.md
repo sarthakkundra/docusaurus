@@ -10,6 +10,7 @@ A component's height and width determine its size on the screen.
 The general way to set the dimensions of a component is by adding a fixed `width` and `height` to style. All dimensions in React Native are unitless, and represent density-independent pixels.
 
 ```SnackPlayer name=Height%20and%20Width
+
 import React from 'react';
 import { View } from 'react-native';
 
@@ -30,6 +31,7 @@ const FixedDimensionsBasics = () => {
 };
 
 export default FixedDimensionsBasics;
+
 ```
 
 Setting dimensions this way is common for components that should always render at exactly the same size, regardless of screen dimensions.
@@ -38,9 +40,10 @@ Setting dimensions this way is common for components that should always render a
 
 Use `flex` in a component's style to have the component expand and shrink dynamically based on available space. Normally you will use `flex: 1`, which tells a component to fill all available space, shared evenly amongst other components with the same parent. The larger the `flex` given, the higher the ratio of space a component will take compared to its siblings.
 
-> A component can only expand to fill available space if its parent has dimensions greater than `0`. If a parent does not have either a fixed `width` and `height` or `flex`, the parent will have dimensions of `0` and the `flex` children will not be visible.
+&gt; A component can only expand to fill available space if its parent has dimensions greater than `0`. If a parent does not have either a fixed `width` and `height` or `flex`, the parent will have dimensions of `0` and the `flex` children will not be visible.
 
 ```SnackPlayer name=Flex%20Dimensions
+
 import React from 'react';
 import { View } from 'react-native';
 
@@ -58,6 +61,7 @@ const FlexDimensionsBasics = () => {
 };
 
 export default FlexDimensionsBasics;
+
 ```
 
 After you can control a component's size, the next step is to [learn how to lay it out on the screen](flexbox.md).
@@ -67,6 +71,7 @@ After you can control a component's size, the next step is to [learn how to lay 
 If you want to fill a certain portion of the screen, but you _don't_ want to use the `flex` layout, you _can_ use **percentage values** in the component's style. Similar to flex dimensions, percentage dimensions require parent with a defined size.
 
 ```SnackPlayer name=Percentage%20Dimensions
+
 import React from 'react';
 import { View } from 'react-native';
 
@@ -89,4 +94,5 @@ const PercentageDimensionsBasics = () => {
 };
 
 export default PercentageDimensionsBasics;
+
 ```

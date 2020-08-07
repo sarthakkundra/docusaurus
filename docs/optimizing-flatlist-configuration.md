@@ -98,9 +98,11 @@ The heavier your components are, the slower they render. Avoid heavy images (use
 Implement update verification to your components. React's `PureComponent` implement a [`shouldComponentUpdate`](https://reactjs.org/docs/react-component.html#shouldcomponentupdate) with shallow comparison. This is expensive here because it need to check all your props. If you want a good bit-level performance, create the strictest rules for your list item components, checking only props that could potentially change. If your list is basic enough, you could even use
 
 ```jsx
+
 shouldComponentUpdate() {
   return false
 }
+
 ```
 
 ### Use cached optimized images
@@ -124,6 +126,7 @@ You can also use a `key` prop in you item component.
 Move out the `renderItem` function to the outside of render function, so it won't recreate itself each time render function called.
 
 ```jsx
+
 renderItem = ({ item }) => (<View key={item.key}><Text>{item.title}</Text></View>);
 
 render(){
@@ -136,4 +139,5 @@ render(){
 
   // ...
 }
+
 ```

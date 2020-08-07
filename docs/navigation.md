@@ -18,7 +18,9 @@ The community solution to navigation is a standalone library that allows develop
 First, you need to install them in your project:
 
 ```sh
+
 npm install @react-navigation/native @react-navigation/stack
+
 ```
 
 Next, install the required peer dependencies. You need to run different commands depending on whether your project is an Expo managed project or a bare React Native project.
@@ -26,24 +28,30 @@ Next, install the required peer dependencies. You need to run different commands
 - If you have an Expo managed project, install the dependencies with `expo`:
 
   ```sh
+
   expo install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+
   ```
 
 - If you have a bare React Native project, install the dependencies with `npm`:
 
   ```sh
+
   npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+
   ```
 
   For iOS with bare React Native project, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then install the pods to complete the installation:
 
   ```sh
+
   cd ios
   pod install
   cd ..
+
   ```
 
-> Note: You might get warnings related to peer dependencies after installation. They are usually caused by incorrect version ranges specified in some packages. You can safely ignore most warnings as long as your app builds.
+&gt; Note: You might get warnings related to peer dependencies after installation. They are usually caused by incorrect version ranges specified in some packages. You can safely ignore most warnings as long as your app builds.
 
 To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
 
@@ -61,7 +69,7 @@ import { NavigationContainer } from '@react-navigation/native';
 const App = () => {
   return (
     <NavigationContainer>
-      {/* Rest of your app code */}
+      Rest of your app code
     </NavigationContainer>
   );
 };

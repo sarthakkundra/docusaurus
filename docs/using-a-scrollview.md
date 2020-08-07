@@ -8,6 +8,7 @@ The [ScrollView](scrollview.md) is a generic scrolling container that can contai
 This example creates a vertical `ScrollView` with both images and text mixed together.
 
 ```SnackPlayer name=Using%20ScrollView
+
 import React from 'react';
 import { Image, ScrollView, Text } from 'react-native';
 
@@ -52,6 +53,7 @@ export default App = () => (
     <Text style={{ fontSize: 80 }}>React Native</Text>
   </ScrollView>
 );
+
 ```
 
 ScrollViews can be configured to allow paging through views using swiping gestures by using the `pagingEnabled` props. Swiping horizontally between views can also be implemented on Android using the [ViewPager](https://github.com/react-native-community/react-native-viewpager) component.

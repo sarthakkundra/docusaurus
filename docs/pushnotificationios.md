@@ -1,11 +1,11 @@
 ---
 id: pushnotificationios
-title: 🚧 PushNotificationIOS
+title: '🚧 PushNotificationIOS'
 ---
 
-> **Deprecated.** Use [@react-native-community/push-notification-ios](https://github.com/react-native-community/react-native-push-notification-ios) instead.
+&gt; **Deprecated.** Use [@react-native-community/push-notification-ios](https://github.com/react-native-community/react-native-push-notification-ios) instead.
 
-<div class="banner-native-code-required">
+<div className="banner-native-code-required">
   <h3>Projects with Native Code Only</h3>
   <p>
     The following section only applies to projects with native code exposed. If you are using the managed <code>expo-cli</code> workflow, see the guide on <a href="https://docs.expo.io/versions/latest/sdk/notifications/">Notifications</a> in the Expo documentation for the appropriate alternative.
@@ -29,10 +29,12 @@ Add the PushNotificationIOS library to your Podfile: ./ios/Podfile
   - Add the PushNotificationIOS library to your Podfile: ./ios/Podfile
 
     ```ruby
+
     target 'myAwesomeApp' do
       # Pods for myAwesomeApp
       pod 'React-RCTPushNotification', :path => '../node_modules/react-native/Libraries/PushNotificationIOS'
     end
+
     ```
 
 - [Manually link](linking-libraries-ios.md#manual-linking) the PushNotificationIOS library:
@@ -48,6 +50,7 @@ At the top of your `AppDelegate.m`:
 And then in your AppDelegate implementation add the following:
 
 ```objectivec
+
  // Required to register for notifications
  - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
  {
@@ -74,6 +77,7 @@ And then in your AppDelegate implementation add the following:
  {
   [RCTPushNotificationManager didReceiveLocalNotification:notification];
  }
+
 ```
 
 To show notifications while being in the foreground (available starting from iOS 10) add the following lines:
@@ -85,6 +89,7 @@ At the top of your `AppDelegate.m`:
 And then in your AppDelegate implementation add the following:
 
 ```objectivec
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   ...
@@ -100,9 +105,10 @@ And then in your AppDelegate implementation add the following:
 {
   completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);
 }
+
 ```
 
-Then enable Background Modes/Remote notifications to be able to use remote notifications properly. The easiest way to do this is via the project settings. Navigate to Targets -> Your App -> Capabilities -> Background Modes and check Remote notifications. This will automatically enable the required settings.
+Then enable Background Modes/Remote notifications to be able to use remote notifications properly. The easiest way to do this is via the project settings. Navigate to Targets -&gt; Your App -&gt; Capabilities -&gt; Background Modes and check Remote notifications. This will automatically enable the required settings.
 
 ---
 
@@ -313,7 +319,7 @@ Valid events are:
 - `notification` : Fired when a remote notification is received. The handler will be invoked with an instance of `PushNotificationIOS`.
 - `localNotification` : Fired when a local notification is received. The handler will be invoked with an instance of `PushNotificationIOS`.
 - `register`: Fired when the user registers for remote notifications. The handler will be invoked with a hex string representing the deviceToken.
-- `registrationError`: Fired when the user fails to register for remote notifications. Typically occurs when APNS is having issues, or the device is a simulator. The handler will be invoked with {message: string, code: number, details: any}.
+- `registrationError`: Fired when the user fails to register for remote notifications. Typically occurs when APNS is having issues, or the device is a simulator. The handler will be invoked with {"{"}message: string, code: number, details: any{"}"}.
 
 ---
 
@@ -418,88 +424,80 @@ You will never need to instantiate `PushNotificationIOS` yourself. Listening to 
 finish(fetchResult);
 ```
 
-This method is available for remote notifications that have been received via: `application:didReceiveRemoteNotification:fetchCompletionHandler:` https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623013-application?language=objc
+This method is available for remote notifications that have been received via: `application:didReceiveRemoteNotification:fetchCompletionHandler:` https:
 
-Call this to execute when the remote notification handling is complete. When calling this block, pass in the fetch result value that best describes the results of your operation. You _must_ call this handler and should do so as soon as possible. For a list of possible values, see `PushNotificationIOS.FetchResult`.
+Call this to execute when the remote notification handling is complete. When calling this block, pass in the fetch result value that best describes the results of your operation. You _must_ call this handler and should do so as soon as possible. For a list of possible values, see ``.
 
 If you do not call this method your background remote notifications could be throttled, to read more about it see the above documentation link.
 
 ---
 
-### `getMessage()`
+### ``
 
 ```jsx
-getMessage();
 ```
 
-An alias for `getAlert` to get the notification's main message string
+An alias for `` to get the notification's main message string
 
 ---
 
-### `getSound()`
+### ``
 
 ```jsx
-getSound();
 ```
 
-Gets the sound string from the `aps` object
+Gets the sound string from the `` object
 
 ---
 
-### `getCategory()`
+### ``
 
 ```jsx
-getCategory();
 ```
 
-Gets the category string from the `aps` object
+Gets the category string from the `` object
 
 ---
 
-### `getAlert()`
+### ``
 
 ```jsx
-getAlert();
 ```
 
-Gets the notification's main message from the `aps` object
+Gets the notification's main message from the `` object
 
 ---
 
-### `getContentAvailable()`
+### ``
 
 ```jsx
-getContentAvailable();
 ```
 
-Gets the content-available number from the `aps` object
+Gets the content-available number from the `` object
 
 ---
 
-### `getBadgeCount()`
+### ``
 
 ```jsx
-getBadgeCount();
 ```
 
-Gets the badge count number from the `aps` object
+Gets the badge count number from the `` object
 
 ---
 
-### `getData()`
+### ``
 
 ```jsx
-getData();
 ```
 
 Gets the data object on the notification
 
 ---
 
-### `getThreadID()`
+### ``
 
 ```jsx
-getThreadID();
 ```
 
 Gets the thread ID on the notification

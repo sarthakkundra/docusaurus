@@ -1,15 +1,16 @@
 ---
 id: progressbarandroid
-title: 🚧 ProgressBarAndroid
+title: '🚧 ProgressBarAndroid'
 ---
 
-> **Deprecated.** Use [@react-native-community/progress-bar-android](https://github.com/react-native-community/progress-bar-android) instead.
+&gt; **Deprecated.** Use [@react-native-community/progress-bar-android](https://github.com/react-native-community/progress-bar-android) instead.
 
 Android-only React component used to indicate that the app is loading or there is some activity in the app.
 
 ### Example
 
 ```SnackPlayer name=ProgressBarAndroid&supportedPlatforms=android
+
 import React from 'react';
 import {View, StyleSheet, ProgressBarAndroid, Text} from 'react-native';
 
@@ -52,6 +53,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 ```
 
 ---

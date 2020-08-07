@@ -10,7 +10,7 @@ The event subscriptions are called in reverse order (i.e. the last registered su
 - **If one subscription returns true,** then subscriptions registered earlier will not be called.
 - **If no subscription returns true or none are registered,** it programmatically invokes the default back button functionality to exit the app.
 
-> **Warning for modal users:** If your app shows an opened `Modal`, `BackHandler` will not publish any events ([see `Modal` docs](modal#onrequestclose)).
+&gt; **Warning for modal users:** If your app shows an opened `Modal`, `BackHandler` will not publish any events ([see `Modal` docs](modal#onrequestclose)).
 
 ## Pattern
 
@@ -43,238 +43,51 @@ BackHandler.addEventListener('hardwareBackPress', function() {
 
 The following example implements a scenario where you confirm if the user wants to exit the app:
 
-<div class="toggler">
-  <ul role="tablist" class="toggle-syntax">
-    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+<div className="toggler">
+  <ul role="tablist" className="toggle-syntax">
+    <li id="functional" className="button-functional" aria-selected="false" role="tab" tabIndex={0} aria-controls="functionaltab" onClick="displayTabs('syntax', 'functional')">
       Function Component Example
     </li>
-    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+    <li id="classical" className="button-classical" aria-selected="false" role="tab" tabIndex={0} aria-controls="classicaltab" onClick="displayTabs('syntax', 'classical')">
       Class Component Example
     </li>
   </ul>
 </div>
 
-<block class="functional syntax" />
+block
 
 ```SnackPlayer name=BackHandler&supportedPlatforms=android
-import React, { useEffect } from "react";
-import { Text, View, StyleSheet, BackHandler, Alert } from "react-native";
 
-const App = () => {
-  useEffect(() => {
-    const backAction = () => {
-      Alert.alert("Hold on!", "Are you sure you want to go back?", [
-        {
-          text: "Cancel",
-          onPress: () => null,
-          style: "cancel"
-        },
-        { text: "YES", onPress: () => BackHandler.exitApp() }
-      ]);
-      return true;
-    };
 
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
 
-    return () => backHandler.remove();
-  }, []);
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Click Back button!</Text>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  text: {
-    fontSize: 18,
-    fontWeight: "bold"
-  }
-});
-
-export default App;
 ```
-
-<block class="classical syntax" />
 
 ```SnackPlayer name=BackHandler&supportedPlatforms=android
-import React, { Component } from "react";
-import { Text, View, StyleSheet, BackHandler, Alert } from "react-native";
 
-class App extends Component {
-  backAction = () => {
-    Alert.alert("Hold on!", "Are you sure you want to go back?", [
-      {
-        text: "Cancel",
-        onPress: () => null,
-        style: "cancel"
-      },
-      { text: "YES", onPress: () => BackHandler.exitApp() }
-    ]);
-    return true;
-  };
 
-  componentDidMount() {
-    this.backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      this.backAction
-    );
-  }
 
-  componentWillUnmount() {
-    this.backHandler.remove();
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>Click Back button!</Text>
-      </View>
-    );
-  }
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  text: {
-    fontSize: 18,
-    fontWeight: "bold"
-  }
-});
-
-export default App;
 ```
 
-<block class="endBlock syntax" />
+`creates an event listener & returns a` object which should be cleared using `` method.
 
-`BackHandler.addEventListener` creates an event listener & returns a `NativeEventSubscription` object which should be cleared using `NativeEventSubscription.remove` method.
+Additionally `can also be used to clear the event listener. Ensure the callback has the reference to the same function used in the` call as shown the following example ﹣
 
-Additionally `BackHandler.removeEventListener` can also be used to clear the event listener. Ensure the callback has the reference to the same function used in the `addEventListener` call as shown the following example ﹣
-
-<div class="toggler">
-  <ul role="tablist" class="toggle-syntax">
-    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
       Function Component Example
-    </li>
-    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+
+
       Class Component Example
-    </li>
-  </ul>
-</div>
-
-<block class="functional syntax" />
 
 ```SnackPlayer name=BackHandler&supportedPlatforms=android
-import React, { useEffect } from "react";
-import { Text, View, StyleSheet, BackHandler, Alert } from "react-native";
 
-const App = () => {
-  const backAction = () => {
-    Alert.alert("Hold on!", "Are you sure you want to go back?", [
-      {
-        text: "Cancel",
-        onPress: () => null,
-        style: "cancel"
-      },
-      { text: "YES", onPress: () => BackHandler.exitApp() }
-    ]);
-    return true;
-  };
 
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", backAction);
 
-    return () =>
-      BackHandler.removeEventListener("hardwareBackPress", backAction);
-  }, []);
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Click Back button!</Text>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  text: {
-    fontSize: 18,
-    fontWeight: "bold"
-  }
-});
-
-export default App;
 ```
-
-<block class="classical syntax" />
 
 ```SnackPlayer name=BackHandler&supportedPlatforms=android
-import React, { Component } from "react";
-import { Text, View, StyleSheet, BackHandler, Alert } from "react-native";
 
-class App extends Component {
-  backAction = () => {
-    Alert.alert("Hold on!", "Are you sure you want to go back?", [
-      {
-        text: "Cancel",
-        onPress: () => null,
-        style: "cancel"
-      },
-      { text: "YES", onPress: () => BackHandler.exitApp() }
-    ]);
-    return true;
-  };
 
-  componentDidMount() {
-    BackHandler.addEventListener("hardwareBackPress", this.backAction);
-  }
 
-  componentWillUnmount() {
-    BackHandler.removeEventListener("hardwareBackPress", this.backAction);
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>Click Back button!</Text>
-      </View>
-    );
-  }
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  text: {
-    fontSize: 18,
-    fontWeight: "bold"
-  }
-});
-
-export default App;
 ```
-
-<block class="endBlock syntax" />
 
 ## Usage with React Navigation
 
@@ -282,7 +95,7 @@ If you are using React Navigation to navigate across different screens, you can 
 
 ## Backhandler hook
 
-[React Native Hooks](https://github.com/react-native-community/hooks#usebackhandler) has a nice `useBackHandler` hook which will simplify the process of setting up event listeners.
+[React Native Hooks](https://github.com/react-native-community/hooks#usebackhandler) has a nice `` hook which will simplify the process of setting up event listeners.
 
 ---
 
@@ -290,24 +103,21 @@ If you are using React Navigation to navigate across different screens, you can 
 
 ## Methods
 
-### `addEventListener()`
+### ``
 
 ```jsx
-static addEventListener(eventName, handler)
 ```
 
 ---
 
-### `exitApp()`
+### ``
 
 ```jsx
-static exitApp()
 ```
 
 ---
 
-### `removeEventListener()`
+### ``
 
 ```jsx
-static removeEventListener(eventName, handler)
 ```

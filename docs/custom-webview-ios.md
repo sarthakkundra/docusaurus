@@ -14,6 +14,7 @@ Like for regular native components, you need a view manager and an web view.
 For the view, you'll need to make a subclass of `RCTWebView`.
 
 ```objc
+
 // RCTCustomWebView.h
 #import <React/RCTWebView.h>
 
@@ -31,6 +32,7 @@ For the view, you'll need to make a subclass of `RCTWebView`.
 @implementation RCTCustomWebView { }
 
 @end
+
 ```
 
 For the view manager, you need to make a subclass `RCTWebViewManager`. You must still include:
@@ -39,6 +41,7 @@ For the view manager, you need to make a subclass `RCTWebViewManager`. You must 
 - The `RCT_EXPORT_MODULE()` tag
 
 ```objc
+
 // RCTCustomWebViewManager.h
 #import <React/RCTWebViewManager.h>
 
@@ -66,6 +69,7 @@ RCT_EXPORT_MODULE()
 }
 
 @end
+
 ```
 
 ### Adding New Events and Properties
@@ -73,6 +77,7 @@ RCT_EXPORT_MODULE()
 Adding new properties and events is the same as regular UI components. For properties, you define an `@property` in the header. For events, you define a `RCTDirectEventBlock` in the view's `@interface`.
 
 ```objc
+
 // RCTCustomWebView.h
 @property (nonatomic, copy) NSString *finalUrl;
 
@@ -82,14 +87,17 @@ Adding new properties and events is the same as regular UI components. For prope
 @property (nonatomic, copy) RCTDirectEventBlock onNavigationCompleted;
 
 @end
+
 ```
 
 Then expose it in the view manager's `@implementation`.
 
 ```objc
+
 // RCTCustomWebViewManager.m
 RCT_EXPORT_VIEW_PROPERTY(onNavigationCompleted, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(finalUrl, NSString)
+
 ```
 
 ### Extending Existing Events
@@ -99,6 +107,7 @@ You should refer to [RCTWebView.m](https://github.com/facebook/react-native/blob
 By default, most methods aren't exposed from RCTWebView. If you need to expose them, you need to create an [Objective C category](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/CustomizingExistingClasses/CustomizingExistingClasses.html), and then expose all the methods you need to use.
 
 ```objc
+
 // RCTWebView+Custom.h
 #import <React/RCTWebView.h>
 
@@ -106,11 +115,13 @@ By default, most methods aren't exposed from RCTWebView. If you need to expose t
 - (BOOL)webView:(__unused UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 - (NSMutableDictionary<NSString *, id> *)baseEvent;
 @end
+
 ```
 
 Once these are exposed, you can reference them in your custom web view class.
 
 ```objc
+
 // RCTCustomWebView.m
 
 // Remember to import the category file.
@@ -133,6 +144,7 @@ Once these are exposed, you can reference them in your custom web view class.
 
   return allowed;
 }
+
 ```
 
 ## JavaScript Interface
