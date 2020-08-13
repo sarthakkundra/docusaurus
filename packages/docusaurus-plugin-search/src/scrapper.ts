@@ -11,6 +11,7 @@ import find from 'unist-util-find';
 import visit from 'unist-util-visit';
 import parent from 'unist-util-parents';
 import {Node, DataNode} from './types';
+import {groupBy} from 'lodash';
 
 export const LEVEL = {
   content: 'p',
@@ -83,7 +84,7 @@ const testHeading = (node: Node) => node.tagName === LEVEL.lv0;
 
 const getHeading = (node: Node) => find(node, testHeading);
 
-export default function scrap(data: string): DataNode[] {
+export default function scrap(data: string): Record<string, DataNode[]> {
   const file = rehype().parse(data);
   const nodes: Array<DataNode> = [];
   const heading = toText(getHeading(file));
@@ -95,5 +96,5 @@ export default function scrap(data: string): DataNode[] {
       heading,
     });
   });
-  return nodes;
+  return groupBy(nodes, 'type');
 }

@@ -96,7 +96,8 @@ export function useSearch() {
       if (cached) {
         return cached;
       }
-      const value = rank(fuse.search(term));
+      const value = [];
+      console.log(fuse.search(term, {limit: 10}));
       setToCache(term, value);
       return value;
     },

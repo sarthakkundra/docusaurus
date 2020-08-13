@@ -57,20 +57,28 @@ export default function search(
           return {url: dirname(file), dataNodes: scrap(String(content))};
         }),
       );
-      let id = 0;
-      const results = flat(
-        scrapedData.map((page) => {
-          return page.dataNodes.map((dataNode) => {
-            id += 1;
-            return {
-              pageID: page.url,
-              id,
-              ...dataNode,
-            };
-          });
-        }),
+      const results = scrapedData;
+      const index = Fuse.createIndex(
+        [
+          {
+            name: 'dataNodes.h1.body',
+            weight: 5,
+          },
+          {
+            name: 'dataNodes.h2.body',
+            weight: 4,
+          },
+          {
+            name: 'dataNodes.h3.body',
+            weight: 2,
+          },
+          {
+            name: 'dataNodes.p.body',
+            weight: 1,
+          },
+        ],
+        results,
       );
-      const index = Fuse.createIndex(['body'], results);
       await writeFile(
         join(props.outDir, 'search_index.json'),
         JSON.stringify(index),
